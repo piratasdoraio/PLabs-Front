@@ -2,7 +2,45 @@
   "name": "plabs-front",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
+    "bootstrap": "^5.1.0",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.0.0-beta.6",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-decorators": "^7.12.1",
+    "@babel/plugin-proposal-do-expressions": "^7.14.5",
+    "@babel/plugin-proposal-export-default-from": "^7.14.5",
+    "@babel/plugin-proposal-export-namespace-from": "^7.14.5",
+    "@babel/plugin-proposal-function-bind": "^7.14.5",
+    "@babel/plugin-proposal-function-sent": "^7.14.5",
+    "@babel/plugin-proposal-json-strings": "^7.14.5",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.14.5",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.14.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/plugin-proposal-pipeline-operator": "^7.15.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/plugin-transform-react-constant-elements": "^7.14.5",
+    "@babel/plugin-transform-react-inline-elements": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.12.1",
+    "@babel/register": "^7.15.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -10,17 +48,33 @@
     "@types/node": "^12.20.24",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.4.3",
-    "web-vitals": "^1.1.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "@types/react-router-dom": "^5.1.9",
+    "@types/react-test-renderer": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-compat": "^3.13.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
+    "jest": "^26.6.0",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.0",
+    "sass": "^1.40.1",
+    "typescript": "^4.4.3"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +93,65 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "cross-env NODE_ENV=development eslint --cache"
+    ],
+    "{*.json,.{babelrc,eslintrc,prettierrc}}": [
+      "prettier --ignore-path .eslintignore --parser json --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ],
+    "*.{html,md,yml}": [
+      "prettier --ignore-path .eslintignore --single-quote --write"
+    ]
+  },
+  "jest": {
+    "testURL": "http://localhost:3000/",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "verbose": true
+  },
+  "devEngines": {
+    "node": ">=14.x",
+    "npm": ">=7.x"
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": [
+          ".prettierrc",
+          ".babelrc",
+          ".eslintrc"
+        ],
+        "options": {
+          "parser": "json"
+        }
+      }
+    ],
+    "singleQuote": true
+  },
+  "renovate": {
+    "extends": [
+      "bliss"
+    ],
+    "baseBranches": [
+      "next"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
