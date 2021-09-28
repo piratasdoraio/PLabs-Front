@@ -5,7 +5,7 @@ const logoCss = {
 
 }
 
-export default function Navbar() {
+export default function NavbarLoggedIn() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
             <div className="container-fluid">
@@ -17,22 +17,21 @@ export default function Navbar() {
                 <button className="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <i className="fas fa-bars" />
                 </button>
-
                 <div className="collapse navbar-collapse" id="mainNavbar">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Sobre</a>
+                            <a className="nav-link active" aria-current="page" href="#">Dashboard</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Contato</a>
+                            <a className="nav-link" href="#">Grupos</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Suporte</a>
+                            <a className="nav-link" href="#">Quadros</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Usuários</a>
                         </li>
                     </ul>
-                </div>
-
-                <div className="d-flex align-items-center">
                     <form className="d-flex input-group w-auto">
                         <Link to='/login'>
                             <button
