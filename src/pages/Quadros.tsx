@@ -36,7 +36,8 @@ const data = {
 export default function quadros() {
   return (
     <>
-      <Board data={data} />
+      <Board data={data} />   
+      
     </>
   );
 }
