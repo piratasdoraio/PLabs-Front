@@ -7,9 +7,9 @@ const logoCss = {
 
 export default function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light">
+        <nav style = {{height: '80px'}}className="navbar navbar-expand-lg navbar-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="/">
                     <h1 className="logoBNI" >
                         BNI
                     </h1>
@@ -20,6 +20,9 @@ export default function Navbar() {
 
                 <div className="collapse navbar-collapse" id="mainNavbar">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <a className="nav-link" href="/quadros">Quadros</a>
+                        </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Sobre</a>
                         </li>
