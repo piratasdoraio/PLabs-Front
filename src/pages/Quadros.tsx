@@ -1,8 +1,9 @@
 import React from 'react';
 import Board from 'react-trello';
 import Base from './BasePage';
-import Grupos from '../components/Grupos';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Card } from 'react-bootstrap';
+import CardGrupos from '../components/Grupos';
+import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 const data = {
   lanes: [
@@ -40,18 +41,26 @@ export default function quadros() {
   return (
     <>
       <Base>
-      <nav style={{ height:'56px', backgroundColor: '#2D4354', marginBottom: '15px'}}>
-          <div style={{ color:'#FFF'}}>
-          grupos XD
-          </div> 
-          <div style={{textAlign: "center", color:'#FFF'}}>
-          Visão geral das etapas do quadro XXXXX
-          </div>               
-      </nav>
+
+        <nav style={{ height: '56px', backgroundColor: '#2D4354', marginBottom: '15px' }}>
+          <Row>
+          <Col style={{ textAlign: "center",marginTop: '14px', color: '#FFF' }}>
+            Visão geral das etapas do quadro XXXXX
+          </Col>
+          </Row>
+        </nav>
+
         <Row>
-        <Grupos />
+
+          <Card className="border" style={{ backgroundColor: '#F3F3F3', marginLeft: '40px', borderRadius: '11px', height: '50rem', width: "20rem"}}>
+            {/* fazer um component de outros cards que entrem */}
+            <div style={{textAlign: "center" }}>
+            Grupos
+            </div>
+            <CardGrupos/>
+          </Card>
           <Col>
-          <Board style={{ backgroundColor: '#F3F3F3' }} data={data} />
+            <Board  style={{ backgroundColor: '#F3F3F3' }} data={data} />
           </Col>
         </Row>
       </Base>
