@@ -1,7 +1,26 @@
-import React from 'react'
+import Button from '@restart/ui/esm/Button'
+import React, {useState} from 'react'
+import { Redirect } from 'react-router'
 import logo from '../components/LogoBNI.png'
 
+const log = {
+    email : 'admin',
+    senha : 'admin'
+}
+
+function login (email : string, senha :string){
+
+  
+    if ( email == log.email && senha == log.senha){
+      window.location.href = '/quadros'
+    }else{
+      alert('Dados inválidos')
+    }
+}
+
 export default function LoginPage() {
+  var [email, setEmail] = useState('')
+  var [senha, setSenha] = useState('')
   return (
     <section className="vh-100 loginPage">
       <div className="container py-5 h-100 align-items-center justify-content-center">
@@ -17,14 +36,14 @@ export default function LoginPage() {
                 <h3 className="mb-5 text-center">Login</h3>
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="typeEmailX">Email</label>
-                  <input type="email" id="typeEmailX" className="form-control form-control-lg" />
+                  <input onChange = {event => setEmail(event.target.value)} type="email" id="typeEmailX" className="form-control form-control-lg" />
                 </div>
                 <div className="form-outline mb-4">
                   <label className="form-label" htmlFor="typePasswordX">Senha</label>
-                  <input type="password" id="typePasswordX" className="form-control form-control-lg" />
+                  <input onChange = {event => setSenha(event.target.value)}type="password" id="typePasswordX" className="form-control form-control-lg" />
                 </div>
                 <div className="text-center">
-                  <button className="btn btn-danger btn-lg btn-block" type="submit">Entrar</button>
+                <Button onClick = {()=> login(email,senha)} className="btn btn-danger btn-lg btn-block" type="submit">Entrar</Button>
                 </div>
               </div>
             </div>
