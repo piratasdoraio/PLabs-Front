@@ -147,8 +147,8 @@ export function setData(quadroId: string) {
   }
   return data;
 }
-
 export default function Quadros() {
+
   return (
     <>
       <Base>
@@ -189,7 +189,9 @@ export default function Quadros() {
               eventBusHandle={setEventBus}
               style={{ backgroundColor: '#F3F3F3' }}
               data={data}
+              draggable
             />
+          
           </Col>
         </Row>
       </Base>
