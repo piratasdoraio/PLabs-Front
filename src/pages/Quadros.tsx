@@ -190,6 +190,12 @@ export default function Quadros() {
               style={{ backgroundColor: '#F3F3F3' }}
               data={data}
               draggable
+              editable
+              canAddLanes
+              //canRemoveLanes
+              
+              
+
             />
           
           </Col>
