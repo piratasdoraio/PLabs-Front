@@ -179,7 +179,7 @@ export default function Quadros() {
             }}
           >
             {/* fazer um component de outros cards que entrem */}
-            <div style={{ textAlign: 'center' }}>Grupos</div>
+            <div style={{ textAlign: 'center' }}>Groups</div>
             {grupos.grupos.map((grupo) => (
               <CardGrupos grupos={grupo} />
             ))}
@@ -192,10 +192,8 @@ export default function Quadros() {
               draggable
               editable
               canAddLanes
+              addCardTitle='asdsad'
               //canRemoveLanes
-              
-              
-
             />
           
           </Col>
