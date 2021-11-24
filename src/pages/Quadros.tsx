@@ -217,22 +217,30 @@ const setEventBus = (handle: any) => {
 
 export default function Quadros() {
 
-  const [newGrupos, setNewGrupos] = React.useState(grupos);
+  const [newGrupos, setNewGrupos] = React.useState(JSON.parse(localStorage.getItem("newGrupos") || JSON.stringify(grupos)));
   const [actualGrupo, setActualGrupo] = React.useState(0);
   const [actualQuadro, setActualQuadro] = React.useState(0);
+  const [saving, setSaving] = React.useState(false);
+
+  // const [loaded, setLoaded] = React.useState(false);
 
   // const [myData, setMyData] = useState(grupos);
 
   // useEffect(() => {
-  //   const saved = JSON.parse(
-  //     localStorage.getItem("newGrupos") || JSON.stringify(newGrupos)
-  //   );
-  //   setNewGrupos(saved);
+  //   const saved = localStorage.getItem("newGrupos")
+    
+  //   if (!saved) return console.log("can't load");
+
+  //   console.log("loading")
+  //   console.log(saved)
+
+  //   setNewGrupos(JSON.parse(saved));
   // }, []);
 
-  useEffect(() => {
-    localStorage.setItem("newGrupos", JSON.stringify(newGrupos));
-  }, [newGrupos]);
+  // useEffect(() => {
+  //   console.log("salvei")
+  //   localStorage.setItem("newGrupos", JSON.stringify(newGrupos));
+  // }, [newGrupos]);
 
   const createGroup = (nome: string) => {
     let updateGrupos = {
@@ -254,16 +262,20 @@ export default function Quadros() {
   }
 
   const changeData = (e: any) => {
-    // setMyData(e);
-    console.log(e)
-    return;
+    if (e.id) return;
     let updateGrupos = newGrupos
     updateGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes = e.lanes
 
     setNewGrupos(updateGrupos);
+    setSaving(true);
   }
 
   console.log(newGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes)
+
+  if (saving) {
+    setSaving(false);
+    localStorage.setItem("newGrupos", JSON.stringify(newGrupos));
+  }
 
   return (
     <>
@@ -298,7 +310,7 @@ export default function Quadros() {
           >
             {/* fazer um component de outros cards que entrem */}
             <div style={{ textAlign: 'center' }}>Groups</div>
-            {newGrupos.grupos.map((grupo, i) => (
+            {newGrupos.grupos.map((grupo : any, i : any) => (
               <CardGrupos grupos={grupo} grupoIndex={i} changeBoard={changeBoard} />
             ))}
 
