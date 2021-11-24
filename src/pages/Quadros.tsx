@@ -254,6 +254,37 @@ export default function Quadros() {
       ],
     };
     setNewGrupos(updateGrupos);
+    setSaving(true);
+  }
+
+  const removeGroup = (grupoIndex: number) => {
+    let updateGrupos = {
+      grupos: newGrupos.grupos.filter((grupo: any, index: any) => index !== grupoIndex),
+    };
+    setNewGrupos(updateGrupos);
+    setSaving(true);
+  }
+
+  const createQuadro = (grupoIndex: number, nome: string) => {
+    let updateGrupos = newGrupos;
+
+    updateGrupos.grupos[grupoIndex].quadros.push({
+      id: updateGrupos.grupos[grupoIndex].quadros.length.toString(),
+      nome: nome,
+      lanes: [],
+    });
+
+    setNewGrupos(updateGrupos);
+    setSaving(true);
+  }
+
+  const removeQuadro = (grupoIndex: number, quadroIndex: number) => {
+    let updateGrupos = newGrupos;
+
+    updateGrupos.grupos[grupoIndex].quadros.splice(quadroIndex, 1);
+
+    setNewGrupos(updateGrupos);
+    setSaving(true);
   }
 
   const changeBoard = (grupoIndex: number, quadroIndex: number) => {
@@ -311,10 +342,10 @@ export default function Quadros() {
             {/* fazer um component de outros cards que entrem */}
             <div style={{ textAlign: 'center' }}>Groups</div>
             {newGrupos.grupos.map((grupo : any, i : any) => (
-              <CardGrupos grupos={grupo} grupoIndex={i} changeBoard={changeBoard} />
+              <CardGrupos grupos={grupo} grupoIndex={i} changeBoard={changeBoard} removeGroup={removeGroup} createQuadro={createQuadro} removeQuadro={removeQuadro} />
             ))}
 
-            <Card className="border-0 larica" onClick={() => createGroup(`Grupo ${newGrupos.grupos.length}`)} style={{ cursor: 'pointer', borderRadius: '15px', paddingBottom: '11px', marginTop: '11px', backgroundColor: '#FFFF', boxShadow: "0px 0px 15px rgba(69, 69, 69, 0.2)" }}>
+            <Card className="border-0 larica" onClick={() => createGroup(`Grupo ${newGrupos.grupos.length+1}`)} style={{ cursor: 'pointer', borderRadius: '15px', paddingBottom: '11px', marginTop: '11px', backgroundColor: '#FFFF', boxShadow: "0px 0px 15px rgba(69, 69, 69, 0.2)" }}>
               <Card.Title></Card.Title>
               <Card.Subtitle style={{ marginLeft: '10px' }} className="text-muted">add new group</Card.Subtitle>
             </Card>
