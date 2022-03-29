@@ -400,7 +400,7 @@ const setEventBus = (handle: any) => {
 
 export default function Quadros() {
   const [show, setShow] = useState(false);
-
+  let [taskId, setTaskId] = useState('');
   function OpenCardModal(data: any) {
     console.log('cliquei,', data);
     return (
@@ -413,7 +413,7 @@ export default function Quadros() {
         >
           <Modal.Body>
             {data.data}
-            darbutiyo esse card goy
+            Card de ID: {taskId}
           </Modal.Body>
         </Modal>
       </>
@@ -664,6 +664,7 @@ export default function Quadros() {
               onDataChange={changeData}
               onCardClick={(event: any) => {
                 setShow(true);
+                setTaskId(event)
               }} //esse onclick apenas retorna o ID do card clicado,
               labelStyle={{ background: '#348954' }}
               //canRemoveLanes
