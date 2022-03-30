@@ -4,6 +4,7 @@ import Base from './BasePage';
 import { Col, Row, Card } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import CardGrupos from '../components/Grupos';
+import TaskPanel from '../components/tasksPane';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import './style.css';
 
@@ -401,6 +402,8 @@ const setEventBus = (handle: any) => {
 export default function Quadros() {
   const [show, setShow] = useState(false);
   let [taskId, setTaskId] = useState('');
+
+
   function OpenCardModal(data: any) {
     console.log('cliquei,', data);
     return (
@@ -408,13 +411,19 @@ export default function Quadros() {
         <Modal
           show={show}
           onHide={() => setShow(false)}
-          dialogClassName="modal-90w"
+          dialogClassName="modal-100w"
           aria-labelledby="example-custom-modal-styling-title"
+            
         >
+          <div  style={{width: '10002 px', marginLeft:'calc(14% - 30px)'}}/>
           <Modal.Body>
+            
+              cu
+          
             {data.data}
             Card de ID: {taskId}
-          </Modal.Body>
+            <TaskPanel cardId={taskId} />
+            </Modal.Body>
         </Modal>
       </>
     );
@@ -661,10 +670,10 @@ export default function Quadros() {
               editable
               canAddLanes
               //addCardTitle='asdsad'
-              onDataChange={changeData}
+              onDataChange={changeData} //aqui chamar a função de API 
               onCardClick={(event: any) => {
-                setShow(true);
                 setTaskId(event)
+                setShow(true);
               }} //esse onclick apenas retorna o ID do card clicado,
               labelStyle={{ background: '#348954' }}
               //canRemoveLanes
