@@ -415,13 +415,9 @@ export default function Quadros() {
           aria-labelledby="example-custom-modal-styling-title"
             
         >
-          <div  style={{width: '10002 px', marginLeft:'calc(14% - 30px)'}}/>
+          <Modal.Header closeButton style={{borderBottom: '0', paddingBottom:'0'}}></Modal.Header>
+          {/* <div  style={{width: '10002 px', marginLeft:'calc(14% - 30px)'}}/> */}
           <Modal.Body>
-            
-              cu
-          
-            {data.data}
-            Card de ID: {taskId}
             <TaskPanel cardId={taskId} />
             </Modal.Body>
         </Modal>

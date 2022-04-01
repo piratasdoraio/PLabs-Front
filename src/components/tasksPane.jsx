@@ -96,12 +96,14 @@ export default function TaskPanel(cardID) {
   })
   return (
     <>
-      <div>
+      <div style={{fontSize:'1.5rem'}}>
         {title}
       </div>
       <br/>
-
-      <div>
+      <div style={{marginBottom:'5px',fontSize:'1.2rem'}}>
+        Descrição
+      </div>
+      <div style={{marginBottom:'15px'}}>
         {description}
       </div>
 
