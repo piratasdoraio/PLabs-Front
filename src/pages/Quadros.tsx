@@ -413,7 +413,8 @@ export default function Quadros() {
           onHide={() => setShow(false)}
           dialogClassName="modal-100w"
           aria-labelledby="example-custom-modal-styling-title"
-            
+          size="lg"
+          
         >
           <Modal.Header closeButton style={{borderBottom: '0', paddingBottom:'0'}}></Modal.Header>
           {/* <div  style={{width: '10002 px', marginLeft:'calc(14% - 30px)'}}/> */}
