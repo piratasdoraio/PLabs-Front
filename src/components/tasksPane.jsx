@@ -122,10 +122,13 @@ export default function TaskPanel(cardID) {
     <div style={{marginLeft:'35px',marginRight:'30px'}}
      onClick={async (event)=> 
                           {
-                            //console.log('rtihs', event.target.id)
+                            console.log('rtihs', event.target.id)
                             if(event.target.id != 'descrição'){
                               setEditandoDescrição(false)
                               setPreDescrição(description)
+                            }
+                            if(event.target.id != 'inputTarefa' && event.target.id != 'descriçãoText' && newLane.length == 0){
+                              setAdicionando(true)
                             }
                             
                             if(event.target.id != 'title' && title.length >= 1){
@@ -243,9 +246,10 @@ export default function TaskPanel(cardID) {
       {
         adicionando ?
         <a
-        style={{textDecoration:'none', cursor:'pointer'}}
-        onClick = {async ()=> {await setAdicionando(false); handleFocus()}}>
-          adicionar</a> 
+          style={{textDecoration:'none', cursor:'pointer'}}
+          id='inputTarefa'
+          onClick = {async ()=> {await setAdicionando(false); handleFocus()}}>
+            adicionar</a> 
 
         :
 
