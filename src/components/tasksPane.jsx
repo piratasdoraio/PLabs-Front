@@ -75,6 +75,7 @@ export default function TaskPanel(cardID) {
   let [task, setTask] = useState('')
   let [taskBack, setTaskBack] = useState('')
   let [editandoTask, setEditandoTask] = useState('-1')
+  let [elementHeight, setElementHeight] = useState('')
 
   const isAdmin = localStorage.getItem('user') === 'admin';
   
@@ -229,24 +230,28 @@ export default function TaskPanel(cardID) {
               
               <>
                 <textarea 
-                    id='descrição'
+                    
                     className='descrição'
-                    style={{borderColor:'#dee2e6',padding:'5px', paddingLeft:'12px', borderRadius:'5px', overflowWrap: 'break-word', width:'100%', maxHeight:'400px'}}
-                    rows= '2'
+                    style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', width:'100%', height: elementHeight ,maxHeight:'260px'}}
+                    ref={textToFocus}
                     value={task}
-                    onChange={(event) => {setTask(event.target.value)}}
+                    onChange={(event) => {setTask(event.target.value)
+                                          if(task == 'olavo de carvalh'){
+                                            setTask('💀')
+                                          }}}
                     />  
               <div style={{marginBottom:'20px'}}>
                 <button 
                     disabled={task.length == 0 }
                     style={{fontSize:'1rem', padding:'3px'}}
                     class='btn btn-secondary'
-                    onClick={async () => {
+                    onClick={async (event) => {
+                      
                         setEditandoTask('-1');
                         setTaskBack('')
                         lanes[index].description = task
                         await setLanes(lanes)
-                        console.log()
+                    
                     }}>
                   Salvar</button>
 
@@ -263,14 +268,20 @@ export default function TaskPanel(cardID) {
             </>
             :
             <>
-            <div className='border'style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', overflowWrap: 'break-word'}}>        
+            <div className='border' id = {'task' + index} style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', overflowWrap: 'break-word'}}>        
               {data.description}    
             </div>
             
             <div hidden={!isAdmin} style={{marginLeft:'13px', color:'#6c757d'}}>
             <a 
             style={{fontSize:'0.8rem', cursor: 'pointer'}}
-            onClick={()=>{setEditandoTask(index); setTask(data.description)}}
+            onClick={async ()=>{ 
+                            await setElementHeight(document.getElementById('task' + index).offsetHeight)
+                            await setEditandoTask(index); 
+                            setTask(data.description); 
+                            handleFocus(); 
+                            
+                          }}
             >
               Editar </a>
             -
