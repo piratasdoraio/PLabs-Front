@@ -109,13 +109,14 @@ export default function TaskPanel(cardID) {
       </div>
 
       {lanes.map((data, index) =>{
+        console.log(lanes.length)
         return (
 
           <div style={{marginBottom:'10px'}}> 
             {/* content */}      
             
             
-            <div style={{color:'#495057',marginTop:'5px',marginBottom:'3px', fontWeight: 'bold'}}>
+            <div style={{color:'#495057',marginTop:'5px',marginBottom:'3px', fontWeight: 'bold', paddingLeft:'3px'}}>
               <img src='https://cdn.discordapp.com/attachments/299228773415649281/959617736403722301/-.png'
               style ={{width:'30px', height:'30px', objectFit: 'cover', borderRadius:'28px', position:'absolute',left:'13px'}}/>
 
@@ -131,7 +132,14 @@ export default function TaskPanel(cardID) {
             <div hidden={!isAdmin} style={{marginLeft:'13px', color:'#6c757d'}}>
             <a style={{fontSize:'0.8rem', cursor: 'pointer'}}>Editar </a>
             -
-            <a style={{fontSize:'0.8rem',cursor: 'pointer'}}> Excluir</a>
+            <a 
+              style={{fontSize:'0.8rem',cursor: 'pointer'}}
+              onClick={async ()=>{
+                await lanes.splice(index);
+                setLanes(lanes);
+                setAdicionando(false)
+                setAdicionando(true)
+              }}> Excluir</a>
             </div>
 
           </div>       
@@ -184,7 +192,6 @@ export default function TaskPanel(cardID) {
                 }}
                 />
           </div>
-      
       }
      </div>
     </>
