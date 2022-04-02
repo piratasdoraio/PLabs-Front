@@ -1,6 +1,6 @@
 import Button from '@restart/ui/esm/Button';
 import React, { Component, useState, useEffect } from 'react';
-import { Card, Col } from 'react-bootstrap';
+import { Card, Col,Row  } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import './style.css';
 
@@ -72,7 +72,7 @@ export default function TaskPanel(cardID) {
 
       setLanes(lanes)
   }
-  }else{
+  }else if (cardID.cardId == 'Card2'){
     if(id == 'id off'){
       setId(data2.id);
       setTitle(data2.title)
@@ -96,34 +96,47 @@ export default function TaskPanel(cardID) {
   })
   return (
     <>
-      <div style={{fontSize:'1.5rem'}}>
+    <div style={{marginLeft:'35px',marginRight:'30px'}}>
+      <div style={{fontSize:'1.7rem'}}>
         {title}
       </div>
       <br/>
-      <div style={{marginBottom:'5px',fontSize:'1.2rem'}}>
+      <div style={{marginBottom:'5px',fontSize:'1.28rem'}}>
         Descrição
       </div>
-      <div style={{marginBottom:'15px'}}>
+      <div style={{marginBottom:'15px', marginLeft:'15px'}}>
         {description}
       </div>
 
-      {lanes.map((data) =>{
+      {lanes.map((data, index) =>{
         return (
 
-          <div className = 'border'>
-            {data.user}
+          <div style={{marginBottom:'10px'}}> 
+            {/* content */}      
+            
+            
+            <div style={{color:'#495057',marginTop:'5px',marginBottom:'3px', fontWeight: 'bold'}}>
+              <img src='https://cdn.discordapp.com/attachments/299228773415649281/959617736403722301/-.png'
+              style ={{width:'30px', height:'30px', objectFit: 'cover', borderRadius:'28px', position:'absolute',left:'13px'}}/>
 
-            <div>
-              <br></br>
-              
-            {data.description}
-         
+              {data.user}
+
+              <a style={{ fontWeight: 'normal', fontSize:'0.8rem', marginLeft:'10px' }}>Admin</a>
             </div>
-          </div>
-          
+
+            <div className='border'style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px'}}>        
+              {data.description}    
+            </div>
+
+            <div hidden={!isAdmin} style={{marginLeft:'13px', color:'#6c757d'}}>
+            <a style={{fontSize:'0.8rem', cursor: 'pointer'}}>Editar </a>
+            -
+            <a style={{fontSize:'0.8rem',cursor: 'pointer'}}> Excluir</a>
+            </div>
+
+          </div>       
         )
       })}
-
       {
         adicionando ?
         <a
@@ -134,25 +147,46 @@ export default function TaskPanel(cardID) {
         :
 
         <div>
-        <input
-        value={newLane}
-        onChange={(event) => setNewLane(event.target.value)}></input>
-            <button onClick={() => {
-              console.log('a'); setAdicionando(true);
-              lanes.push(
-                {
-                  id: '1',
-                  user: 'admin também',
-                  description: newLane ,
-                  //usuarios associados se pa
-                }
-              )
-              setNewLane('')
-            }}>save</button>
-          </div>
+        <div class="form-group">
+          <textarea 
+          placeholder="Descreva a nova tarefa." 
+          class="form-control" 
+          rows="2"
+          value={newLane}
+          onChange={(event) => setNewLane(event.target.value)}
+          />
+      </div>
+            <button 
+                style={{marginTop:'8px'}}
+                class='btn btn-secondary'
+                disabled={newLane.length == 0 }
+                onClick={() => {
+                    setAdicionando(true);
+                    lanes.push(
+                    {
+                      id: '1',
+                      user: 'admin também',
+                      description: newLane ,
+                      //usuarios associados se pa
+                      //tags 
+                    }
+                  )
+                  setNewLane('')
+                }}>
+              Salvar</button>
 
+              <button 
+                class='btn-close'
+                style={{marginLeft:'5px'}}
+                onClick={async()=>{
+                  setAdicionando(true);
+                  setNewLane('')
+                }}
+                />
+          </div>
+      
       }
-     
+     </div>
     </>
   );
 }
