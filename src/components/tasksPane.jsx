@@ -65,11 +65,16 @@ export default function TaskPanel(cardID) {
   let [editandoDescrição,setEditandoDescrição] = useState(false)
   let [preDescrição, setPreDescrição] = useState('')
   let [ description, setDescription] = useState('')
-  const descriptionFocus = useRef(null);
+
 
   //adicionando lanes
   let [adicionando, setAdicionando] = useState(true)
   let [newLane, setNewLane] = useState('')
+
+  //editando task
+  let [task, setTask] = useState('')
+  let [taskBack, setTaskBack] = useState('')
+  let [editandoTask, setEditandoTask] = useState('-1')
 
   const isAdmin = localStorage.getItem('user') === 'admin';
   
@@ -177,12 +182,11 @@ export default function TaskPanel(cardID) {
                 // disabled={editandoDescrição} (desabilitei pq o cara so chega ai apertando tab)
                 id='descrição'
                 className='descrição'
-                style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', border:'0', backgroundColor: (editandoDescrição ? '#ffff' : '#e1e1e1'), cursor:(!editandoDescrição ? 'pointer':''), width:'100%', maxHeight:'400px'}}
+                style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', border:'0', backgroundColor: (editandoDescrição ? '#ffff' : '#ebebeb'), cursor:(!editandoDescrição ? 'pointer':''), width:'100%', maxHeight:'400px'}}
                 rows= '5'
                 value={description}
                 onChange={(event) => {setDescription(event.target.value)}}
-                >  
-      </textarea>
+                />  
       <div style={{marginBottom:'20px'}} hidden={!editandoDescrição}>
             <button 
                 style={{fontSize:'1rem', padding:'3px'}}
@@ -221,12 +225,54 @@ export default function TaskPanel(cardID) {
               <a style={{ fontWeight: 'normal', fontSize:'0.8rem', marginLeft:'10px' }}>Admin</a>
             </div>
 
+            { editandoTask == index ?
+              
+              <>
+                <textarea 
+                    id='descrição'
+                    className='descrição'
+                    style={{borderColor:'#dee2e6',padding:'5px', paddingLeft:'12px', borderRadius:'5px', overflowWrap: 'break-word', width:'100%', maxHeight:'400px'}}
+                    rows= '2'
+                    value={task}
+                    onChange={(event) => {setTask(event.target.value)}}
+                    />  
+              <div style={{marginBottom:'20px'}}>
+                <button 
+                    disabled={task.length == 0 }
+                    style={{fontSize:'1rem', padding:'3px'}}
+                    class='btn btn-secondary'
+                    onClick={async () => {
+                        setEditandoTask('-1');
+                        setTaskBack('')
+                        lanes[index].description = task
+                        await setLanes(lanes)
+                        console.log()
+                    }}>
+                  Salvar</button>
+
+                  <button 
+                    class='btn-close'
+                    style={{marginLeft:'5px', position:'relative', top:'3px'}}
+                    onClick={async()=>{
+                      await setTask(taskBack)
+                      setEditandoTask('-1');
+                      setTaskBack('')
+                    }}
+                    />
+              </div>
+            </>
+            :
+            <>
             <div className='border'style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', overflowWrap: 'break-word'}}>        
               {data.description}    
             </div>
-
+            
             <div hidden={!isAdmin} style={{marginLeft:'13px', color:'#6c757d'}}>
-            <a style={{fontSize:'0.8rem', cursor: 'pointer'}}>Editar </a>
+            <a 
+            style={{fontSize:'0.8rem', cursor: 'pointer'}}
+            onClick={()=>{setEditandoTask(index); setTask(data.description)}}
+            >
+              Editar </a>
             -
             <a 
               style={{fontSize:'0.8rem',cursor: 'pointer'}}
@@ -239,9 +285,16 @@ export default function TaskPanel(cardID) {
               }}> Excluir</a>
             </div>
 
-          </div>       
+  
+            </>
+            }
+            
+        </div>
+              
         )
       })}
+
+      {/* end task */}
 
       {
         adicionando ?
