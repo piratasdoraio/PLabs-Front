@@ -50,7 +50,7 @@ export default function TaskPanel(cardID) {
   let [id, setId] = useState('id off')
   let [title, setTitle] = useState('title off')
   let [ description, setDescription] = useState('off description')
-  let [permision, setPermision] =useState('')
+  let [permision, setPermision] = useState('')
   let [lanes, setLanes] = useState([])
 
   //adicionando lanes
@@ -162,14 +162,18 @@ export default function TaskPanel(cardID) {
           class="form-control" 
           rows="2"
           value={newLane}
-          onChange={(event) => setNewLane(event.target.value)}
+          onChange={(event) => {setNewLane(event.target.value)
+          
+            if(newLane == 'olavo de carvalh'){
+              setNewLane('💀')
+            } }}
           />
       </div>
             <button 
                 style={{marginTop:'8px'}}
                 class='btn btn-secondary'
                 disabled={newLane.length == 0 }
-                onClick={() => {
+                onClick={ () => {
                     setAdicionando(true);
                     lanes.push(
                     {
