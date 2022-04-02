@@ -7,7 +7,7 @@ import './style.css';
 let data = {
     id:'Card 1 (por enquanto n ta na API)',
     title:'cu1',
-    description:'XD XD',
+    description:'Oi bonitão',
     permisions:'admin',
     lanes:[
         {
@@ -44,7 +44,7 @@ let data2 = {
 
 //'#D2D2D2'
 export default function TaskPanel(cardID) {
-  console.log('card id',cardID)
+  //console.log('card id',cardID)
   const [quadroNome, setQuadroNome] = useState('');
   //const [grupoNome, setGrupoNome] = useState('');
   let [id, setId] = useState('id off')
@@ -57,11 +57,13 @@ export default function TaskPanel(cardID) {
   let [editandoTitulo,setEditandoTitulo] = useState(false)
   let [title, setTitle] = useState('Titulo⠀')
   let [focus,setFocus] = useState(false)
-  const titleInput = useRef(null);
+  const textToFocus = useRef(null);
 
   //adicionando descrição 
   let [editandoDescrição,setEditandoDescrição] = useState(false)
+  let [preDescrição, setPreDescrição] = useState('')
   let [ description, setDescription] = useState('')
+  const descriptionFocus = useRef(null);
 
   //adicionando lanes
   let [adicionando, setAdicionando] = useState(true)
@@ -74,6 +76,7 @@ export default function TaskPanel(cardID) {
       setId(data.id);
       setTitle(data.title)
       setDescription(data.description)
+      setPreDescrição(data.description)
 
     let maric = []
       data.lanes.map((lane) =>{
@@ -87,7 +90,7 @@ export default function TaskPanel(cardID) {
       setId(data2.id);
       setTitle(data2.title)
       setDescription(data2.description)
-
+      setPreDescrição(data2.description)
     let maric = []
       data2.lanes.map((lane) =>{
         lanes.push(lane)
@@ -106,28 +109,40 @@ export default function TaskPanel(cardID) {
   }, [])
 
   function handleFocus(e){
-      titleInput.current.focus()
+      textToFocus.current.focus()
     }
 
+  
   return (
     <>
     <div style={{marginLeft:'35px',marginRight:'30px'}}
      onClick={async (event)=> 
                           {
-                            console.log('rtihs', event.target.id)
-                            if(event.target.id != 'title'){
+                            //console.log('rtihs', event.target.id)
+                            if(event.target.id != 'descrição'){
+                              setEditandoDescrição(false)
+                              setPreDescrição(description)
+                            }
+                            
+                            if(event.target.id != 'title' && title.length >= 1){
                             setEditandoTitulo(false)
                           }}}>
 
-      {!editandoTitulo ? 
-        <div id='title'style={{fontSize:'1.6rem',paddingBottom:'2px'}} onClick={async (event)=> { await setEditandoTitulo(true);console.log('a'); await setFocus(true); handleFocus(event.target);console.log(event)}}>
+      { !editandoTitulo ? 
+
+        <div id='title'style={{fontSize:'1.8rem',paddingBottom:'2px'}} 
+              onClick={async (event)=> {                                                                          
+                                        await setEditandoTitulo(true); 
+                                        await setFocus(true); 
+                                        handleFocus(event.target)
+                                        }}>
           {title}
         </div> 
       :    
 
       <input 
-        style={{fontSize:'1.6rem', padding:'0px',paddingLeft:'3px', position:'relative',top:'-1px',left:'-4px'}}
-        ref={titleInput} id='titulo' class="form-control" 
+        style={{fontSize:'1.8rem', padding:'0px',paddingLeft:'3px', position:'relative',top:'-1px',left:'-4px'}}
+        ref={textToFocus} id='titulo' class="form-control" 
         placeholder={title == 'Titulo⠀' ? '' : 'Insira o titulo'}
         value={title}
         onChange={(event) => {setTitle(event.target.value)}}
@@ -137,16 +152,50 @@ export default function TaskPanel(cardID) {
                     }   
                     }}/>
       }
+
       <br/>
-      <div style={{marginBottom:'5px',fontSize:'1.28rem'}}>
+      <div style={{marginBottom:'5px',fontSize:'1.25rem'}}>
         Descrição
       </div>
-      <div style={{marginBottom:'15px', marginLeft:'15px'}}>
-        {description}
+      
+      <div onClick={
+                    async ()=>{
+                      await setEditandoDescrição(true)
+                    }}
+           >    
+      <textarea 
+                // disabled={editandoDescrição} (desabilitei pq o cara so chega ai apertando tab)
+                id='descrição'
+                className='descrição'
+                style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', border:'0', backgroundColor: (editandoDescrição ? '#ffff' : '#e1e1e1'), cursor:(!editandoDescrição ? 'pointer':''), width:'100%', maxHeight:'400px'}}
+                rows= '5'
+                value={description}
+                onChange={(event) => {setDescription(event.target.value)}}
+                >  
+      </textarea>
+      <div style={{marginBottom:'20px'}} hidden={!editandoDescrição}>
+            <button 
+                style={{fontSize:'1rem', padding:'3px'}}
+                class='btn btn-secondary'
+                onClick={ () => {
+                    setEditandoDescrição(false);
+                    setPreDescrição(description)
+                }}>
+              Salvar</button>
+
+              <button 
+                class='btn-close'
+                style={{marginLeft:'5px', position:'relative', top:'3px'}}
+                onClick={async()=>{
+                  await setDescription(preDescrição)
+                  setEditandoDescrição(false)
+                }}
+                />
+          </div>
       </div>
+      
 
       {lanes.map((data, index) =>{
-        console.log(index)
         return (
 
           <div style={{marginBottom:'10px'}}> 
@@ -162,7 +211,7 @@ export default function TaskPanel(cardID) {
               <a style={{ fontWeight: 'normal', fontSize:'0.8rem', marginLeft:'10px' }}>Admin</a>
             </div>
 
-            <div className='border'style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px'}}>        
+            <div className='border'style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', overflowWrap: 'break-word'}}>        
               {data.description}    
             </div>
 
@@ -188,7 +237,7 @@ export default function TaskPanel(cardID) {
         adicionando ?
         <a
         style={{textDecoration:'none', cursor:'pointer'}}
-        onClick = {()=> setAdicionando(false)}>
+        onClick = {async ()=> {await setAdicionando(false); handleFocus()}}>
           adicionar</a> 
 
         :
@@ -197,6 +246,7 @@ export default function TaskPanel(cardID) {
         <div class="form-group">
           <textarea 
           id='descriçãoText'
+          ref={textToFocus}
           placeholder="Descreva a nova tarefa." 
           class="form-control" 
           rows="2"
@@ -208,8 +258,9 @@ export default function TaskPanel(cardID) {
             } }}
           />
       </div>
+          <div>
             <button 
-                style={{marginTop:'8px'}}
+                style={{marginTop:'8px', fontSize:'1rem', padding:'3px'}}
                 class='btn btn-secondary'
                 disabled={newLane.length == 0 }
                 onClick={ () => {
@@ -229,12 +280,13 @@ export default function TaskPanel(cardID) {
 
               <button 
                 class='btn-close'
-                style={{marginLeft:'5px'}}
+                style={{marginLeft:'5px', position:'relative', top:'8px'}}
                 onClick={async()=>{
                   setAdicionando(true);
                   setNewLane('')
                 }}
                 />
+          </div>
           </div>
       }
      </div>
