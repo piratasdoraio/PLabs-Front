@@ -13,7 +13,7 @@ let data = {
         {
             id:'1',
             user:'jose matador',
-            description:'jose vai nao matar ninguem',
+            description:'QUE FIQUE BEM CLARO DE QUE: OS COMENTARIOS SAO FEITO DE CIMA PRA BAIXO E TAMBÉM SAO ENCADEADOS. DELETA ESSE AKI PRA VER, em seguida reabra esta aba e delete so o de baixo. Sim eu sei, eu sou um deus 😎.',
             users:[], //usuarios associados se pa
         },
         {
@@ -109,7 +109,7 @@ export default function TaskPanel(cardID) {
       </div>
 
       {lanes.map((data, index) =>{
-        console.log(lanes.length)
+        console.log(index)
         return (
 
           <div style={{marginBottom:'10px'}}> 
@@ -135,9 +135,10 @@ export default function TaskPanel(cardID) {
             <a 
               style={{fontSize:'0.8rem',cursor: 'pointer'}}
               onClick={async ()=>{
-                await lanes.splice(index);
-                setLanes(lanes);
-                setAdicionando(false)
+                lanes.splice(index);
+                await setLanes(lanes);
+                setNewLane('a')
+                setNewLane('')
                 setAdicionando(true)
               }}> Excluir</a>
             </div>
