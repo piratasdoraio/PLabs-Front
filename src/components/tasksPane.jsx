@@ -120,7 +120,7 @@ export default function TaskPanel(cardID) {
                           }}}>
 
       {!editandoTitulo ? 
-        <div id='title'style={{fontSize:'1.6rem'}} onClick={async (event)=> { await setEditandoTitulo(true);console.log('a'); await setFocus(true); handleFocus(event.target);console.log(event)}}>
+        <div id='title'style={{fontSize:'1.6rem',paddingBottom:'2px'}} onClick={async (event)=> { await setEditandoTitulo(true);console.log('a'); await setFocus(true); handleFocus(event.target);console.log(event)}}>
           {title}
         </div> 
       :    
