@@ -152,7 +152,6 @@ export default function TaskPanel(cardID) {
           {title}
         </div> 
       :    
-
       <input 
         style={{fontSize:'1.8rem', padding:'0px',paddingLeft:'3px', position:'relative',top:'-1px',left:'-4px'}}
         ref={textToFocus} id='titulo' class="form-control" 
@@ -209,7 +208,9 @@ export default function TaskPanel(cardID) {
           </div>
       </div>
       
-
+      <div style={{marginTop:'25px',marginBottom:'16px',fontSize:'1.25rem'}}>
+        Atividades
+      </div>
       {lanes.map((data, index) =>{
         return (
 
@@ -306,7 +307,7 @@ export default function TaskPanel(cardID) {
       })}
 
       {/* end task */}
-
+      <div style={{marginTop:'15px'}}>
       {
         adicionando ?
         <a
@@ -364,6 +365,7 @@ export default function TaskPanel(cardID) {
           </div>
           </div>
       }
+      </div>
      </div>
     </>
   );
