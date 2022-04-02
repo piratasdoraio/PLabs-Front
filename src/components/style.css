@@ -1,3 +1,7 @@
 .ilumina :hover {
   filter: brightness(0.9);
 }
+
+input::placeholder {
+  font-size: 0.8em;
+}

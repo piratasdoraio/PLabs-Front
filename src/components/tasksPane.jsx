@@ -1,5 +1,5 @@
 import Button from '@restart/ui/esm/Button';
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 import { Card, Col,Row  } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import './style.css';
@@ -48,10 +48,20 @@ export default function TaskPanel(cardID) {
   const [quadroNome, setQuadroNome] = useState('');
   //const [grupoNome, setGrupoNome] = useState('');
   let [id, setId] = useState('id off')
-  let [title, setTitle] = useState('title off')
-  let [ description, setDescription] = useState('off description')
+  
+  
   let [permision, setPermision] = useState('')
   let [lanes, setLanes] = useState([])
+
+  //adicionando Titulo
+  let [editandoTitulo,setEditandoTitulo] = useState(false)
+  let [title, setTitle] = useState('Titulo⠀')
+  let [focus,setFocus] = useState(false)
+  const titleInput = useRef(null);
+
+  //adicionando descrição 
+  let [editandoDescrição,setEditandoDescrição] = useState(false)
+  let [ description, setDescription] = useState('')
 
   //adicionando lanes
   let [adicionando, setAdicionando] = useState(true)
@@ -92,14 +102,41 @@ export default function TaskPanel(cardID) {
   }
   
   useEffect(()=>{
+    
+  }, [])
 
-  })
+  function handleFocus(e){
+      titleInput.current.focus()
+    }
+
   return (
     <>
-    <div style={{marginLeft:'35px',marginRight:'30px'}}>
-      <div style={{fontSize:'1.8rem'}}>
-        {title}
-      </div>
+    <div style={{marginLeft:'35px',marginRight:'30px'}}
+     onClick={async (event)=> 
+                          {
+                            console.log('rtihs', event.target.id)
+                            if(event.target.id != 'title'){
+                            setEditandoTitulo(false)
+                          }}}>
+
+      {!editandoTitulo ? 
+        <div id='title'style={{fontSize:'1.6rem'}} onClick={async (event)=> { await setEditandoTitulo(true);console.log('a'); await setFocus(true); handleFocus(event.target);console.log(event)}}>
+          {title}
+        </div> 
+      :    
+
+      <input 
+        style={{fontSize:'1.6rem', padding:'0px',paddingLeft:'3px', position:'relative',top:'-1px',left:'-4px'}}
+        ref={titleInput} id='titulo' class="form-control" 
+        placeholder={title == 'Titulo⠀' ? '' : 'Insira o titulo'}
+        value={title}
+        onChange={(event) => {setTitle(event.target.value)}}
+        onKeyPress={(event) => {
+                    if(event.key === 'Enter' && title.length >= 1){
+                      setEditandoTitulo(false)
+                    }   
+                    }}/>
+      }
       <br/>
       <div style={{marginBottom:'5px',fontSize:'1.28rem'}}>
         Descrição
@@ -146,6 +183,7 @@ export default function TaskPanel(cardID) {
           </div>       
         )
       })}
+
       {
         adicionando ?
         <a
@@ -158,6 +196,7 @@ export default function TaskPanel(cardID) {
         <div>
         <div class="form-group">
           <textarea 
+          id='descriçãoText'
           placeholder="Descreva a nova tarefa." 
           class="form-control" 
           rows="2"
