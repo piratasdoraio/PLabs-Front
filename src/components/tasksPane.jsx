@@ -7,6 +7,7 @@ import './style.css';
 let data = {
     id:'Card 1 (por enquanto n ta na API)',
     title:'cu1',
+    coluna:'Fase 1',
     description:'Oi bonitão',
     permisions:'admin',
     lanes:[
@@ -56,6 +57,7 @@ export default function TaskPanel(cardID) {
   //adicionando Titulo
   let [editandoTitulo,setEditandoTitulo] = useState(false)
   let [title, setTitle] = useState('Titulo⠀')
+  let [fase, setFase] = useState('')
   let [focus,setFocus] = useState(false)
   const textToFocus = useRef(null);
 
@@ -75,6 +77,7 @@ export default function TaskPanel(cardID) {
     if(id == 'id off'){
       setId(data.id);
       setTitle(data.title)
+      setFase(data.coluna)
       setDescription(data.description)
       setPreDescrição(data.description)
 
@@ -89,6 +92,7 @@ export default function TaskPanel(cardID) {
     if(id == 'id off'){
       setId(data2.id);
       setTitle(data2.title)
+      setFase(data2.fase)
       setDescription(data2.description)
       setPreDescrição(data2.description)
     let maric = []
@@ -153,6 +157,9 @@ export default function TaskPanel(cardID) {
                     }}/>
       }
 
+       <div hidden={!isAdmin} style={{color:'#6c757d'}}>
+            <a style={{fontSize:'0.85rem', cursor: 'pointer'}}>{fase} </a>
+        </div>
       <br/>
       <div style={{marginBottom:'5px',fontSize:'1.25rem'}}>
         Descrição
