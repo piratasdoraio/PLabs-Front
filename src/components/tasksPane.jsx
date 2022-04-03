@@ -268,6 +268,7 @@ export default function TaskPanel(cardID) {
                         setEditandoTask('-1');
                         setTaskBack('')
                         lanes[index].description = task
+                        
                         await setLanes(lanes)
                     
                     }}>
@@ -358,8 +359,8 @@ export default function TaskPanel(cardID) {
                     setAdicionando(true);
                     lanes.push(
                     {
-                      id: '1',
-                      user: 'admin também',
+                      id: lanes.length+1,
+                      user: user,
                       description: newLane ,
                       //usuarios associados se pa
                       //tags 
@@ -367,7 +368,7 @@ export default function TaskPanel(cardID) {
                   )
                   setNewLane('')
                 }}>
-              Salvar</button>
+              Enviar</button>
 
               <button 
                 class='btn-close'
