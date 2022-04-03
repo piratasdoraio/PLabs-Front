@@ -440,6 +440,15 @@ export default function Quadros() {
 
   function OpenCardModal(data: any) {
     console.log('cliquei,', data);
+    console.log('actualQuadro',actualQuadro)
+    let infos = {
+      actualGrupo: actualGrupo.toString(),
+      actualQuadro: actualQuadro.toString()
+      
+    }
+    
+    localStorage.setItem('actualQuadro', actualQuadro.toString());
+    localStorage.setItem('actualGrupo', actualGrupo.toString());
     return (
       <>
         <Modal
@@ -453,7 +462,8 @@ export default function Quadros() {
           <Modal.Header closeButton style={{borderBottom: '0', paddingBottom:'0'}}></Modal.Header>
           {/* <div  style={{width: '10002 px', marginLeft:'calc(14% - 30px)'}}/> */}
           <Modal.Body>
-            <TaskPanel cardId={taskId} actualGrupo = {actualGrupo} />
+        
+            <TaskPanel cardId={taskId}/>
             </Modal.Body>
         </Modal>
       </>
@@ -595,16 +605,16 @@ export default function Quadros() {
         role: `${role}`,
         lanes:[]
       }
-      localStorage.setItem('LastCard', JSON.stringify(newCard))
+      await localStorage.setItem('LastCard', JSON.stringify(newCard))
       setLastCardUpdate(newCard)
       
       console.log('novo card',newCard)
   };
-  const lastUpdateCard = (e: any) => {
-    
+  const lastUpdateCard = (e: any) => { //talvez não seja necessario 
+
   };
 
-  const changeData = (e: any) => {
+  const changeData = async (e: any) => {
     if (e.id) return;
     let updateGrupos = newGrupos;
 
@@ -612,7 +622,6 @@ export default function Quadros() {
     setTimeout(()=>
     e.lanes.map((coluna:any, indexColuna:any)=>{
       coluna.cards.map((card:any, index:any) =>{
-        console.log('lastCardUpdate.id',lastCardUpdate.id)
         if(card.id == localStorage.lastCardId){
           console.log('achei sa porra',  e.lanes[indexColuna].cards[index], JSON.parse(localStorage.getItem('LastCard') || '') ) 
           e.lanes[indexColuna].cards[index] = JSON.parse(localStorage.getItem('LastCard') || '') 
@@ -620,12 +629,12 @@ export default function Quadros() {
         }
       })
       
-    }), 500)
+    }), 200)
     
     console.log('e lanes',e)
     updateGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes = e.lanes;
     
-    setNewGrupos(updateGrupos);
+    await setNewGrupos(updateGrupos);
     setSaving(true);
   };
 
@@ -746,7 +755,7 @@ export default function Quadros() {
               onLaneClick ={(e:any) => localStorage.setItem('lastLane', e)}
               onCardAdd={async (e:any) => await lastCardAdd(e)}
               
-              onCardUpdate = {(e:any) => { e.description ='XDXD',console.log('card add',e)}}
+              onCardUpdate = {(e:any) => {console.log('card add',e)}}
               eventBusHandle={setEventBus}
               style={{
                 height: '50rem',
@@ -761,8 +770,8 @@ export default function Quadros() {
               //addCardTitle='asdsad'
               
               //aqui chamar a função de API 
-              onCardClick={(event: any) => {
-                setTaskId(event)
+              onCardClick={async (event: any) => {
+                await localStorage.setItem('CardId', event)
                 setShow(true);
               }} //esse onclick apenas retorna o ID do card clicado,
               labelStyle={{ background: '#348954' }}
