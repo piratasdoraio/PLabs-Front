@@ -453,11 +453,25 @@ export default function Quadros() {
       <>
         <Modal
           show={show}
-          onHide={() => setShow(false)}
+          onHide={() => { setShow(false); 
+                  if (user == 'admin') {
+                    dados = JSON.parse(
+                      localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
+        
+                    );setNewGrupos(dados)
+                  } else if (user == 'pedro') {
+                    dados = JSON.parse(
+                      localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
+                    );setNewGrupos(dados)
+                  } else if (user == 'julio') {
+                    dados = JSON.parse(
+                      localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
+                    );setNewGrupos(dados)
+                   }}}
           dialogClassName="modal-100w"
           aria-labelledby="example-custom-modal-styling-title"
           size="lg"
-          
+        
         >
           <Modal.Header closeButton style={{borderBottom: '0', paddingBottom:'0'}}></Modal.Header>
           {/* <div  style={{width: '10002 px', marginLeft:'calc(14% - 30px)'}}/> */}
@@ -618,7 +632,7 @@ export default function Quadros() {
     if (e.id) return;
     let updateGrupos = newGrupos;
 
-    
+    if(e != null){
     setTimeout(()=>
     e.lanes.map((coluna:any, indexColuna:any)=>{
       coluna.cards.map((card:any, index:any) =>{
@@ -630,8 +644,8 @@ export default function Quadros() {
       })
       
     }), 200)
-    
-    console.log('e lanes',e)
+  }
+    //console.log('e lanes',e)
     updateGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes = e.lanes;
     
     await setNewGrupos(updateGrupos);
