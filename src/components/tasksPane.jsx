@@ -121,7 +121,7 @@ const dados = JSON.parse(
     // }
   })
 
-  console.log('data', data)
+  // console.log('data', data)
  
       // permission.push('admin')
       // if (data.permissions.length == 0){
@@ -135,7 +135,7 @@ const dados = JSON.parse(
       // }
       if(title == '⠀'){
       if (user == 'admin' || user == data.author){
-        console.log('permitido liberaco cu ')
+        // console.log('permitido liberaco cu ')
         setaAuthorization(true)
       }
       setAuthor(data.author)
@@ -184,7 +184,7 @@ const dados = JSON.parse(
     }
   
   async function salvar(){
-    console.log('salvar',faseIndex,dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex])
+    // console.log('salvar',faseIndex,dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex])
     const newCard = {
       author: author,
       description: description,
@@ -206,7 +206,7 @@ const dados = JSON.parse(
     <div style={{marginLeft:'35px',marginRight:'30px'}}
      onClick={async (event)=> 
                           {               
-                                console.log('rtihs', event.target.id)
+                                // console.log('rtihs', event.target.id)
                               if(event.target.id != 'descrição'){
                                 setEditandoDescrição(false)
                                 setPreDescrição(description)
