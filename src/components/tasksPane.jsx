@@ -9,7 +9,7 @@ let data = {
     title:'cu1',
     coluna:'Fase 1',
     description:'Oi bonitão',
-    permisions:'admin',
+    permissions:['pedro'],
     lanes:[
         {
             id:'1',
@@ -32,26 +32,29 @@ let data2 = {
     id:'Card 2',
     title:'OPA É O CARD 2',
     description:'OPA É O CARD 2',
-    permisions:'user',
+    permissions:['pedro'],
     lanes:[
         {
             id:'1',
             user:'admin também',
             description:'admin triste',
             users:[], //usuarios associados se pa
+            permissions:['admin']
         },   
     ]
 }
 
 //'#D2D2D2'
 export default function TaskPanel(cardID) {
+  const user = localStorage.user
   //console.log('card id',cardID)
   const [quadroNome, setQuadroNome] = useState('');
   //const [grupoNome, setGrupoNome] = useState('');
   let [id, setId] = useState('id off')
   
   
-  let [permision, setPermision] = useState('')
+  let [permission, setPermission] = useState([])
+  let [authorization, setaAuthorization] = useState(false)
   let [lanes, setLanes] = useState([])
 
   //adicionando Titulo
@@ -65,7 +68,7 @@ export default function TaskPanel(cardID) {
   let [editandoDescrição,setEditandoDescrição] = useState(false)
   let [preDescrição, setPreDescrição] = useState('')
   let [ description, setDescription] = useState('')
-
+  let [arapuca,setArapuca ] = useState(false)
 
   //adicionando lanes
   let [adicionando, setAdicionando] = useState(true)
@@ -81,6 +84,14 @@ export default function TaskPanel(cardID) {
   
   if(cardID.cardId == 'Card1'){
     if(id == 'id off'){
+      permission.push('admin')
+      data.permissions.map((e)=>{
+        if(user == e || user == 'admin'){
+          setaAuthorization(true)
+        }
+      }) 
+      setPermission(permission)
+      console.log('pedro' in permission)
       setId(data.id);
       setTitle(data.title)
       setFase(data.coluna)
@@ -127,27 +138,30 @@ export default function TaskPanel(cardID) {
     <>
     <div style={{marginLeft:'35px',marginRight:'30px'}}
      onClick={async (event)=> 
-                          {
-                            console.log('rtihs', event.target.id)
-                            if(event.target.id != 'descrição'){
-                              setEditandoDescrição(false)
-                              setPreDescrição(description)
-                            }
-                            if(event.target.id != 'inputTarefa' && event.target.id != 'descriçãoText' && newLane.length == 0){
-                              setAdicionando(true)
-                            }
-                            
-                            if(event.target.id != 'title' && title.length >= 1){
-                            setEditandoTitulo(false)
+                          {               
+                                console.log('rtihs', event.target.id)
+                              if(event.target.id != 'descrição'){
+                                setEditandoDescrição(false)
+                                setPreDescrição(description)
+                              }
+                              if(event.target.id != 'inputTarefa' && event.target.id != 'descriçãoText' && newLane.length == 0){
+                                setAdicionando(true)
+                              }
+                              
+                              if(event.target.id != 'title' && title.length >= 1){
+                              setEditandoTitulo(false)
+                           
                           }}}>
 
       { !editandoTitulo ? 
 
         <div id='title'style={{fontSize:'1.8rem',paddingBottom:'2px'}} 
-              onClick={async (event)=> {                                                                          
-                                        await setEditandoTitulo(true); 
+              onClick={async (event)=> {
+                                        if(authorization){
+                                          await setEditandoTitulo(true); 
                                         await setFocus(true); 
                                         handleFocus(event.target)
+                                        }                                                                          
                                         }}>
           {title}
         </div> 
@@ -175,17 +189,20 @@ export default function TaskPanel(cardID) {
       
       <div onClick={
                     async ()=>{
-                      await setEditandoDescrição(true)
+                      if(authorization){
+                        await setEditandoDescrição(true)
+                      }
                     }}
            >    
       <textarea 
                 // disabled={editandoDescrição} (desabilitei pq o cara so chega ai apertando tab)
                 id='descrição'
                 className='descrição'
-                style={{padding:'5px', paddingLeft:'12px', borderRadius:'5px', border:'0', backgroundColor: (editandoDescrição ? '#ffff' : '#ebebeb'), cursor:(!editandoDescrição ? 'pointer':''), width:'100%', maxHeight:'400px'}}
+                style={{color:'#000000',padding:'5px', paddingLeft:'12px', borderRadius:'5px', border:'0', backgroundColor: (editandoDescrição ? '#ffff' : '#ebebeb'), cursor:(!editandoDescrição && authorization ? 'pointer':''), width:'100%', maxHeight:'400px'}}
                 rows= '5'
                 value={description}
                 onChange={(event) => {setDescription(event.target.value)}}
+                disabled={!authorization}
                 />  
       <div style={{marginBottom:'20px'}} hidden={!editandoDescrição}>
             <button 
@@ -273,15 +290,15 @@ export default function TaskPanel(cardID) {
               {data.description}    
             </div>
             
-            <div hidden={!isAdmin} style={{marginLeft:'13px', color:'#6c757d'}}>
+            <div hidden={!authorization} style={{marginLeft:'13px', color:'#6c757d'}}>
             <a 
             style={{fontSize:'0.8rem', cursor: 'pointer'}}
             onClick={async ()=>{ 
+                            
                             await setElementHeight(document.getElementById('task' + index).offsetHeight)
                             await setEditandoTask(index); 
                             setTask(data.description); 
                             handleFocus(); 
-                            
                           }}
             >
               Editar </a>
@@ -296,8 +313,6 @@ export default function TaskPanel(cardID) {
                 setAdicionando(true)
               }}> Excluir</a>
             </div>
-
-  
             </>
             }
             
@@ -307,7 +322,7 @@ export default function TaskPanel(cardID) {
       })}
 
       {/* end task */}
-      <div style={{marginTop:'15px'}}>
+      <div style={{marginTop:'15px'}} hidden={!authorization}>
       {
         adicionando ?
         <a
