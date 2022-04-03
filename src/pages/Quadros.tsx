@@ -587,9 +587,10 @@ export default function Quadros() {
       let author = localStorage.getItem('user')
       let newCard = {
         id: e.id,
-        title: '',
-        description: '',
-        label: '',
+        laneId: localStorage.getItem('lastLane') || '',
+        title: e.title || '',
+        description:  e.description || '',
+        label:  e.label || '',
         author: `${author}`,
         role: `${role}`,
         lanes:[]
@@ -607,7 +608,7 @@ export default function Quadros() {
     if (e.id) return;
     let updateGrupos = newGrupos;
 
-    console.log('eeeee',e)
+    
     setTimeout(()=>
     e.lanes.map((coluna:any, indexColuna:any)=>{
       coluna.cards.map((card:any, index:any) =>{
@@ -615,6 +616,7 @@ export default function Quadros() {
         if(card.id == localStorage.lastCardId){
           console.log('achei sa porra',  e.lanes[indexColuna].cards[index], JSON.parse(localStorage.getItem('LastCard') || '') ) 
           e.lanes[indexColuna].cards[index] = JSON.parse(localStorage.getItem('LastCard') || '') 
+
         }
       })
       
@@ -741,7 +743,9 @@ export default function Quadros() {
           >
 
             <Board
+              onLaneClick ={(e:any) => localStorage.setItem('lastLane', e)}
               onCardAdd={async (e:any) => await lastCardAdd(e)}
+              
               onCardUpdate = {(e:any) => { e.description ='XDXD',console.log('card add',e)}}
               eventBusHandle={setEventBus}
               style={{
