@@ -52,7 +52,7 @@ let data2 = {
 }
 
 //'#D2D2D2'
-export default function TaskPanel(cardID) {
+export default function TaskPanel(actualGroup,cardID) {
   const user = localStorage.user
   const role = 'User' //alterar o metodo disso para pegar do local storage futuramente 
   //console.log('card id',cardID)
@@ -93,20 +93,23 @@ export default function TaskPanel(cardID) {
   if(cardID.cardId == 'Card1'){
     if(id == 'id off'){
       permission.push('admin')
-      data.permissions.map((e)=>{
-        if(user == e || user == 'admin'){
-          setaAuthorization(true)
-        }
-      }) 
+      if (data.permissions.length == 0){
+        setaAuthorization(true)
+      }else {
+        data.permissions.map((e)=>{
+          if(user == e || user == 'admin'){
+            setaAuthorization(true)
+          }
+        }) 
+      }
+      
       setPermission(permission)
-      console.log('pedro' in permission)
       setId(data.id);
       setTitle(data.title)
       setFase(data.coluna)
       setDescription(data.description)
       setPreDescrição(data.description)
 
-    let maric = []
       data.lanes.map((lane) =>{
         lanes.push(lane)
       })
