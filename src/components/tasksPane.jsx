@@ -10,16 +10,20 @@ let data = {
     coluna:'Fase 1',
     description:'Oi bonitão',
     permissions:['pedro'],
+    author:'admin',
+    role:'Admin',
     lanes:[
         {
             id:'1',
             user:'jose matador',
+            role:'Admin',
             description:'QUE FIQUE BEM CLARO DE QUE: OS COMENTARIOS SAO FEITO DE CIMA PRA BAIXO E TAMBÉM SAO ENCADEADOS. DELETA ESSE AKI PRA VER, em seguida reabra esta aba e delete so o de baixo. Sim eu sei, eu sou um deus 😎.',
             users:[], //usuarios associados se pa
         },
         {
             id:'2',
             user:'jose matador',
+            role:'Admin',
             description:'jose vai nao matar ninguem2',
             users:[], //usuarios associados se pa
         },
@@ -33,10 +37,13 @@ let data2 = {
     title:'OPA É O CARD 2',
     description:'OPA É O CARD 2',
     permissions:['pedro'],
+    author:'Admin',
+    role:'Admin',
     lanes:[
         {
             id:'1',
             user:'admin também',
+            role:'Admin',
             description:'admin triste',
             users:[], //usuarios associados se pa
             permissions:['admin']
@@ -47,6 +54,7 @@ let data2 = {
 //'#D2D2D2'
 export default function TaskPanel(cardID) {
   const user = localStorage.user
+  const role = 'User' //alterar o metodo disso para pegar do local storage futuramente 
   //console.log('card id',cardID)
   const [quadroNome, setQuadroNome] = useState('');
   //const [grupoNome, setGrupoNome] = useState('');
@@ -241,7 +249,7 @@ export default function TaskPanel(cardID) {
 
               {data.user}
 
-              <a style={{ fontWeight: 'normal', fontSize:'0.8rem', marginLeft:'10px' }}>Admin</a>
+              <a style={{ fontWeight: 'normal', fontSize:'0.8rem', marginLeft:'10px' }}>{data.role}</a>
             </div>
 
             { editandoTask == index ?
@@ -361,6 +369,7 @@ export default function TaskPanel(cardID) {
                     {
                       id: lanes.length+1,
                       user: user,
+                      role: role,
                       description: newLane ,
                       //usuarios associados se pa
                       //tags 
