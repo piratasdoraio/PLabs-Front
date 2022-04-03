@@ -30,6 +30,9 @@ let grupos = {
                   description: 'Vendedor de fruta',
                   label: 'Alta prioridade',
                   draggable: false,
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
                 {
                   id: 'Card2',
@@ -37,6 +40,9 @@ let grupos = {
                   description: 'Designer',
                   label: 'Media Prioridade',
                   metadata: { sha: 'be312a1' },
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
                 {
                   id: 'Card3',
@@ -44,6 +50,9 @@ let grupos = {
                   // description: 'Designer',
                   // label: 'Media Prioridade',
                   // metadata: { sha: 'be312a1' },
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
 
                 {
@@ -52,6 +61,9 @@ let grupos = {
                   // description: 'Designer',
                   // label: 'Media Prioridade',
                   // metadata: { sha: 'be312a1' },
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
               ],
             },
@@ -78,6 +90,9 @@ let grupos = {
                   description: 'Musico',
                   label: 'Alta prioridade',
                   draggable: false,
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
               ],
             },
@@ -104,6 +119,9 @@ let grupos = {
                   description: 'Programador',
                   label: 'Extrema prioridade',
                   draggable: false,
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
               ],
             },
@@ -135,6 +153,9 @@ let gruposU1 = {
                   description: 'Vendedor de fruta',
                   label: 'Alta prioridade',
                   draggable: false,
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
               ],
             },
@@ -161,6 +182,9 @@ let gruposU1 = {
                   description: 'Musico',
                   label: 'Alta prioridade',
                   draggable: false,
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
               ],
             },
@@ -187,6 +211,9 @@ let gruposU1 = {
                   description: 'Programador',
                   label: 'Extrema prioridade',
                   draggable: false,
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
               ],
             },
@@ -218,6 +245,7 @@ let gruposU2 = {
                   description: 'Designer',
                   label: 'Media Prioridade',
                   metadata: { sha: 'be312a1' },
+                  lanes:[]
                 },
               ],
             },
@@ -244,6 +272,9 @@ let gruposU2 = {
                   description: 'Musico',
                   label: 'Alta prioridade',
                   draggable: false,
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
               ],
             },
@@ -270,6 +301,9 @@ let gruposU2 = {
                   description: 'Programador',
                   label: 'Extrema prioridade',
                   draggable: false,
+                  author: 'Admin',
+                  role: 'Admin',
+                  lanes:[]
                 },
               ],
             },
@@ -419,7 +453,7 @@ export default function Quadros() {
           <Modal.Header closeButton style={{borderBottom: '0', paddingBottom:'0'}}></Modal.Header>
           {/* <div  style={{width: '10002 px', marginLeft:'calc(14% - 30px)'}}/> */}
           <Modal.Body>
-            <TaskPanel cardId={taskId} />
+            <TaskPanel cardId={taskId} actualGrupo = {actualGrupo} />
             </Modal.Body>
         </Modal>
       </>
@@ -432,7 +466,7 @@ export default function Quadros() {
 
   if (user == 'admin') {
     dados = JSON.parse(
-      localStorage.getItem('newGrupos') || JSON.stringify(grupos)
+      localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
     );
   } else if (user == 'pedro') {
     dados = JSON.parse(
@@ -450,6 +484,26 @@ export default function Quadros() {
   const [actualGrupo, setActualGrupo] = React.useState(0);
   const [actualQuadro, setActualQuadro] = React.useState(0);
   const [saving, setSaving] = React.useState(false);
+
+  // type card = {
+  //   id: any;
+  //   title: string;
+  //   description: string;
+  //   label: string;
+  //   author: string | null;
+  //   role: string;
+  //   lanes: never[];
+  // }
+  let card = {
+    id: '',
+        title: '',
+        description: '',
+        label: '',
+        author: '',
+        role:  '',
+        lanes:[]
+  }
+  const [lastCardUpdate, setLastCardUpdate ] = React.useState(card)
 
   // const [loaded, setLoaded] = React.useState(false);
 
@@ -504,13 +558,6 @@ export default function Quadros() {
 
   const createQuadro = (grupoIndex: number, nome: string) => {
     let updateGrupos = newGrupos;
-
-    updateGrupos.grupos[grupoIndex].quadros.push({
-      id: updateGrupos.grupos[grupoIndex].quadros.length.toString(),
-      nome: nome,
-      lanes: [],
-    });
-
     setNewGrupos(updateGrupos);
     setSaving(true);
   };
@@ -533,11 +580,49 @@ export default function Quadros() {
     setActualQuadro(quadroIndex);
   };
 
+  const lastCardAdd = async (e:any) => {
+      localStorage.setItem('lastCardId', e.id)
+      console.log('card adicionado', e)
+      let role = localStorage.getItem('user') == 'Admin' ? 'Admin' : 'User' 
+      let author = localStorage.getItem('user')
+      let newCard = {
+        id: e.id,
+        title: '',
+        description: '',
+        label: '',
+        author: `${author}`,
+        role: `${role}`,
+        lanes:[]
+      }
+      localStorage.setItem('LastCard', JSON.stringify(newCard))
+      setLastCardUpdate(newCard)
+      
+      console.log('novo card',newCard)
+  };
+  const lastUpdateCard = (e: any) => {
+    
+  };
+
   const changeData = (e: any) => {
     if (e.id) return;
     let updateGrupos = newGrupos;
-    updateGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes = e.lanes;
 
+    console.log('eeeee',e)
+    setTimeout(()=>
+    e.lanes.map((coluna:any, indexColuna:any)=>{
+      coluna.cards.map((card:any, index:any) =>{
+        console.log('lastCardUpdate.id',lastCardUpdate.id)
+        if(card.id == localStorage.lastCardId){
+          console.log('achei sa porra',  e.lanes[indexColuna].cards[index], JSON.parse(localStorage.getItem('LastCard') || '') ) 
+          e.lanes[indexColuna].cards[index] = JSON.parse(localStorage.getItem('LastCard') || '') 
+        }
+      })
+      
+    }), 500)
+    
+    console.log('e lanes',e)
+    updateGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes = e.lanes;
+    
     setNewGrupos(updateGrupos);
     setSaving(true);
   };
@@ -654,7 +739,10 @@ export default function Quadros() {
               opacity: '0.9',
             }}
           >
+
             <Board
+              onCardAdd={async (e:any) => await lastCardAdd(e)}
+              onCardUpdate = {(e:any) => { e.description ='XDXD',console.log('card add',e)}}
               eventBusHandle={setEventBus}
               style={{
                 height: '50rem',
@@ -667,13 +755,15 @@ export default function Quadros() {
               editable
               canAddLanes
               //addCardTitle='asdsad'
-              onDataChange={changeData} //aqui chamar a função de API 
+              
+              //aqui chamar a função de API 
               onCardClick={(event: any) => {
                 setTaskId(event)
                 setShow(true);
               }} //esse onclick apenas retorna o ID do card clicado,
               labelStyle={{ background: '#348954' }}
               //canRemoveLanes
+              onDataChange={changeData} 
             />
           </Col>
           <OpenCardModal />
