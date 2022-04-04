@@ -436,7 +436,7 @@ const setEventBus = (handle: any) => {
 export default function Quadros() {
   const [show, setShow] = useState(false);
   let [taskId, setTaskId] = useState('');
-
+  const [authorization, setAuthorization] = useState(false)
 
   function OpenCardModal(data: any) {
     console.log('cliquei,', data);
@@ -489,6 +489,9 @@ export default function Quadros() {
   let dados;
 
   if (user == 'admin') {
+    if(authorization == false){
+      setAuthorization(true)
+    }
     dados = JSON.parse(
       localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
     );
@@ -606,16 +609,17 @@ export default function Quadros() {
 
   const lastCardAdd = async (e:any) => {
       localStorage.setItem('lastCardId', e.id)
+      
       console.log('card adicionado', e)
-      let role = localStorage.getItem('user') == 'Admin' ? 'Admin' : 'User' 
-      let author = localStorage.getItem('user')
+      let role = localStorage.getItem('user') == 'admin' ? 'Admin' : 'User' 
+      let author = localStorage.getItem('user') 
       let newCard = {
         id: e.id,
         laneId: localStorage.getItem('lastLane') || '',
         title: e.title || '',
         description:  e.description || '',
         label:  e.label || '',
-        author: `${author}`,
+        author: author || '',
         role: `${role}`,
         lanes:[]
       }
@@ -643,7 +647,7 @@ export default function Quadros() {
         }
       })
       
-    }), 200)
+    }), 10)
   }
     //console.log('e lanes',e)
     updateGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes = e.lanes;
@@ -767,7 +771,7 @@ export default function Quadros() {
 
             <Board
               onLaneClick ={(e:any) => localStorage.setItem('lastLane', e)}
-              onCardAdd={async (e:any) => await lastCardAdd(e)}
+              onCardAdd={async (e:any) => await lastCardAdd(e)  }
               
               onCardUpdate = {(e:any) => {console.log('card add',e)}}
               eventBusHandle={setEventBus}
@@ -778,15 +782,18 @@ export default function Quadros() {
                 overflowY: 'auto',
               }}
               data={newGrupos.grupos[actualGrupo].quadros[actualQuadro]}
-              draggable
-              editable
-              canAddLanes
+              draggable={authorization}
+              editable={authorization}
+              canAddLanes={authorization}
               //addCardTitle='asdsad'
               
               //aqui chamar a função de API 
               onCardClick={async (event: any) => {
                 await localStorage.setItem('CardId', event)
-                setShow(true);
+
+                  setShow(true);
+
+                
               }} //esse onclick apenas retorna o ID do card clicado,
               labelStyle={{ background: '#348954' }}
               //canRemoveLanes
