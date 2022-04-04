@@ -134,6 +134,7 @@ const dados = JSON.parse(
       //   }) 
       // }
       if(title == '⠀'){
+        console.log('card',data)
       if (user == 'admin' || user == data.author){
         // console.log('permitido liberaco cu ')
         setaAuthorization(true)
@@ -145,12 +146,14 @@ const dados = JSON.parse(
       setFase(data.coluna)
       setDescription(data.description)
       setPreDescrição(data.description)
-
-      if(data.lanes.length != 0){
-        data.lanes.map((lane) =>{
-          lanes.push(lane)
-        })
+      if(data.lanes != undefined){
+        if(data.lanes.length != 0 ){
+          data.lanes.map((lane) =>{
+            lanes.push(lane)
+          })
+        }
       }
+      
       setLanes(lanes)
       }
       
@@ -288,8 +291,9 @@ const dados = JSON.parse(
                 style={{marginLeft:'5px', position:'relative', top:'3px'}}
                 onClick={async()=>{
                   await setDescription(preDescrição)
-                  salvar()
                   setEditandoDescrição(false)
+                  salvar()
+                  
                 }}
                 />
           </div>
