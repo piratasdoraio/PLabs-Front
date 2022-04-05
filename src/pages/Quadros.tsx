@@ -37,7 +37,7 @@ let grupos = {
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
-                      title: 'Tag'
+                      title: '⠀⠀⠀'
                     },
                     {
                       bgcolor: '#0079BF',

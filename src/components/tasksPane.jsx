@@ -144,7 +144,12 @@ const dados = JSON.parse(
       setAuthor(data.author)
       setLabel(data.label)
       setId(data.id);
-      setTitle(data.title)
+      
+      if (data.title == ''){
+        setTitle('Titulo⠀')
+      }else{
+        setTitle(data.title)
+      }
       setFase(data.coluna)
       setDescription(data.description)
       setPreDescrição(data.description)
@@ -196,7 +201,7 @@ const dados = JSON.parse(
       tags = [ {
         bgcolor: '#EB5A46',
         color: 'white',
-        title: 'Tag'
+        title: '⠀⠀⠀'
       },
       {
         bgcolor: '#0079BF',
@@ -257,7 +262,7 @@ const dados = JSON.parse(
       <input 
         style={{fontSize:'1.8rem', padding:'0px',paddingLeft:'3px', position:'relative',top:'-1px',left:'-4px'}}
         ref={textToFocus} id='titulo' class="form-control" 
-        placeholder={title == 'Titulo⠀' ? '' : 'Insira o titulo'}
+        placeholder={title == 'Titulo⠀' ? '⠀' : 'Insira o titulo'}
         value={title}
         onChange={(event) => {setTitle(event.target.value)}}
         onKeyPress={(event) => {
