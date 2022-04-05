@@ -492,7 +492,7 @@ export default function Quadros() {
 
   let dados;
 
-  if (user == 'admin') {
+  if (localStorage.getItem('role') == 'admin') {
     if(authorization == false){
       setAuthorization(true)
     }
