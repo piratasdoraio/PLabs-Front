@@ -21,12 +21,14 @@ const log3 = {
 function login(email: string, senha: string) {
   if (email == log.email && senha == log.senha) {
     localStorage.setItem('user', email);
+    localStorage.setItem('role', 'admin');
     window.location.href = '/quadros';
   } else if (email == log2.email && senha == log2.senha) {
-    localStorage.setItem('user', email);
+    localStorage.setItem('role', 'user');
     window.location.href = '/quadros';
   } else if (email == log3.email && senha == log3.senha) {
     localStorage.setItem('user', email);
+    localStorage.setItem('role', 'user');
     window.location.href = '/quadros';
   } else {
     alert('Dados inválidos');
