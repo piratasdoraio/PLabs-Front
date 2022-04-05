@@ -61,7 +61,7 @@ const dados = JSON.parse(
 
   
   const user = localStorage.user
-  const role = 'User' //alterar o metodo disso para pegar do local storage futuramente 
+  const role = localStorage.getItem('role') //alterar o metodo disso para pegar do local storage futuramente 
   //console.log('card id',cardID)
   const [quadroNome, setQuadroNome] = useState('');
   //const [grupoNome, setGrupoNome] = useState('');
@@ -97,6 +97,7 @@ const dados = JSON.parse(
 
   let data 
   let CardId = localStorage.getItem('CardId')
+  let faseName 
   let faseIndex
   let cardIndex
   let faseID
@@ -105,6 +106,7 @@ const dados = JSON.parse(
   dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes.map((coluna, indexCol)=>{
     coluna.cards.map((a,index) =>{
       if (a.id == CardId){
+        faseName = coluna.title
         data = a
         faseIndex = indexCol
         faseID = coluna.id
@@ -134,8 +136,8 @@ const dados = JSON.parse(
       //   }) 
       // }
       if(title == '⠀'){
-        console.log('card',data)
-      if (user == 'admin' || user == data.author){
+        //console.log('card',data)
+      if (role == 'admin' || user == data.author){
         // console.log('permitido liberaco cu ')
         setaAuthorization(true)
       }
@@ -252,7 +254,7 @@ const dados = JSON.parse(
       }
 
        <div hidden={!isAdmin} style={{color:'#6c757d'}}>
-            <a style={{fontSize:'0.85rem', cursor: 'pointer'}}>{fase} </a>
+            <a style={{fontSize:'0.85rem', cursor: 'pointer'}}>{faseName} </a>
         </div>
       <br/>
       <div style={{marginBottom:'5px',fontSize:'1.25rem'}}>
