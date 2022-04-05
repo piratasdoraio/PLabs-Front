@@ -271,7 +271,7 @@ const dados = JSON.parse(
                 id='descrição'
                 className='descrição'
                 style={{color:'#000000',padding:'5px', paddingLeft:'12px', borderRadius:'5px', border:'0', backgroundColor: (editandoDescrição ? '#ffff' : '#ebebeb'), cursor:(!editandoDescrição && authorization ? 'pointer':''), width:'100%', maxHeight:'400px'}}
-                rows= '5'
+                rows= '3'
                 value={description}
                 onChange={(event) => {setDescription(event.target.value)}}
                 disabled={!authorization}
