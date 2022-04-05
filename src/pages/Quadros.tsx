@@ -32,17 +32,17 @@ let grupos = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[],
+                  lanes: [],
                   tags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
-                      title: '⠀⠀⠀'
+                      title: 'Atrasado',
                     },
                     {
                       bgcolor: '#0079BF',
                       color: 'white',
-                      title: 'Tag'
+                      title: 'Pedro',
                     },
                     // {
                     //   bgcolor: '#61BD4F',
@@ -64,7 +64,7 @@ let grupos = {
                   metadata: { sha: 'be312a1' },
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
                 {
                   id: 'Card3',
@@ -74,7 +74,7 @@ let grupos = {
                   // metadata: { sha: 'be312a1' },
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
 
                 {
@@ -85,7 +85,7 @@ let grupos = {
                   // metadata: { sha: 'be312a1' },
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -114,7 +114,7 @@ let grupos = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -143,7 +143,7 @@ let grupos = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -177,7 +177,7 @@ let gruposU1 = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -206,7 +206,7 @@ let gruposU1 = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -235,7 +235,7 @@ let gruposU1 = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -267,7 +267,7 @@ let gruposU2 = {
                   description: 'Designer',
                   label: 'Media Prioridade',
                   metadata: { sha: 'be312a1' },
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -296,7 +296,7 @@ let gruposU2 = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -325,7 +325,7 @@ let gruposU2 = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes: [],
                 },
               ],
             },
@@ -458,54 +458,58 @@ const setEventBus = (handle: any) => {
 export default function Quadros() {
   const [show, setShow] = useState(false);
   let [taskId, setTaskId] = useState('');
-  const [authorization, setAuthorization] = useState(false)
+  const [authorization, setAuthorization] = useState(false);
 
   function OpenCardModal(data: any) {
     console.log('cliquei,', data);
-    console.log('actualQuadro',actualQuadro)
+    console.log('actualQuadro', actualQuadro);
     let infos = {
       actualGrupo: actualGrupo.toString(),
-      actualQuadro: actualQuadro.toString()
-      
-    }
-    
+      actualQuadro: actualQuadro.toString(),
+    };
+
     localStorage.setItem('actualQuadro', actualQuadro.toString());
     localStorage.setItem('actualGrupo', actualGrupo.toString());
     return (
       <>
         <Modal
           show={show}
-          onHide={() => { setShow(false); 
-                localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
-                dados = JSON.parse(
-                       localStorage.getItem('newGrupos') || JSON.stringify(grupos));
-                  setNewGrupos(dados)
-                  //  if (user == 'admin') {
-                  //   dados = JSON.parse(
-                  //     localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
-        
-                  //   );setNewGrupos(dados)
-                  // } else if (user == 'pedro') {
-                  //   dados = JSON.parse(
-                  //     localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
-                  //   );setNewGrupos(dados)
-                  // } else if (user == 'julio') {
-                  //   dados = JSON.parse(
-                  //     localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
-                  //   );setNewGrupos(dados)
-                  //  }
-                  }}
+          onHide={() => {
+            setShow(false);
+            // localStorage.getItem('newGrupos') || JSON.stringify(grupos); //localstorage ou client
+            // dados = JSON.parse(
+            //   localStorage.getItem('newGrupos') || JSON.stringify(grupos)
+            // );
+            // setNewGrupos(dados);
+            if (user == 'admin') {
+              dados = JSON.parse(
+                localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
+              );
+              setNewGrupos(dados);
+            } else if (user == 'pedro') {
+              dados = JSON.parse(
+                localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
+              );
+              setNewGrupos(dados);
+            } else if (user == 'julio') {
+              dados = JSON.parse(
+                localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
+              );
+              setNewGrupos(dados);
+            }
+          }}
           dialogClassName="modal-100w"
           aria-labelledby="example-custom-modal-styling-title"
           size="lg"
-        
         >
-          <Modal.Header closeButton style={{borderBottom: '0', paddingBottom:'0'}}></Modal.Header>
+          <Modal.Header
+            closeButton
+            style={{ borderBottom: '0', paddingBottom: '0' }}
+          ></Modal.Header>
           {/* <div  style={{width: '10002 px', marginLeft:'calc(14% - 30px)'}}/> */}
           <Modal.Body>
-        
-            <TaskPanel cardId={taskId}/>
-            </Modal.Body>
+            <TaskPanel cardId={taskId} />
+          </Modal.Body>
         </Modal>
       </>
     );
@@ -516,37 +520,34 @@ export default function Quadros() {
   let dados;
 
   if (localStorage.getItem('role') == 'admin') {
-    if(authorization == false){
-      setAuthorization(true)
+    if (authorization == false) {
+      setAuthorization(true);
     }
-    
-  } else if(user == null){
+  } else if (user == null) {
     window.location.href = '/login';
   }
-  dados = JSON.parse(
-    localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
-  ); 
-  
+  // dados = JSON.parse(
+  //   localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
+  // );
 
-  // if (user == 'admin') {
-  //   if(authorization == false){
-  //     setAuthorization(true)
-  //   }
-  //   dados = JSON.parse(
-  //     localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
-  //   );
-  // } else if (user == 'pedro') {
-  //   dados = JSON.parse(
-  //     localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
-  //   );
-  // } else if (user == 'julio') {
-  //   dados = JSON.parse(
-  //     localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
-  //   );
-  // } else {
-  //   window.location.href = '/login';
-  // }
-
+  if (user == 'admin') {
+    if (authorization == false) {
+      setAuthorization(true);
+    }
+    dados = JSON.parse(
+      localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
+    );
+  } else if (user == 'pedro') {
+    dados = JSON.parse(
+      localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
+    );
+  } else if (user == 'julio') {
+    dados = JSON.parse(
+      localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
+    );
+  } else {
+    window.location.href = '/login';
+  }
 
   const [newGrupos, setNewGrupos] = React.useState(dados);
   const [actualGrupo, setActualGrupo] = React.useState(0);
@@ -564,14 +565,14 @@ export default function Quadros() {
   // }
   let card = {
     id: '',
-        title: '',
-        description: '',
-        label: '',
-        author: '',
-        role:  '',
-        lanes:[]
-  }
-  const [lastCardUpdate, setLastCardUpdate ] = React.useState(card)
+    title: '',
+    description: '',
+    label: '',
+    author: '',
+    role: '',
+    lanes: [],
+  };
+  const [lastCardUpdate, setLastCardUpdate] = React.useState(card);
 
   // const [loaded, setLoaded] = React.useState(false);
 
@@ -626,6 +627,11 @@ export default function Quadros() {
 
   const createQuadro = (grupoIndex: number, nome: string) => {
     let updateGrupos = newGrupos;
+    updateGrupos.grupos[grupoIndex].quadros.push({
+      id: updateGrupos.grupos[grupoIndex].quadros.length.toString(),
+      nome: nome,
+      lanes: [],
+    });
     setNewGrupos(updateGrupos);
     setSaving(true);
   };
@@ -648,72 +654,79 @@ export default function Quadros() {
     setActualQuadro(quadroIndex);
   };
 
-  const lastCardAdd = async (e:any) => {
-      localStorage.setItem('lastCardId', e.id)
-      
-      console.log('card adicionado', e)
-      let role = localStorage.getItem('user') == 'admin' ? 'User' : 'Admin' 
-      let author = localStorage.getItem('user') 
-      let newCard = {
-        id: e.id,
-        laneId: localStorage.getItem('lastLane') || '',
-        title: e.title || '',
-        description:  e.description || '',
-        label:  e.label || '',
-        author: author || '',
-        role: `${role}`,
-        lanes:[],
-        tags:[]
-      }
-      await localStorage.setItem('LastCard', JSON.stringify(newCard))
-      setLastCardUpdate(newCard)
-      
-      console.log('novo card',newCard)
-  };
-  const lastUpdateCard = (e: any) => { //talvez não seja necessario 
+  const lastCardAdd = async (e: any) => {
+    localStorage.setItem('lastCardId', e.id);
 
+    console.log('card adicionado', e);
+    let role = localStorage.getItem('user') == 'admin' ? 'User' : 'Admin';
+    let author = localStorage.getItem('user');
+    let newCard = {
+      id: e.id,
+      laneId: localStorage.getItem('lastLane') || '',
+      title: e.title || '',
+      description: e.description || '',
+      label: e.label || '',
+      author: author || '',
+      role: `${role}`,
+      lanes: [],
+      tags: [],
+    };
+    await localStorage.setItem('LastCard', JSON.stringify(newCard));
+    setLastCardUpdate(newCard);
+
+    console.log('novo card', newCard);
+  };
+  const lastUpdateCard = (e: any) => {
+    //talvez não seja necessario
   };
 
   const changeData = async (e: any) => {
     if (e.id) return;
     let updateGrupos = newGrupos;
 
-    if(e != null){
-    setTimeout(()=>
-    e.lanes.map((coluna:any, indexColuna:any)=>{
-      coluna.cards.map((card:any, index:any) =>{
-        if(card.id == localStorage.lastCardId){
-          console.log('achei sa porra',  e.lanes[indexColuna].cards[index], JSON.parse(localStorage.getItem('LastCard') || '') ) 
-          e.lanes[indexColuna].cards[index] = JSON.parse(localStorage.getItem('LastCard') || '') 
-
-        }
-      })
-      
-    }), 10)
-  }
+    if (e != null) {
+      setTimeout(
+        () =>
+          e.lanes.map((coluna: any, indexColuna: any) => {
+            coluna.cards.map((card: any, index: any) => {
+              if (card.id == localStorage.lastCardId) {
+                console.log(
+                  'achei sa porra',
+                  e.lanes[indexColuna].cards[index],
+                  JSON.parse(localStorage.getItem('LastCard') || '')
+                );
+                e.lanes[indexColuna].cards[index] = JSON.parse(
+                  localStorage.getItem('LastCard') || ''
+                );
+              }
+            });
+          }),
+        10
+      );
+    }
     //console.log('e lanes',e)
     updateGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes = e.lanes;
-    
+
     await setNewGrupos(updateGrupos);
     setSaving(true);
   };
 
   console.log(newGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes);
 
-  if (saving) {
-    setSaving(false);
-    localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
-  } 
   // if (saving) {
   //   setSaving(false);
-  //   if (user == 'admin') {
-  //     localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
-  //   } else if (user == 'pedro') {
-  //     localStorage.setItem('newGruposU1', JSON.stringify(newGrupos));
-  //   } else if (user == 'julio') {
-  //     localStorage.setItem('newGruposU2', JSON.stringify(newGrupos));
-  //   }
-  // } 
+  //   localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
+  // }
+  if (saving) {
+    setSaving(false);
+    if (user == 'admin') {
+      localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
+    } else if (user == 'pedro') {
+      localStorage.setItem('newGruposU1', JSON.stringify(newGrupos));
+    } else if (user == 'julio') {
+      localStorage.setItem('newGruposU2', JSON.stringify(newGrupos));
+    }
+  }
 
   return (
     <>
@@ -814,12 +827,12 @@ export default function Quadros() {
               opacity: '0.9',
             }}
           >
-
             <Board
-              onLaneClick ={(e:any) => localStorage.setItem('lastLane', e)}
-              onCardAdd={async (e:any) => await lastCardAdd(e)  }
-              
-              onCardUpdate = {(e:any) => {console.log('card add',e)}}
+              onLaneClick={(e: any) => localStorage.setItem('lastLane', e)}
+              onCardAdd={async (e: any) => await lastCardAdd(e)}
+              onCardUpdate={(e: any) => {
+                console.log('card add', e);
+              }}
               eventBusHandle={setEventBus}
               style={{
                 height: '50rem',
@@ -832,18 +845,16 @@ export default function Quadros() {
               editable={authorization}
               canAddLanes={authorization}
               //addCardTitle='asdsad'
-              
-              //aqui chamar a função de API 
+
+              //aqui chamar a função de API
               onCardClick={async (event: any) => {
-                await localStorage.setItem('CardId', event)
+                await localStorage.setItem('CardId', event);
 
-                  setShow(true);
-
-                
+                setShow(true);
               }} //esse onclick apenas retorna o ID do card clicado,
               labelStyle={{ background: '#348954' }}
               //canRemoveLanes
-              onDataChange={changeData} 
+              onDataChange={changeData}
             />
           </Col>
           <OpenCardModal />
