@@ -454,20 +454,24 @@ export default function Quadros() {
         <Modal
           show={show}
           onHide={() => { setShow(false); 
-                  if (user == 'admin') {
-                    dados = JSON.parse(
-                      localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
+                localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
+
+                  
+                  //  if (user == 'admin') {
+                  //   dados = JSON.parse(
+                  //     localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
         
-                    );setNewGrupos(dados)
-                  } else if (user == 'pedro') {
-                    dados = JSON.parse(
-                      localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
-                    );setNewGrupos(dados)
-                  } else if (user == 'julio') {
-                    dados = JSON.parse(
-                      localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
-                    );setNewGrupos(dados)
-                   }}}
+                  //   );setNewGrupos(dados)
+                  // } else if (user == 'pedro') {
+                  //   dados = JSON.parse(
+                  //     localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
+                  //   );setNewGrupos(dados)
+                  // } else if (user == 'julio') {
+                  //   dados = JSON.parse(
+                  //     localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
+                  //   );setNewGrupos(dados)
+                  //  }
+                  }}
           dialogClassName="modal-100w"
           aria-labelledby="example-custom-modal-styling-title"
           size="lg"
@@ -492,20 +496,34 @@ export default function Quadros() {
     if(authorization == false){
       setAuthorization(true)
     }
-    dados = JSON.parse(
-      localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
-    );
-  } else if (user == 'pedro') {
-    dados = JSON.parse(
-      localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
-    );
-  } else if (user == 'julio') {
-    dados = JSON.parse(
-      localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
-    );
-  } else {
+    
+  } else if(user == null){
     window.location.href = '/login';
   }
+  dados = JSON.parse(
+    localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
+  ); 
+  
+
+  // if (user == 'admin') {
+  //   if(authorization == false){
+  //     setAuthorization(true)
+  //   }
+  //   dados = JSON.parse(
+  //     localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
+  //   );
+  // } else if (user == 'pedro') {
+  //   dados = JSON.parse(
+  //     localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
+  //   );
+  // } else if (user == 'julio') {
+  //   dados = JSON.parse(
+  //     localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
+  //   );
+  // } else {
+  //   window.location.href = '/login';
+  // }
+
 
   const [newGrupos, setNewGrupos] = React.useState(dados);
   const [actualGrupo, setActualGrupo] = React.useState(0);
@@ -611,7 +629,7 @@ export default function Quadros() {
       localStorage.setItem('lastCardId', e.id)
       
       console.log('card adicionado', e)
-      let role = localStorage.getItem('user') == 'admin' ? 'Admin' : 'User' 
+      let role = localStorage.getItem('user') == 'admin' ? 'User' : 'Admin' 
       let author = localStorage.getItem('user') 
       let newCard = {
         id: e.id,
@@ -660,14 +678,18 @@ export default function Quadros() {
 
   if (saving) {
     setSaving(false);
-    if (user == 'admin') {
-      localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
-    } else if (user == 'pedro') {
-      localStorage.setItem('newGruposU1', JSON.stringify(newGrupos));
-    } else if (user == 'julio') {
-      localStorage.setItem('newGruposU2', JSON.stringify(newGrupos));
-    }
-  }
+    localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
+  } 
+  // if (saving) {
+  //   setSaving(false);
+  //   if (user == 'admin') {
+  //     localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
+  //   } else if (user == 'pedro') {
+  //     localStorage.setItem('newGruposU1', JSON.stringify(newGrupos));
+  //   } else if (user == 'julio') {
+  //     localStorage.setItem('newGruposU2', JSON.stringify(newGrupos));
+  //   }
+  // } 
 
   return (
     <>
