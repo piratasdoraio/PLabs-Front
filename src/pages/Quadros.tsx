@@ -32,7 +32,29 @@ let grupos = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes:[]
+                  lanes:[],
+                  tags: [
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: 'Tag'
+                    },
+                    {
+                      bgcolor: '#0079BF',
+                      color: 'white',
+                      title: 'Tag'
+                    },
+                    // {
+                    //   bgcolor: '#61BD4F',
+                    //   color: 'white',
+                    //   title: 'Teste Teste Teste Teste'
+                    // },
+                    // {
+                    //   bgcolor: '#61BD4F',
+                    //   color: 'white',
+                    //   title: 'Teste'
+                    // }
+                  ],
                 },
                 {
                   id: 'Card2',
@@ -455,8 +477,9 @@ export default function Quadros() {
           show={show}
           onHide={() => { setShow(false); 
                 localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
-
-                  
+                dados = JSON.parse(
+                       localStorage.getItem('newGrupos') || JSON.stringify(grupos));
+                  setNewGrupos(dados)
                   //  if (user == 'admin') {
                   //   dados = JSON.parse(
                   //     localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client 
@@ -639,7 +662,8 @@ export default function Quadros() {
         label:  e.label || '',
         author: author || '',
         role: `${role}`,
-        lanes:[]
+        lanes:[],
+        tags:[]
       }
       await localStorage.setItem('LastCard', JSON.stringify(newCard))
       setLastCardUpdate(newCard)

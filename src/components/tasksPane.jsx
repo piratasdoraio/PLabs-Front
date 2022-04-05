@@ -190,6 +190,20 @@ const dados = JSON.parse(
   
   async function salvar(){
     // console.log('salvar',faseIndex,dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex])
+    let tags = []
+    if(CardId== 'Card1'){
+      console.log('SADASDASDASDAS')
+      tags = [ {
+        bgcolor: '#EB5A46',
+        color: 'white',
+        title: 'Tag'
+      },
+      {
+        bgcolor: '#0079BF',
+        color: 'white',
+        title: 'Tag'
+      },]
+    }
     const newCard = {
       author: author,
       description: description,
@@ -198,7 +212,8 @@ const dados = JSON.parse(
       laneId: faseID,
       title: title,
       lanes:lanes,
-      role:'Admin'
+      role:'Admin',
+      tags:tags,
     }
     dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex] = newCard
     let newGrupos = dados
