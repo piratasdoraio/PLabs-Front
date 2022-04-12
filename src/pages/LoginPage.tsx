@@ -66,7 +66,9 @@ export default function LoginPage() {
                   <input
                     onChange={(event) => setEmail(event.target.value)}
                     type="email"
+                    onKeyPress={(event)=>{if(event.key == "Enter"){login(email, senha)} }}
                     id="typeEmailX"
+                    
                     className="form-control form-control-lg"
                   />
                 </div>
@@ -78,6 +80,7 @@ export default function LoginPage() {
                     onChange={(event) => setSenha(event.target.value)}
                     type="password"
                     id="typePasswordX"
+                    onKeyPress={(event)=>{if(event.key == "Enter"){login(email, senha)} }}
                     className="form-control form-control-lg"
                   />
                 </div>
