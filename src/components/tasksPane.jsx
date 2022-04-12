@@ -412,7 +412,13 @@ export default function TaskPanel(infos, cardID) {
                         setNewLane('a')
                         setNewLane('')
                         setAdicionando(true)
-                      }}> Excluir</a>
+                      }}> Excluir </a>
+
+                    - 
+                    <a
+                      style={{ fontSize: '0.8rem', cursor: 'pointer' }}
+                      onClick={async () => {
+                      }}> Responder</a>
                   </div>
                 </>
               }
