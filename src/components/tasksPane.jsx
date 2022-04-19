@@ -435,7 +435,7 @@ export default function TaskPanel(infos, cardID) {
                     
                     <a
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
-                      onClick={async () => { setadicionandoResposta(true)
+                      onClick={async () => { await setadicionandoResposta(true)
                       }}> 
                       Responder ({data.respostas.length})</a>
                   </div>
@@ -454,9 +454,10 @@ export default function TaskPanel(infos, cardID) {
                                 <a
                                   style={{ cursor: 'pointer', fontWeight: 'normal' }}
                                   onClick={async () => {
-                                    data.respostas.splice(index); //splice remove tudo, usar filter futuramente
+                                    await data.respostas.splice(index); //splice remove tudo, usar filter futuramente
                                     await setLanes(lanes);
                                     salvar()
+                                    setNewLane('a')
                                     setNewLane('')
                                     setAdicionando(true)
                                   }}> - Excluir</a>
@@ -465,48 +466,8 @@ export default function TaskPanel(infos, cardID) {
                               <div className='border' id={'task' + index} style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word' }}>
                                 {resposta.description}
                               </div>
-                              <div style={{ marginTop: '15px' }} hidden = {!adicionandoResposta}>
-                                    <div class="form-group">
-                                      <input
-                                        id='descriçãoTexto'
-                                        ref={textToFocus}
-                                        placeholder="Insira sua resposta"
-                                        class="form-control"
-                                        value={newresposta}
-                                        onChange={(event) => {
-                                        setResposta(event.target.value)
-                                        }}
-                                      />
-                                    </div>
-                                    <div>
-                                      <button
-                                        style={{ marginTop: '8px', fontSize: '1rem', padding: '3px' }}
-                                        class='btn btn-secondary'
-                                        disabled={resposta.length == 0}
-                                        onClick={() => {
-                                          setadicionandoResposta(false);
-                                          data.respostas.push(
-                                            {
-                                              id: lanes.length + 1,
-                                              user: user,
-                                              role: role,
-                                              description: newresposta,
-                                            }
-                                          )
-                                          setNewLane('')
-                                        }}>
-                                        Enviar</button>
-
-                                      <button
-                                        class='btn-close'
-                                        style={{ marginLeft: '5px', position: 'relative', top: '8px' }}
-                                        onClick={async () => {
-                                          setAdicionandoResposta(false);
-                                          setNewLane('')
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
+                              
+                              
                             </div>
                         
                           </>
@@ -514,6 +475,49 @@ export default function TaskPanel(infos, cardID) {
 
                       })
                     }
+                    <div style={{ marginTop: '15px' }} hidden={!adicionandoResposta}>
+                      <div class="form-group">
+                        <input
+                          id='descriçãoTexto'
+                          ref={textToFocus}
+                          placeholder="Insira sua resposta"
+                          class="form-control"
+                          value={newresposta}
+                          onChange={(event) => {
+                            setResposta(event.target.value)
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <button
+                          style={{ marginTop: '8px', fontSize: '1rem', padding: '3px' }}
+                          class='btn btn-secondary'
+                          disabled={newresposta.length == 0}
+                          onClick={async () => {
+                            await setadicionandoResposta(false);
+                            lanes.respostas.push(
+                              {
+                                id: lanes.respostas.length + 1,
+                                user: user,
+                                role: role,
+                                description: newresposta,
+                              }
+                            )
+                            await setResposta('')
+                          }}>
+                          Enviar</button>
+
+                        <button
+                          class='btn-close'
+                          style={{ marginLeft: '5px', position: 'relative', top: '8px' }}
+                          onClick={async () => {
+                            setAdicionandoResposta(false);
+                            setResposta('')
+                          }}
+                        />
+                      </div>
+                    </div>
+
                   </div>
 
                 </>
