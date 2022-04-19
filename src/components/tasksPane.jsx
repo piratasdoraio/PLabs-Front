@@ -447,7 +447,7 @@ export default function TaskPanel(infos, cardID) {
                         return (
                           <>
                             <div style={{ marginLeft: '30px', fontSize: '0.8rem' }}>
-                              <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '58px', position: 'absolute', left: '67px' }}></div>
+                              <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '59px', position: 'absolute', left: '67px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
                                 <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{data.role}</a>
