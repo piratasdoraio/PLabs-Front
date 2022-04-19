@@ -32,7 +32,31 @@ let grupos = {
                   draggable: false,
                   author: 'Admin',
                   role: 'Admin',
-                  lanes: [],
+                  lanes: [
+                    {
+                      id: '1',
+                      user: 'admin também',
+                      role: 'Admin',
+                      description: 'admin triste',
+                      users: [], //usuarios associados se pa
+                      permissions: ['admin'],
+                      respostas:[{
+                          id: '1',
+                          user: 'admin também',
+                          role: 'Admin',
+                          description: 'resposta ao admin triste',
+                          permissions: ['admin']
+                        },
+                        {
+                          id: '1',
+                          user: 'admin também',
+                          role: 'Admin',
+                          description: 'resposta ao admin triste2',
+                          permissions: ['admin']
+                        }
+                      ]
+                    },
+                  ],
                   tags: [
                     {
                       bgcolor: '#EB5A46',
