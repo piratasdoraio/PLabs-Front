@@ -492,7 +492,7 @@ export default function TaskPanel(infos, cardID) {
                       </div>
                       <div>
                         <button
-                          style={{ marginTop: '8px', fontSize: '1rem', padding: '3px' }}
+                          style={{ marginTop: '8px', fontSize: '0.8rem', padding: '3px' }}
                           class='btn btn-secondary'
                           disabled={newresposta.length == 0}
                           onClick={async () => {
