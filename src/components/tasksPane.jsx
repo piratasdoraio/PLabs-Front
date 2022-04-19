@@ -511,7 +511,7 @@ export default function TaskPanel(infos, cardID) {
                           class='btn-close'
                           style={{ marginLeft: '5px', position: 'relative', top: '8px' }}
                           onClick={async () => {
-                            setAdicionandoResposta(false);
+                            setadicionandoResposta(false);
                             setResposta('')
                           }}
                         />
