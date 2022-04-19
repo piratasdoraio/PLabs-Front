@@ -443,7 +443,7 @@ export default function TaskPanel(infos, cardID) {
                   {/* RESPOSTAS */}
                   <div >
                     {
-                      data.respostas.map((resposta) => {
+                      data.respostas.map((resposta,index) => {
                         return (
                           <>
                             <div style={{ marginLeft: '30px', fontSize: '0.8rem' }}>
@@ -477,7 +477,7 @@ export default function TaskPanel(infos, cardID) {
                     }
                     
                     <div id = {'lane' + index} style={{ marginLeft: '30px', marginTop:'10px', fontSize: '0.8rem'  }} hidden={!adicionandoResposta }>
-                    <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '58px', position: 'absolute', left: '67px' }}></div>
+                    <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '74px', position: 'absolute', left: '67px' }}></div>
                       <div class="form-group">
                         <input
                           id='descriçãoTexto'
