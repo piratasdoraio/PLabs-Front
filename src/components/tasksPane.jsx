@@ -495,9 +495,9 @@ export default function TaskPanel(infos, cardID) {
                           disabled={newresposta.length == 0}
                           onClick={async () => {
                             await setadicionandoResposta(false);
-                            lanes.respostas.push(
+                            data.respostas.push(
                               {
-                                id: lanes.respostas.length + 1,
+                                id: data.respostas.length + 1,
                                 user: user,
                                 role: role,
                                 description: newresposta,
