@@ -114,6 +114,7 @@ export default function TaskPanel(infos, cardID) {
   let [exibirResposta, setExibirResposta] = useState(false)
   let [adicionandoResposta, setadicionandoResposta] = useState(false)
   let [newresposta, setResposta] = useState('')
+  let [actualLane, setActualLane] = useState('')
 
   let data
   let CardId = localStorage.getItem('CardId')
@@ -435,15 +436,14 @@ export default function TaskPanel(infos, cardID) {
                     
                     <a
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
-                      onClick={async () => { await setadicionandoResposta(true)
-                      }}> 
+                      onClick={async () => { document.getElementById("lane" + index).hidden = false }}> 
                       Responder ({data.respostas.length})</a>
                   </div>
 
                   {/* RESPOSTAS */}
                   <div >
                     {
-                      data.respostas.map((resposta,index) => {
+                      data.respostas.map((resposta) => {
                         return (
                           <>
                             <div style={{ marginLeft: '30px', fontSize: '0.8rem' }}>
@@ -463,7 +463,7 @@ export default function TaskPanel(infos, cardID) {
                                   }}> - Excluir</a>
                               </div>
 
-                              <div className='border' id={'task' + index} style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word' }}>
+                              <div className='border' style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word' }}>
                                 {resposta.description}
                               </div>
                               
@@ -475,7 +475,9 @@ export default function TaskPanel(infos, cardID) {
 
                       })
                     }
-                    <div style={{ marginTop: '15px' }} hidden={!adicionandoResposta}>
+                    
+                    <div id = {'lane' + index} style={{ marginLeft: '30px', marginTop:'10px', fontSize: '0.8rem'  }} hidden={!adicionandoResposta }>
+                    <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '58px', position: 'absolute', left: '67px' }}></div>
                       <div class="form-group">
                         <input
                           id='descriçãoTexto'
@@ -494,7 +496,8 @@ export default function TaskPanel(infos, cardID) {
                           class='btn btn-secondary'
                           disabled={newresposta.length == 0}
                           onClick={async () => {
-                            await setadicionandoResposta(false);
+                            //await setadicionandoResposta(false);
+                            document.getElementById("lane" + index).hidden = true
                             data.respostas.push(
                               {
                                 id: data.respostas.length + 1,
@@ -511,7 +514,8 @@ export default function TaskPanel(infos, cardID) {
                           class='btn-close'
                           style={{ marginLeft: '5px', position: 'relative', top: '8px' }}
                           onClick={async () => {
-                            setadicionandoResposta(false);
+                            //setadicionandoResposta(false);
+                            document.getElementById("lane" + index).hidden = true
                             setResposta('')
                           }}
                         />
