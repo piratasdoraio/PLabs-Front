@@ -46,7 +46,22 @@ let data2 = {
       role: 'Admin',
       description: 'admin triste',
       users: [], //usuarios associados se pa
-      permissions: ['admin']
+      permissions: ['admin'],
+      respostas:[{
+          id: '1',
+          user: 'admin também',
+          role: 'Admin',
+          description: 'resposta ao admin triste',
+          permissions: ['admin']
+        },
+        {
+          id: '1',
+          user: 'admin também',
+          role: 'Admin',
+          description: 'resposta ao admin triste2',
+          permissions: ['admin']
+        }
+      ]
     },
   ]
 }
@@ -94,6 +109,11 @@ export default function TaskPanel(infos, cardID) {
   let [taskBack, setTaskBack] = useState('')
   let [editandoTask, setEditandoTask] = useState('-1')
   let [elementHeight, setElementHeight] = useState('')
+
+  //RESPOSTAS 
+  let [exibirResposta, setExibirResposta] = useState(false)
+  let [adicionandoResposta, setadicionandoResposta] = useState(false)
+  let [newresposta, setResposta] = useState('')
 
   let data
   let CardId = localStorage.getItem('CardId')
@@ -327,7 +347,7 @@ export default function TaskPanel(infos, cardID) {
         {lanes.map((data, index) => {
           return (
 
-            <div style={{ marginBottom: '10px' }}>
+            <div style={{ marginBottom: '23px' }}>
               {/* content */}
 
 
@@ -344,7 +364,6 @@ export default function TaskPanel(infos, cardID) {
 
                 <>
                   <textarea
-
                     className='descrição'
                     style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', width: '100%', height: elementHeight, maxHeight: '260px' }}
                     ref={textToFocus}
@@ -362,7 +381,6 @@ export default function TaskPanel(infos, cardID) {
                       style={{ fontSize: '1rem', padding: '3px' }}
                       class='btn btn-secondary'
                       onClick={async (event) => {
-
                         setEditandoTask('-1');
                         setTaskBack('')
                         lanes[index].description = task
@@ -391,18 +409,19 @@ export default function TaskPanel(infos, cardID) {
                   </div>
 
                   <div hidden={!authorization} style={{ marginLeft: '13px', color: '#6c757d' }}>
+                    
+                    
                     <a
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
                       onClick={async () => {
-
                         await setElementHeight(document.getElementById('task' + index).offsetHeight)
                         await setEditandoTask(index);
                         setTask(data.description);
                         handleFocus();
                       }}
                     >
-                      Editar </a>
-                    -
+                    Editar </a>
+                    - 
                     <a
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
                       onClick={async () => {
@@ -412,14 +431,91 @@ export default function TaskPanel(infos, cardID) {
                         setNewLane('a')
                         setNewLane('')
                         setAdicionando(true)
-                      }}> Excluir </a>
-
-                    - 
+                      }}> Excluir | </a>
+                    
                     <a
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
-                      onClick={async () => {
-                      }}> Responder</a>
+                      onClick={async () => { setadicionandoResposta(true)
+                      }}> 
+                      Responder ({data.respostas.length})</a>
                   </div>
+
+                  {/* RESPOSTAS */}
+                  <div >
+                    {
+                      data.respostas.map((resposta,index) => {
+                        return (
+                          <>
+                            <div style={{ marginLeft: '30px', fontSize: '0.8rem' }}>
+                              <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '58px', position: 'absolute', left: '67px' }}></div>
+                              <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
+                                {resposta.user}
+                                <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{data.role}</a>
+                                <a
+                                  style={{ cursor: 'pointer', fontWeight: 'normal' }}
+                                  onClick={async () => {
+                                    data.respostas.splice(index); //splice remove tudo, usar filter futuramente
+                                    await setLanes(lanes);
+                                    salvar()
+                                    setNewLane('')
+                                    setAdicionando(true)
+                                  }}> - Excluir</a>
+                              </div>
+
+                              <div className='border' id={'task' + index} style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word' }}>
+                                {resposta.description}
+                              </div>
+                              <div style={{ marginTop: '15px' }} hidden = {!adicionandoResposta}>
+                                    <div class="form-group">
+                                      <input
+                                        id='descriçãoTexto'
+                                        ref={textToFocus}
+                                        placeholder="Insira sua resposta"
+                                        class="form-control"
+                                        value={newresposta}
+                                        onChange={(event) => {
+                                        setResposta(event.target.value)
+                                        }}
+                                      />
+                                    </div>
+                                    <div>
+                                      <button
+                                        style={{ marginTop: '8px', fontSize: '1rem', padding: '3px' }}
+                                        class='btn btn-secondary'
+                                        disabled={resposta.length == 0}
+                                        onClick={() => {
+                                          setadicionandoResposta(false);
+                                          data.respostas.push(
+                                            {
+                                              id: lanes.length + 1,
+                                              user: user,
+                                              role: role,
+                                              description: newresposta,
+                                            }
+                                          )
+                                          setNewLane('')
+                                        }}>
+                                        Enviar</button>
+
+                                      <button
+                                        class='btn-close'
+                                        style={{ marginLeft: '5px', position: 'relative', top: '8px' }}
+                                        onClick={async () => {
+                                          setAdicionandoResposta(false);
+                                          setNewLane('')
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                            </div>
+                        
+                          </>
+                        )
+
+                      })
+                    }
+                  </div>
+
                 </>
               }
 
@@ -471,6 +567,7 @@ export default function TaskPanel(infos, cardID) {
                           user: user,
                           role: role,
                           description: newLane,
+                          respostas:[]
                           //usuarios associados se pa
                           //tags
                         }
