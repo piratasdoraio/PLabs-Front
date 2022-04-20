@@ -24,7 +24,8 @@ type grupo = {
 //'#D2D2D2'
 export default function CardGrupos(grupo: grupo) {
   const [quadroNome, setQuadroNome] = useState('');
-  //const [grupoNome, setGrupoNome] = useState('');
+
+  const [grupoNome, setGrupoNome] = useState('');
 
   const changehandler = (e: any) => {
     setQuadroNome(e.target.value);
@@ -58,7 +59,7 @@ export default function CardGrupos(grupo: grupo) {
               left: '265px',
             }}
           >
-            <a style={{ color: '#FFF' }}> x </a>
+            <a style={{ color: '#FFF',position: 'relative', top: '-1.63px' }}> x </a>
           </Button>
         </CardHeader>
         {/* listar esses botoes ae */}
@@ -90,9 +91,10 @@ export default function CardGrupos(grupo: grupo) {
                 top: '0px',
                 width: '23px',
                 height: '28px',
+               
               }}
             >
-              <a style={{ color: '#FFF' }}> x </a>
+              <a style={{ color: '#FFF', position: 'relative', top: '-2px' }}> x </a>
             </Button>
           </div>
         ))}
@@ -115,6 +117,17 @@ export default function CardGrupos(grupo: grupo) {
               marginTop: '5px',
               marginLeft: '10px',
               marginRight: '10px',
+              paddingLeft:'8px'
+            }}
+            onKeyPress={(event) => {
+              if (event.key == "Enter") {
+                grupo.createQuadro(
+                  grupo.grupoIndex,
+                  `Quadro ${quadroNome ? quadroNome : grupo.grupos.quadros.length + 1
+                  }`
+                );
+                setQuadroNome('');
+              }
             }}
           >
             {/* Add new Board */}
@@ -141,7 +154,7 @@ export default function CardGrupos(grupo: grupo) {
               height: '28px',
             }}
           >
-            <a style={{ color: '#FFF', font: 'bold' }}> + </a>
+            <a style={{ color: '#FFF', font: 'bold',position: 'relative', top: '-2px' }}> + </a>
           </Button>
         </div>
       </Card>
