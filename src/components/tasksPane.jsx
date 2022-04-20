@@ -436,7 +436,7 @@ export default function TaskPanel(infos, cardID) {
                     
                     <a
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
-                      onClick={async () => { document.getElementById("lane" + index).hidden = false }}> 
+                      onClick={async () => { document.getElementById("lane" + index).hidden = false; handleFocus(); }}> 
                       Responder ({data.respostas.length})</a>
                   </div>
 
@@ -446,8 +446,9 @@ export default function TaskPanel(infos, cardID) {
                       data.respostas.map((resposta,index) => {
                         return (
                           <>
-                            <div style={{ marginLeft: '30px', fontSize: '0.8rem' }}>
-                              <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '59px', position: 'absolute', left: '67px' }}></div>
+                          {/* default era 30 e 67px */}
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem' }}> 
+                              <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '59px', position: 'absolute', left: '65px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
                                 <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{data.role}</a>
@@ -476,11 +477,11 @@ export default function TaskPanel(infos, cardID) {
                       })
                     }
                     
-                    <div id = {'lane' + index} style={{ marginLeft: '30px', marginTop:'10px', fontSize: '0.8rem'  }} hidden={!adicionandoResposta }>
-                    <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '74px', position: 'absolute', left: '67px' }}></div>
+                    <div id = {'lane' + index} style={{ marginLeft: '25px', marginTop:'10px', fontSize: '0.8rem'  }} hidden={!adicionandoResposta }>
+                    <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '74px', position: 'absolute', left: '65px' }}></div>
                       <div class="form-group">
                         <input
-                          id='descriçãoTexto'
+                          id= {'descriçãoTexto' + index }
                           ref={textToFocus}
                           placeholder="Insira sua resposta"
                           class="form-control"
