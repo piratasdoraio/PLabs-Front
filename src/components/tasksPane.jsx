@@ -432,12 +432,9 @@ export default function TaskPanel(infos, cardID) {
                         setNewLane('a')
                         setNewLane('')
                         setAdicionando(true)
-                      }}> Excluir | </a>
+                      }}> Excluir</a>
                     
-                    <a
-                      style={{ fontSize: '0.8rem', cursor: 'pointer' }}
-                      onClick={async () => { document.getElementById("lane" + index).hidden = false; handleFocus(); }}> 
-                      Responder ({data.respostas.length})</a>
+                    
                   </div>
 
                   {/* RESPOSTAS */}
@@ -447,7 +444,7 @@ export default function TaskPanel(infos, cardID) {
                         return (
                           <>
                           {/* default era 30 e 67px */}
-                            <div style={{ marginLeft: '25px', fontSize: '0.8rem' }}> 
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem' }} id = {'respostas' + index} > 
                               <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '59px', position: 'absolute', left: '65px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
@@ -522,6 +519,11 @@ export default function TaskPanel(infos, cardID) {
                         />
                       </div>
                     </div>
+                    <a
+                      style={{ fontSize: '0.8rem', cursor: 'pointer',marginLeft:'15px', paddingTop:'10px' }}
+                      onClick={async () => { document.getElementById("lane" + index).hidden = false; handleFocus(); }}> 
+                      Responder ({data.respostas.length})</a>
+
 
                   </div>
 
