@@ -3,6 +3,9 @@ import React, { Component, useState, useEffect, useRef } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import './style.css';
+import Overlay from 'react-bootstrap/Overlay'
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 // let data = {
 //     id:'Card 1 (por enquanto n ta na API)',
@@ -118,8 +121,8 @@ export default function TaskPanel(infos, cardID) {
   
 
   //TAGS
-  let [tags, setTags] = useState('')
-  let [preTags, setPreTags] = useState('')
+  let [tags, setTags] = useState([])
+  let [preTags, setPreTags] = useState([])
 
   let data
   let CardId = localStorage.getItem('CardId')
@@ -254,7 +257,35 @@ export default function TaskPanel(infos, cardID) {
     await localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
   }
 
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Header as="h3" className='center'>Tags</Popover.Header>
+      <Popover.Body>
+        {preTags.map((preTag, index) =>{
+          return(<>
+          <Row>
+          <Col xs={8}>
+            <input id={'color' + index} disabled={true} ref={textToFocus} value={preTag.title} style={{backgroundColor: preTag.bgcolor, border:0, margin:'3px', borderRadius:'5px', paddingLeft: '10px', color:'#fff', fontSize:'1.1rem', width: '200px'}} className='ilumina'>
+            </input>
+          </Col>
+          <Col xs={4} style={{position:'relative', left:'15px'}}>
+            <button style ={{border:0, fontSize:'1.1rem'}} className='btn' 
+              onClick={()=>{
+                document.getElementById('color' + index).disabled = false;
+                handleFocus()
+            }}>
+              ✏
+            </button>
+          </Col>
+          </Row>
+          
+          </>)
+        })}
+      </Popover.Body>
+    </Popover>
+  );
 
+  
   return (
     <>
       <div style={{ marginLeft: '35px', marginRight: '30px' }}
@@ -302,9 +333,41 @@ export default function TaskPanel(infos, cardID) {
             }} />
         }
 
+       
         <div hidden={!isAdmin} style={{ color: '#6c757d' }}>
           <a style={{ fontSize: '0.85rem', cursor: 'pointer' }}>{faseName} </a>
         </div>
+
+        {/* TAGS */}
+        <br />
+        <div>
+          <div style={{ marginBottom: '5px', fontSize: '0.9rem' }}>
+            Tags
+          </div>
+          <div style={{maxHeight: '30px'}}>
+          <Row style={{marginLeft:'0px'}}>
+          {tags.map((tag,index)=>{
+            console.log('tag',tag)
+            return(
+              <>
+              
+              <div 
+                id={'tag' + index} 
+                disabled={true}
+                style = {{backgroundColor: tag.bgcolor, fontSize:  '1rem', color:'#FFFF', borderRadius: '5px', width: 'fit-content', marginLeft:'3px'}}>
+                 {tag.title}
+              </div>
+              
+              </>
+            )
+          })}
+          <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+            <button style={{ backgroundColor: '#adb5bd73', color:"#495057", border:0, borderRadius: '5px',width: 'fit-content', marginLeft:'3px' }} className='ilumina' onClick>+</button>
+          </OverlayTrigger>
+          </Row>
+          </div>
+        </div>
+        
         <br />
         <div style={{ marginBottom: '5px', fontSize: '1.25rem' }}>
           Descrição
@@ -528,7 +591,7 @@ export default function TaskPanel(infos, cardID) {
                       </div>
                     </div>
                     <a
-                      style={{ fontSize: '0.8rem', cursor: 'pointer',marginLeft:'15px', paddingTop:'10px' }}
+                      style={{ fontSize: '0.8rem', cursor: 'pointer',marginLeft:'13px', paddingTop:'10px', color:'#adb5b',color: '#6c757d' }}
                       onClick={async () => { document.getElementById("lane" + index).hidden = false; handleFocus(); }}> 
                       Responder ({data.respostas.length})</a>
 

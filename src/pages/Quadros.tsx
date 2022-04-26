@@ -73,12 +73,12 @@ let grupos = {
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
-                      title: '',
+                      title: 'Atrasado',
                     },
                     {
                       bgcolor: '#0079BF', 
                       color: 'white',
-                      title: '',
+                      title: 'Pedro',
                     },
                     {
                       bgcolor: '#20c997',  
