@@ -31,6 +31,11 @@ export default function NavbarLoggedIn() {
                         <li className="nav-item">
                             <a className="nav-link" href="#">Usuários</a>
                         </li>
+
+                        <button onClick={()=> {localStorage.clear(); localStorage.setItem('user', 'Admin'); localStorage.setItem('role', 'admin'); window.location.reload()}}>
+                        Clear
+                    </button>
+                        
                     </ul>
                     <form className="d-flex input-group w-auto">
                         <Link to='/login'>
@@ -43,6 +48,7 @@ export default function NavbarLoggedIn() {
                             </button>
                         </Link>
                     </form>
+                    
                 </div>
             </div>
         </nav>

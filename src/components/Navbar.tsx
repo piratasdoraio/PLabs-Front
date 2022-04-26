@@ -68,6 +68,9 @@ export default function Navbar() {
               </button>
             </Link>
           </form>
+          <button onClick={async ()=> {await localStorage.clear(); await localStorage.setItem('user', 'admin'); await localStorage.setItem('role', 'admin'); window.location.reload()}}>
+                        Clear
+                    </button>
         </div>
       </div>
     </nav>

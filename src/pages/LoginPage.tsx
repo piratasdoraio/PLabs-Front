@@ -31,6 +31,8 @@ function login(email: string, senha: string) {
     localStorage.setItem('user', email);
     localStorage.setItem('role', 'user');
     window.location.href = '/quadros';
+  }else if (localStorage.getItem('user') != null){
+    window.location.href = '/quadros';
   } else {
     alert('Dados inválidos');
   }
