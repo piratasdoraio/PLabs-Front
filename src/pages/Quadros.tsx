@@ -68,29 +68,33 @@ let grupos = {
                       color: 'white',
                       title: 'Pedro',
                     },
-                    // {
-                    //   bgcolor: '#61BD4F',
-                    //   color: 'white',
-                    //   title: 'Teste Teste Teste Teste'
-                    // },
-                    // {
-                    //   bgcolor: '#61BD4F',
-                    //   color: 'white',
-                    //   title: 'Teste'
-                    // }
                   ],
                   preTags:[
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
-                      title: 'Atrasado',
+                      title: '',
                     },
                     {
-                      bgcolor: '#0079BF',
+                      bgcolor: '#0079BF', 
                       color: 'white',
-                      title: 'Pedro',
+                      title: '',
                     },
-
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
                   ]
                 },
                 {
@@ -682,125 +686,10 @@ let gruposU2 = {
   ],
 };
 
-// let data = {
-//   lanes: [
-//     {
-//       id: 'Coluna1',
-//       title: 'Fase 1',
-//       label: '2/2',
-//       cards: [
-//         {
-//           id: 'Card1',
-//           title: 'Jose',
-//           description: 'Vendedor de fruta',
-//           label: 'Alta prioridade',
-//           draggable: false,
-//         },
-//         {
-//           id: 'Card2',
-//           title: 'Roberto',
-//           description: 'Designer',
-//           label: 'Media prioridade',
-//           metadata: { sha: 'be312a1' },
-//         },
-//       ],
-//     },
-//     {
-//       id: 'Coluna2',
-//       title: 'Fase2',
-//       label: '0/0',
-//       cards: [],
-//     },
-//   ],
-// };
-
 let eventBus: any = undefined;
 const setEventBus = (handle: any) => {
   eventBus = handle;
 };
-
-// export function setData(grupoIndex: number, quadroIndex: number) {
-//   let quadroId = grupoIndex
-//   let data
-
-//   if (quadroId == 0) {
-//     data = {
-//       lanes: [
-//         {
-//           id: 'Coluna1',
-//           title: 'Fase 1',
-//           label: '2/2',
-//           cards: [
-//             {
-//               id: 'Card1',
-//               title: 'Jose',
-//               description: 'Vendedor de fruta',
-//               label: 'Alta prioridade',
-//               draggable: false,
-//             },
-//             {
-//               id: 'Card2',
-//               title: 'Roberto',
-//               description: 'Designer',
-//               label: 'Media Prioridade',
-//               metadata: { sha: 'be312a1' },
-//             },
-//           ],
-//         },
-//         {
-//           id: 'Coluna2',
-//           title: 'Fase2',
-//           label: '0/0',
-//           cards: [],
-//         },
-//       ],
-//     };
-//     eventBus.publish({ type: 'UPDATE_LANES', lanes: data.lanes });
-//   } else if (quadroId == 1) {
-//     data = {
-//       lanes: [
-//         {
-//           id: '1',
-//           title: 'Fase 1',
-//           label: '1/1',
-//           cards: [
-//             {
-//               id: 'Card1',
-//               title: 'Julio',
-//               description: 'Musico',
-//               label: 'Alta prioridade',
-//               draggable: false,
-//             },
-//           ],
-//         },
-//       ],
-//     };
-//     eventBus.publish({ type: 'UPDATE_LANES', lanes: data.lanes });
-//   } else {
-//     data = {
-//       lanes: [
-//         {
-//           id: '1',
-//           title: 'Fase 1',
-//           label: '2/3',
-//           cards: [
-//             {
-//               id: 'Card1',
-//               title: 'Pedro',
-//               description: 'Programador',
-//               label: 'Extrema prioridade',
-//               draggable: false,
-//             },
-//           ],
-//         },
-//       ],
-//     };
-//     eventBus.publish({ type: 'UPDATE_LANES', lanes: data.lanes });
-//   }
-
-//   return data;
-// }
-
 export default function Quadros() {
   const [show, setShow] = useState(false);
   let [taskId, setTaskId] = useState('');
