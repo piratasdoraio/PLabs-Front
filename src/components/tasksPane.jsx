@@ -115,6 +115,11 @@ export default function TaskPanel(infos, cardID) {
   let [adicionandoResposta, setadicionandoResposta] = useState(false)
   let [newresposta, setResposta] = useState('')
   let [actualLane, setActualLane] = useState('')
+  
+
+  //TAGS
+  let [tags, setTags] = useState('')
+  let [preTags, setPreTags] = useState('')
 
   let data
   let CardId = localStorage.getItem('CardId')
@@ -181,7 +186,8 @@ export default function TaskPanel(infos, cardID) {
         })
       }
     }
-
+    setTags(data.tags)
+    setPreTags(data.preTags)
     setLanes(lanes)
   }
 
@@ -216,7 +222,8 @@ export default function TaskPanel(infos, cardID) {
 
   async function salvar() {
     // console.log('salvar',faseIndex,dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex])
-    let tags = []
+    console.log(tags, preTags)
+    //let tags = []
     if (CardId == 'Card1') {
       console.log('SADASDASDASDAS')
       tags = [{
@@ -240,6 +247,7 @@ export default function TaskPanel(infos, cardID) {
       lanes: lanes,
       role: 'Admin',
       tags: tags,
+      preTags: preTags,
     }
     dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex] = newCard
     let newGrupos = dados
