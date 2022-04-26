@@ -79,6 +79,19 @@ let grupos = {
                     //   title: 'Teste'
                     // }
                   ],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: 'Atrasado',
+                    },
+                    {
+                      bgcolor: '#0079BF',
+                      color: 'white',
+                      title: 'Pedro',
+                    },
+
+                  ]
                 },
                 {
                   id: 'Card2',
@@ -89,6 +102,34 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
                 {
                   id: 'Card3',
@@ -99,6 +140,35 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
+                  
                 },
 
                 {
@@ -110,6 +180,34 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -139,6 +237,34 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -168,6 +294,34 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -202,6 +356,34 @@ let gruposU1 = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -231,6 +413,34 @@ let gruposU1 = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -260,6 +470,34 @@ let gruposU1 = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -292,6 +530,34 @@ let gruposU2 = {
                   label: 'Media Prioridade',
                   metadata: { sha: 'be312a1' },
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -321,6 +587,34 @@ let gruposU2 = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -350,6 +644,34 @@ let gruposU2 = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  tags: [],
+                  preTags:[
+                    {
+                      bgcolor: '#EB5A46',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#0079BF', 
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#20c997',  
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#ffc107',
+                      color: 'white',
+                      title: '',
+                    },
+                    {
+                      bgcolor: '#7b58bb',  
+                      color: 'white',
+                      title: '',
+                    },
+                  ]
                 },
               ],
             },
@@ -694,6 +1016,33 @@ export default function Quadros() {
       role: `${role}`,
       lanes: [],
       tags: [],
+      preTags:[
+        {
+          bgcolor: '#EB5A46',
+          color: 'white',
+          title: '',
+        },
+        {
+          bgcolor: '#0079BF', 
+          color: 'white',
+          title: '',
+        },
+        {
+          bgcolor: '#20c997',  
+          color: 'white',
+          title: '',
+        },
+        {
+          bgcolor: '#ffc107',
+          color: 'white',
+          title: '',
+        },
+        {
+          bgcolor: '#7b58bb',  
+          color: 'white',
+          title: '',
+        },
+      ]
     };
     await localStorage.setItem('LastCard', JSON.stringify(newCard));
     setLastCardUpdate(newCard);
