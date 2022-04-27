@@ -708,6 +708,7 @@ export default function Quadros() {
     return (
       <>
         <Modal
+          enforceFocus={false}
           show={show}
           onHide={() => {
             setShow(false);
