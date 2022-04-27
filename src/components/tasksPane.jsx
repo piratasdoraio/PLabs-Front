@@ -124,6 +124,8 @@ export default function TaskPanel(infos, cardID) {
   let [tags, setTags] = useState([])
   let [preTags, setPreTags] = useState([])
 
+  const [showTags, setShowTags] = useState(false);
+  const target = useRef(null);
   let data
   let CardId = localStorage.getItem('CardId')
   let faseName
@@ -258,43 +260,46 @@ export default function TaskPanel(infos, cardID) {
   }
 
   const popover = (
-    <Popover id="popover-basic">
-      <Popover.Header as="h3" className='center'>Tags</Popover.Header>
-      <Popover.Body>
+    <Popover id="popover-basic" sanitize={false}>
+      <Popover.Header as="h3" className='center' sanitize={false} closeButton>Tags</Popover.Header>
+      <Popover.Body  sanitize={false}>
         {preTags.map((preTag, index) =>{
-          return(<>
+          
+          return(
+          
           <Row>
           <Col xs={8}>
-            <input id={'color' + index} disabled={true} ref={textToFocus} value={preTag.title} style={{backgroundColor: preTag.bgcolor, border:0, margin:'3px', borderRadius:'5px', paddingLeft: '10px', color:'#fff', fontSize:'1.1rem', width: '200px'}} className='ilumina'>
+            <input id={'color' + index} ref={textToFocus} disabled = {true} placeholder={preTag.title }style={{backgroundColor: preTag.bgcolor, border:0, margin:'3px', borderRadius:'5px', paddingLeft: '10px', color:'#fff', fontSize:'1.1rem', width: '200px'}}   >
             </input>
           </Col>
           <Col xs={4} style={{position:'relative', left:'15px'}}>
             <button style ={{border:0, fontSize:'1.1rem'}} className='btn' 
-              onClick={()=>{
+              onClick={async ()=>{
+                document.getElementById("color" + index).value = preTag.title;
                 document.getElementById('color' + index).disabled = false;
-                handleFocus()
+                await handleFocus()
             }}>
               ✏
             </button>
           </Col>
           </Row>
           
-          </>)
+          )
         })}
       </Popover.Body>
     </Popover>
   );
-
   
   return (
     <>
       <div style={{ marginLeft: '35px', marginRight: '30px' }}
         onClick={async (event) => {
-          // console.log('rtihs', event.target.id)
+          console.log('rtihs', event.target.id)
           if (event.target.id != 'descrição') {
             setEditandoDescrição(false)
             setPreDescrição(description)
           }
+          
           if (event.target.id != 'inputTarefa' && event.target.id != 'descriçãoText' && newLane.length == 0) {
             setAdicionando(true)
           }
