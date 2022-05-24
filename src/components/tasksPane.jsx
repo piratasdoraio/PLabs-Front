@@ -269,7 +269,7 @@ export default function TaskPanel(infos, cardID) {
         {preTags.map((preTag, index) => {
 
           return (
-
+            // xibiu
             <Row>
               <Col xs={8}>
                 <div
@@ -278,7 +278,7 @@ export default function TaskPanel(infos, cardID) {
                     if (document.getElementById('color' + index).disabled == true) {
                       const adicionar = tags.find(tag => tag.bgcolor === preTag.bgcolor)
 
-                      if (adicionar == undefined) {
+                      if (adicionar == undefined) { //adicionar uma nova tag
                         console.log('contem', adicionar)
                         tags.push({
                           bgcolor: preTag.bgcolor,
@@ -288,7 +288,14 @@ export default function TaskPanel(infos, cardID) {
                         setTags(tags)
                         await setTagBugFetch(true)
                         await setTagBugFetch(false)
-                        console.log('add tags', tags)
+                        
+
+                      }else{ //remover tags
+                        let remover = tags.filter(tag => tag.bgcolor != preTag.bgcolor)
+                        tags = remover
+                        setTags(tags)
+                        await setTagBugFetch(true)
+                        await setTagBugFetch(false)
                       }
 
                     }
