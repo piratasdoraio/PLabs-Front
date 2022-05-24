@@ -1105,7 +1105,7 @@ export default function Quadros() {
               }}
               data={newGrupos.grupos[actualGrupo].quadros[actualQuadro]}
               draggable={authorization}
-              editable={authorization}
+              //editable={authorization}
               canAddLanes={authorization}
               //addCardTitle='asdsad'
 
