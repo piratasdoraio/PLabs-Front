@@ -1,6 +1,6 @@
 import Button from '@restart/ui/esm/Button';
 import React, { Component, useState, useEffect, useRef } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row,Form } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import './style.css';
 import Overlay from 'react-bootstrap/Overlay'
@@ -263,7 +263,9 @@ export default function TaskPanel(infos, cardID) {
     <Popover id="popover-basic" sanitize={false}>
       <Popover.Header as="h3" className='center' sanitize={false} >
         Tags
-        <a style={{ marginLeft: '80%', fontSize: '1.2rem', color: 'gray', cursor: 'pointer' }} onClick={() => document.getElementById('popover-basic').hidden = true}>x</a>
+        <a style={{ marginLeft: '80%', fontSize: '1.2rem', color: 'gray', cursor: 'pointer' }} onClick={() => {let element = document.getElementById('popover-basic')             
+                                                                                                                element.classList.remove('show')
+                                                                                                                }}>x</a>
       </Popover.Header>
       <Popover.Body sanitize={false}>
         {preTags.map((preTag, index) => {
@@ -610,6 +612,20 @@ export default function TaskPanel(infos, cardID) {
                       }}> Excluir</a>
 
 
+                    {
+                      authorization?
+                    
+                    <Form.Check
+                            inline
+                            style={{fontSize: '0.8rem', marginLeft: '10px', cursor:'pointer'}}
+                            label="Marcar como concluído."
+                            name="group1"
+                            type='checkbox'
+                            id={'concluded' + index}
+                          />
+                          :
+                          <></>
+                        }
                   </div>
 
                   {/* RESPOSTAS */}
