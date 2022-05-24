@@ -414,7 +414,7 @@ export default function TaskPanel(infos, cardID) {
                   </>
                 )
               })}
-              <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+              <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                 <button style={{ backgroundColor: '#adb5bd73', color: "#495057", border: 0, borderRadius: '5px', width: 'fit-content', marginLeft: '3px' }} className='ilumina' onClick>+</button>
               </OverlayTrigger>
             </Row>
