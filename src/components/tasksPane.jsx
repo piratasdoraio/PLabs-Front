@@ -269,11 +269,11 @@ export default function TaskPanel(infos, cardID) {
         {preTags.map((preTag, index) => {
 
           return (
-            // xibiu
+            <>
+            
             <Row>
               <Col xs={8}>
                 <div
-                  style={{ cursor: 'pointer' }}
                   onClick={async () => {
                     if (document.getElementById('color' + index).disabled == true) {
                       const adicionar = tags.find(tag => tag.bgcolor === preTag.bgcolor)
@@ -297,20 +297,15 @@ export default function TaskPanel(infos, cardID) {
                         await setTagBugFetch(true)
                         await setTagBugFetch(false)
                       }
-
                     }
-
-
-
                   }}>
-
 
                   <input id={'color' + index}
                     ref={textToFocus}
                     disabled={true}
                     placeholder={preTag.title}
-                    style={{ backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px' }}
-
+                    style={{ backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px',
+                    cursor: document.getElementById('color' + index).disabled ? 'pointer' : ''}}
                   >
                   </input>
                 </div>
@@ -326,6 +321,9 @@ export default function TaskPanel(infos, cardID) {
 
                     document.getElementById('botaoSalvar' + index).hidden = false;
                     document.getElementById('botaoEditar' + index).hidden = true;
+
+                    await setTagBugFetch(true)
+                    await setTagBugFetch(false)
                   }}>
                   ✏
                 </button>
@@ -339,13 +337,24 @@ export default function TaskPanel(infos, cardID) {
                     document.getElementById('botaoEditar' + index).hidden = false;
                     document.getElementById('botaoSalvar' + index).hidden = true;
 
+                    await setTagBugFetch(true)
+                    await setTagBugFetch(false)
+
                   }}>
                   save
                 </button>
+                {
+                  <div
+                  style={{position:'relative', top:'-35px',left:'-200px', height:'5px'}}>
+                    ✔
+                  </div>
+
+                }
+                
               </Col>
             </Row>
-
-          )
+            
+            </>)
         })}
       </Popover.Body>
     </Popover>
