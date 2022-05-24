@@ -123,7 +123,7 @@ export default function TaskPanel(infos, cardID) {
   //TAGS
   let [tags, setTags] = useState([])
   let [preTags, setPreTags] = useState([])
-
+  let [tagBugFetch, setTagBugFetch] = useState(false)
   const [showTags, setShowTags] = useState(false);
   const target = useRef(null);
   let data
@@ -229,19 +229,19 @@ export default function TaskPanel(infos, cardID) {
     // console.log('salvar',faseIndex,dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex])
     console.log(tags, preTags)
     //let tags = []
-    if (CardId == 'Card1') {
-      console.log('SADASDASDASDAS')
-      tags = [{
-        bgcolor: '#EB5A46',
-        color: 'white',
-        title: 'Atrasado'
-      },
-      {
-        bgcolor: '#0079BF',
-        color: 'white',
-        title: 'Pedro'
-      },]
-    }
+    // if (CardId == 'Card1') {
+    //   console.log('SADASDASDASDAS')
+    //   tags = [{
+    //     bgcolor: '#EB5A46',
+    //     color: 'white',
+    //     title: 'Atrasado'
+    //   },
+    //   {
+    //     bgcolor: '#0079BF',
+    //     color: 'white',
+    //     title: 'Pedro'
+    //   },]
+    // }
     const newCard = {
       author: author,
       description: description,
@@ -261,7 +261,10 @@ export default function TaskPanel(infos, cardID) {
 
   const popover = (
     <Popover id="popover-basic" sanitize={false}>
-      <Popover.Header as="h3" className='center' sanitize={false} closeButton>Tags</Popover.Header>
+      <Popover.Header as="h3" className='center' sanitize={false} >
+        Tags
+         <a style={{marginLeft: '80%', fontSize:'1.2rem', color:'gray', cursor:'pointer'}} onClick={()=> document.getElementById('popover-basic').hidden = true}>x</a>
+        </Popover.Header>
       <Popover.Body sanitize={false}>
         {preTags.map((preTag, index) => {
 
@@ -269,12 +272,34 @@ export default function TaskPanel(infos, cardID) {
 
             <Row>
               <Col xs={8}>
+                <div
+                style={{cursor:'pointer'}}
+                onClick={async ()=>{
+                  if(document.getElementById('color' + index).disabled == true){
+                    tags.push({
+                      bgcolor:preTag.bgcolor,
+                      color: 'white',
+                      title: preTag.title
+                    })
+                    setTags(tags)
+                    await setTagBugFetch(true)
+                    await setTagBugFetch(false)
+                    console.log('add tags', tags)
+                  }
+
+
+                }}>
+                  
+                
                 <input id={'color' + index}
                   ref={textToFocus}
                   disabled={true}
                   placeholder={preTag.title}
-                  style={{ backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px' }}   >
+                  style={{ backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px' }}   
+                  
+                  >
                 </input>
+                </div>
               </Col>
               <Col xs={4} style={{ position: 'relative', left: '15px' }}>
 
@@ -367,6 +392,7 @@ export default function TaskPanel(infos, cardID) {
 
         {/* TAGS */}
         <br />
+        {tagBugFetch? <></> : <></>}
         <div>
           <div style={{ marginBottom: '5px', fontSize: '0.9rem' }}>
             Tags
