@@ -267,10 +267,11 @@ export default function TaskPanel(infos, cardID) {
       </Popover.Header>
       <Popover.Body sanitize={false}>
         {preTags.map((preTag, index) => {
+          let idCheck = index
           let Check = () => {
             return (
               <div
-
+                id='asd'
                 style={{ position: 'relative', top: '-35px', left: '-200px', height: '5px' }}>
                 ✔
               </div>
@@ -279,6 +280,7 @@ export default function TaskPanel(infos, cardID) {
           }
           const checked = tags.find(tag => tag.bgcolor === preTag.bgcolor)
           if (checked == undefined) {
+            idCheck = -1
             Check = () => {
               return (
                 <></>
@@ -323,6 +325,7 @@ export default function TaskPanel(infos, cardID) {
                     ref={textToFocus}
                     disabled={true}
                     placeholder={preTag.title}
+                    maxLength={20}
                     style={{
                       backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px',
                       cursor: document.getElementById('color' + index) == null? 'auto' : (document.getElementById('color' + index).disabled ? 'pointer' : '')
@@ -334,6 +337,7 @@ export default function TaskPanel(infos, cardID) {
               <Col xs={4} style={{ position: 'relative', left: '15px' }}>
 
                 <button style={{ border: 0, fontSize: '1.1rem' }} className='btn'
+                  
                   id={'botaoEditar' + index}
                   onClick={async () => {
                     document.getElementById("color" + index).value = preTag.title;
@@ -442,8 +446,12 @@ export default function TaskPanel(infos, cardID) {
           </div>
           <div style={{ maxHeight: '30px' }}>
             <Row style={{ marginLeft: '0px' }}>
+            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+                <button style={{ backgroundColor: '#adb5bd73', color: "#495057", border: 0, borderRadius: '5px', width: 'fit-content', marginLeft: '3px', position:'relative'}} className='ilumina' onClick>+</button>
+              </OverlayTrigger>
+
               {tags.map((tag, index) => {
-                console.log('tag', tag)
+                //console.log('tag', tag)
                 return (
                   <>
 
@@ -457,10 +465,10 @@ export default function TaskPanel(infos, cardID) {
                   </>
                 )
               })}
-              <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-                <button style={{ backgroundColor: '#adb5bd73', color: "#495057", border: 0, borderRadius: '5px', width: 'fit-content', marginLeft: '3px' }} className='ilumina' onClick>+</button>
-              </OverlayTrigger>
+              {/* <Row></Row> */}
+              
             </Row>
+            
           </div>
         </div>
 
