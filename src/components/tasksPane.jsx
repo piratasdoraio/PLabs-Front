@@ -342,7 +342,6 @@ export default function TaskPanel(infos, cardID) {
 
                     document.getElementById('botaoSalvar' + index).hidden = false;
                     document.getElementById('botaoEditar' + index).hidden = true;
-
                     await setTagBugFetch(true)
                     await setTagBugFetch(false)
                   }}>
@@ -353,6 +352,13 @@ export default function TaskPanel(infos, cardID) {
                   hidden={true}
                   id={'botaoSalvar' + index}
                   onClick={async () => {
+                    // ISSO AKI É PRA SALVAR QUANDO EDITAR E ESTIVER MARCADO
+                    // const checke = tags.find(tag => tag.bgcolor === preTag.bgcolor) 
+
+                    // if(check != undefined){
+
+                    // }
+
                     preTag.title = document.getElementById("color" + index).value
                     document.getElementById('color' + index).disabled = true;
                     document.getElementById('botaoEditar' + index).hidden = false;
