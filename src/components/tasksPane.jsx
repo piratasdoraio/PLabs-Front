@@ -50,20 +50,20 @@ let data2 = {
       description: 'admin triste',
       users: [], //usuarios associados se pa
       permissions: ['admin'],
-      respostas:[{
-          id: '1',
-          user: 'admin também',
-          role: 'Admin',
-          description: 'resposta ao admin triste',
-          permissions: ['admin']
-        },
-        {
-          id: '1',
-          user: 'admin também',
-          role: 'Admin',
-          description: 'resposta ao admin triste2',
-          permissions: ['admin']
-        }
+      respostas: [{
+        id: '1',
+        user: 'admin também',
+        role: 'Admin',
+        description: 'resposta ao admin triste',
+        permissions: ['admin']
+      },
+      {
+        id: '1',
+        user: 'admin também',
+        role: 'Admin',
+        description: 'resposta ao admin triste2',
+        permissions: ['admin']
+      }
       ]
     },
   ]
@@ -118,7 +118,7 @@ export default function TaskPanel(infos, cardID) {
   let [adicionandoResposta, setadicionandoResposta] = useState(false)
   let [newresposta, setResposta] = useState('')
   let [actualLane, setActualLane] = useState('')
-  
+
 
   //TAGS
   let [tags, setTags] = useState([])
@@ -262,34 +262,56 @@ export default function TaskPanel(infos, cardID) {
   const popover = (
     <Popover id="popover-basic" sanitize={false}>
       <Popover.Header as="h3" className='center' sanitize={false} closeButton>Tags</Popover.Header>
-      <Popover.Body  sanitize={false}>
-        {preTags.map((preTag, index) =>{
-          
-          return(
-          
-          <Row>
-          <Col xs={8}>
-            <input id={'color' + index} ref={textToFocus} disabled = {true} placeholder={preTag.title }style={{backgroundColor: preTag.bgcolor, border:0, margin:'3px', borderRadius:'5px', paddingLeft: '10px', color:'#fff', fontSize:'1.1rem', width: '200px'}}   >
-            </input>
-          </Col>
-          <Col xs={4} style={{position:'relative', left:'15px'}}>
-            <button style ={{border:0, fontSize:'1.1rem'}} className='btn' 
-              onClick={async ()=>{
-                document.getElementById("color" + index).value = preTag.title;
-                document.getElementById('color' + index).disabled = false;
-                await handleFocus()
-            }}>
-              ✏
-            </button>
-          </Col>
-          </Row>
-          
+      <Popover.Body sanitize={false}>
+        {preTags.map((preTag, index) => {
+
+          return (
+
+            <Row>
+              <Col xs={8}>
+                <input id={'color' + index}
+                  ref={textToFocus}
+                  disabled={true}
+                  placeholder={preTag.title}
+                  style={{ backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px' }}   >
+                </input>
+              </Col>
+              <Col xs={4} style={{ position: 'relative', left: '15px' }}>
+
+                <button style={{ border: 0, fontSize: '1.1rem' }} className='btn'
+                  id={'botaoEditar' + index}
+                  onClick={async () => {
+                    document.getElementById("color" + index).value = preTag.title;
+                    document.getElementById('color' + index).disabled = false;
+                    handleFocus()
+
+                    document.getElementById('botaoSalvar' + index).hidden = false;
+                    document.getElementById('botaoEditar' + index).hidden = true;
+                  }}>
+                  ✏
+                </button>
+
+                <button style={{ border: 0, fontSize: '1.1rem' }} className='btn'
+                  hidden={true}
+                  id={'botaoSalvar' + index}
+                  onClick={async () => {
+                    preTag.title = document.getElementById("color" + index).value
+                    document.getElementById('color' + index).disabled = true;
+                    document.getElementById('botaoEditar' + index).hidden = false;
+                    document.getElementById('botaoSalvar' + index).hidden = true;
+
+                  }}>
+                  save
+                </button>
+              </Col>
+            </Row>
+
           )
         })}
       </Popover.Body>
     </Popover>
   );
-  
+
   return (
     <>
       <div style={{ marginLeft: '35px', marginRight: '30px' }}
@@ -299,7 +321,7 @@ export default function TaskPanel(infos, cardID) {
             setEditandoDescrição(false)
             setPreDescrição(description)
           }
-          
+
           if (event.target.id != 'inputTarefa' && event.target.id != 'descriçãoText' && newLane.length == 0) {
             setAdicionando(true)
           }
@@ -338,7 +360,7 @@ export default function TaskPanel(infos, cardID) {
             }} />
         }
 
-       
+
         <div hidden={!isAdmin} style={{ color: '#6c757d' }}>
           <a style={{ fontSize: '0.85rem', cursor: 'pointer' }}>{faseName} </a>
         </div>
@@ -349,30 +371,30 @@ export default function TaskPanel(infos, cardID) {
           <div style={{ marginBottom: '5px', fontSize: '0.9rem' }}>
             Tags
           </div>
-          <div style={{maxHeight: '30px'}}>
-          <Row style={{marginLeft:'0px'}}>
-          {tags.map((tag,index)=>{
-            console.log('tag',tag)
-            return(
-              <>
-              
-              <div 
-                id={'tag' + index} 
-                disabled={true}
-                style = {{backgroundColor: tag.bgcolor, fontSize:  '1rem', color:'#FFFF', borderRadius: '5px', width: 'fit-content', marginLeft:'3px'}}>
-                 {tag.title}
-              </div>
-              
-              </>
-            )
-          })}
-          <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-            <button style={{ backgroundColor: '#adb5bd73', color:"#495057", border:0, borderRadius: '5px',width: 'fit-content', marginLeft:'3px' }} className='ilumina' onClick>+</button>
-          </OverlayTrigger>
-          </Row>
+          <div style={{ maxHeight: '30px' }}>
+            <Row style={{ marginLeft: '0px' }}>
+              {tags.map((tag, index) => {
+                console.log('tag', tag)
+                return (
+                  <>
+
+                    <div
+                      id={'tag' + index}
+                      disabled={true}
+                      style={{ backgroundColor: tag.bgcolor, fontSize: '1rem', color: '#FFFF', borderRadius: '5px', width: 'fit-content', marginLeft: '3px' }}>
+                      {tag.title}
+                    </div>
+
+                  </>
+                )
+              })}
+              <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                <button style={{ backgroundColor: '#adb5bd73', color: "#495057", border: 0, borderRadius: '5px', width: 'fit-content', marginLeft: '3px' }} className='ilumina' onClick>+</button>
+              </OverlayTrigger>
+            </Row>
           </div>
         </div>
-        
+
         <br />
         <div style={{ marginBottom: '5px', fontSize: '1.25rem' }}>
           Descrição
@@ -486,8 +508,8 @@ export default function TaskPanel(infos, cardID) {
                   </div>
 
                   <div hidden={!authorization} style={{ marginLeft: '13px', color: '#6c757d' }}>
-                    
-                    
+
+
                     <a
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
                       onClick={async () => {
@@ -497,8 +519,8 @@ export default function TaskPanel(infos, cardID) {
                         handleFocus();
                       }}
                     >
-                    Editar </a>
-                    - 
+                      Editar </a>
+                    -
                     <a
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
                       onClick={async () => {
@@ -509,18 +531,18 @@ export default function TaskPanel(infos, cardID) {
                         setNewLane('')
                         setAdicionando(true)
                       }}> Excluir</a>
-                    
-                    
+
+
                   </div>
 
                   {/* RESPOSTAS */}
                   <div >
                     {
-                      data.respostas.map((resposta,index) => {
+                      data.respostas.map((resposta, index) => {
                         return (
                           <>
-                          {/* default era 30 e 67px */}
-                            <div style={{ marginLeft: '25px', fontSize: '0.8rem' }} id = {'respostas' + index} > 
+                            {/* default era 30 e 67px */}
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem' }} id={'respostas' + index} >
                               <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '59px', position: 'absolute', left: '65px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
@@ -540,21 +562,21 @@ export default function TaskPanel(infos, cardID) {
                               <div className='border' style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word' }}>
                                 {resposta.description}
                               </div>
-                              
-                              
+
+
                             </div>
-                        
+
                           </>
                         )
 
                       })
                     }
-                    
-                    <div id = {'lane' + index} style={{ marginLeft: '25px', marginTop:'10px', fontSize: '0.8rem'  }} hidden={!adicionandoResposta }>
-                    <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '74px', position: 'absolute', left: '65px' }}></div>
+
+                    <div id={'lane' + index} style={{ marginLeft: '25px', marginTop: '10px', fontSize: '0.8rem' }} hidden={!adicionandoResposta}>
+                      <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '74px', position: 'absolute', left: '65px' }}></div>
                       <div class="form-group">
                         <input
-                          id= {'descriçãoTexto' + index }
+                          id={'descriçãoTexto' + index}
                           ref={textToFocus}
                           placeholder="Insira sua resposta"
                           class="form-control"
@@ -596,11 +618,9 @@ export default function TaskPanel(infos, cardID) {
                       </div>
                     </div>
                     <a
-                      style={{ fontSize: '0.8rem', cursor: 'pointer',marginLeft:'13px', paddingTop:'10px', color:'#adb5b',color: '#6c757d' }}
-                      onClick={async () => { document.getElementById("lane" + index).hidden = false; handleFocus(); }}> 
+                      style={{ fontSize: '0.8rem', cursor: 'pointer', marginLeft: '13px', paddingTop: '10px', color: '#adb5b', color: '#6c757d' }}
+                      onClick={async () => { document.getElementById("lane" + index).hidden = false; handleFocus(); }}>
                       Responder ({data.respostas.length})</a>
-
-
                   </div>
 
                 </>
@@ -654,7 +674,7 @@ export default function TaskPanel(infos, cardID) {
                           user: user,
                           role: role,
                           description: newLane,
-                          respostas:[]
+                          respostas: []
                           //usuarios associados se pa
                           //tags
                         }
