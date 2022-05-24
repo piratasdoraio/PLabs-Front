@@ -267,10 +267,29 @@ export default function TaskPanel(infos, cardID) {
       </Popover.Header>
       <Popover.Body sanitize={false}>
         {preTags.map((preTag, index) => {
+          let Check = () => {
+            return (
+              <div
+
+                style={{ position: 'relative', top: '-35px', left: '-200px', height: '5px' }}>
+                ✔
+              </div>
+
+            )
+          }
+          const checked = tags.find(tag => tag.bgcolor === preTag.bgcolor)
+          if (checked == undefined) {
+            Check = () => {
+              return (
+                <></>
+              )
+          }
+        }
+
 
           return (
-            <>
-            
+
+
             <Row>
               <Col xs={8}>
                 <div
@@ -288,9 +307,9 @@ export default function TaskPanel(infos, cardID) {
                         setTags(tags)
                         await setTagBugFetch(true)
                         await setTagBugFetch(false)
-                        
 
-                      }else{ //remover tags
+
+                      } else { //remover tags
                         let remover = tags.filter(tag => tag.bgcolor != preTag.bgcolor)
                         tags = remover
                         setTags(tags)
@@ -304,8 +323,10 @@ export default function TaskPanel(infos, cardID) {
                     ref={textToFocus}
                     disabled={true}
                     placeholder={preTag.title}
-                    style={{ backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px',
-                    cursor: document.getElementById('color' + index).disabled ? 'pointer' : ''}}
+                    style={{
+                      backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px',
+                      cursor: document.getElementById('color' + index) == null? 'auto' : (document.getElementById('color' + index).disabled ? 'pointer' : '')
+                    }}
                   >
                   </input>
                 </div>
@@ -343,18 +364,11 @@ export default function TaskPanel(infos, cardID) {
                   }}>
                   save
                 </button>
-                {
-                  <div
-                  style={{position:'relative', top:'-35px',left:'-200px', height:'5px'}}>
-                    ✔
-                  </div>
-
-                }
-                
+                  <Check></Check>
               </Col>
             </Row>
-            
-            </>)
+
+          )
         })}
       </Popover.Body>
     </Popover>
