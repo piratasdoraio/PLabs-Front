@@ -1,8 +1,13 @@
 .ilumina :hover {
   filter: brightness(0.9);
 }
+#PlaceHolderFix .a::placeholder{
+  font-size: 1.1rem;
+  color: #293
+}
 
 input::placeholder {
   font-size: 1.1rem;
   color: #fff
 }
+
