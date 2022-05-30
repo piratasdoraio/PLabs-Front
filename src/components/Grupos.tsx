@@ -1,6 +1,6 @@
 import Button from '@restart/ui/esm/Button';
 import React, { Component, useState, useEffect } from 'react';
-import { Card, Col } from 'react-bootstrap';
+import { Card, Col,Form } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import Board from 'react-trello';
 import Quadros /*, {setData}*/ from '../pages/Quadros';
@@ -99,11 +99,14 @@ export default function CardGrupos(grupo: grupo) {
           </div>
         ))}
         <div>
-          <input
+          <textarea
             className="border"
+            name = "PlaceHolderFix"
             placeholder="Add new Board"
             value={quadroNome}
             onChange={changehandler}
+            rows={1}
+
             // onClick={() =>
             //   grupo.createQuadro(
             //     grupo.grupoIndex,
@@ -111,13 +114,15 @@ export default function CardGrupos(grupo: grupo) {
             //   )
             // }
             style={{
+              resize: 'none',
               width: '85%',
               textAlign: 'left',
               borderRadius: '20px',
               marginTop: '5px',
               marginLeft: '10px',
               marginRight: '10px',
-              paddingLeft:'8px'
+              paddingLeft:'8px',
+              
             }}
             onKeyPress={(event) => {
               if (event.key == "Enter") {
@@ -131,7 +136,7 @@ export default function CardGrupos(grupo: grupo) {
             }}
           >
             {/* Add new Board */}
-          </input>
+          </textarea>
           <Button
             className="border-0"
             disabled={!isAdmin}
@@ -149,9 +154,9 @@ export default function CardGrupos(grupo: grupo) {
               borderRadius: '0px',
               position: 'relative',
               right: '25px',
-              top: '0px',
+              top: '-9px',
               width: '23px',
-              height: '28px',
+              height: '30px',
             }}
           >
             <a style={{ color: '#FFF', font: 'bold',position: 'relative', top: '-2px' }}> + </a>
