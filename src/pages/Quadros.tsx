@@ -1105,8 +1105,9 @@ export default function Quadros() {
               }}
               data={newGrupos.grupos[actualGrupo].quadros[actualQuadro]}
               draggable={authorization}
-              //editable={authorization}
-              canAddLanes={authorization}
+              editable={authorization}
+              canAddLanes={authorization
+              }
               //addCardTitle='asdsad'
 
               //aqui chamar a função de API
