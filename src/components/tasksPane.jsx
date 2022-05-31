@@ -721,7 +721,7 @@ export default function TaskPanel(infos, cardID) {
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
                                 <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{resposta.role}</a>
-                                <a style={{ fontWeight: 'normal', fontSize: '0.6rem', marginLeft: '10px' }}>{resposta.data}</a>
+                                <a style={{ fontWeight: 'normal', fontSize: '0.6rem', marginLeft: '10px', color:'#798087' }}>{resposta.data}</a>
                                 <a
                                   hidden={data.status}
                                   style={{ cursor: 'pointer', fontWeight: 'normal', position: 'absolute', left:'98%', color:'#92979d'}}
