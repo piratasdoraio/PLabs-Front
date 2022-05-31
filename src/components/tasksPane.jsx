@@ -6,7 +6,7 @@ import './style.css';
 import Overlay from 'react-bootstrap/Overlay'
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaTimes } from "react-icons/fa";
 
 // let data = {
 //     id:'Card 1 (por enquanto n ta na API)',
@@ -90,6 +90,7 @@ export default function TaskPanel(infos, cardID) {
   let [permission, setPermission] = useState([])
   let [authorization, setaAuthorization] = useState(false)
   let [lanes, setLanes] = useState([])
+  let [cardData,setCardData] = useState('')
 
   //adicionando Titulo
   let [editandoTitulo, setEditandoTitulo] = useState(false)
@@ -177,6 +178,13 @@ export default function TaskPanel(infos, cardID) {
     setAuthor(data.author)
     setLabel(data.label)
     setId(data.id);
+
+    if(data.data == undefined) {
+      setCardData(formatDate(new Date()))
+    }else{
+      setCardData(data.data)
+    }
+    
 
     if (data.title == '') {
       setTitle('Titulo⠀')
@@ -288,6 +296,7 @@ export default function TaskPanel(infos, cardID) {
       label: label,
       description: description,
       draggable: false,
+      data: cardData,
       id: CardId,
       laneId: faseID,
       title: title,
@@ -299,6 +308,18 @@ export default function TaskPanel(infos, cardID) {
     dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex] = newCard
     let newGrupos = dados
     await localStorage.setItem('newGrupos', JSON.stringify(newGrupos));
+  }
+
+
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+  function formatDate(date) {
+    return [
+      padTo2Digits(date.getDate()),
+      padTo2Digits(date.getMonth() + 1),
+      date.getFullYear(),
+    ].join('/');
   }
 
   const popover = (
@@ -478,7 +499,10 @@ export default function TaskPanel(infos, cardID) {
 
 
         <div hidden={!isAdmin} style={{ color: '#6c757d' }}>
-          <a style={{ fontSize: '0.85rem', cursor: 'pointer' }}>{faseName} </a>
+          <a style={{ fontSize: '0.85rem', cursor: 'pointer' }}>{faseName} • </a> 
+          <a style={{ fontSize: '0.7rem', cursor: 'pointer' }}>{cardData} </a> 
+          <br></br>
+          <a style={{ fontSize: '0.9rem', cursor: 'pointer' }}>{label}</a> 
         </div>
 
         {/* TAGS */}
@@ -498,7 +522,6 @@ export default function TaskPanel(infos, cardID) {
                 //console.log('tag', tag)
                 return (
                   <>
-
                     <div
                       id={'tag' + index}
                       disabled={true}
@@ -578,6 +601,7 @@ export default function TaskPanel(infos, cardID) {
                 {data.user}
 
                 <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{data.role}</a>
+                <a style={{ fontWeight: 'normal', fontSize: '0.6rem', marginLeft: '10px' }}>{data.data}</a>
               </div>
 
               {editandoTask == index ?
@@ -626,7 +650,6 @@ export default function TaskPanel(infos, cardID) {
                 <>
                   <div className='' id={'task' + index} style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word', border:'1px solid ', borderColor: data.status ? '#39c99eb8': '#dee2e6' }}>
                     {data.description} 
-                    
                   </div>
                   <div style={{position:'relative', top:'-27px'}}>
                   <FaCheckCircle hidden ={!data.status} style={{color:'#39c99eb8', position: 'absolute', left: 'calc( 101% - 1px)', fontSize:'1.3rem'}}/>
@@ -693,14 +716,16 @@ export default function TaskPanel(infos, cardID) {
                         return (
                           <>
                             {/* default era 30 e 67px */}
-                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-21px':'' }} id={'respostas' + index}>
-                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#72bfa7':'#adb5bd', height: '59px', position: 'absolute', left: '-11px' }}></div>
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-20px':'',marginBottom:'10px' }} id={'respostas' + index}>
+                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#72bfa7':'#adb5bd', height: '64px', position: 'absolute', left: '-11px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
-                                <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{data.role}</a>
+                                <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{resposta.role}</a>
+                                <a style={{ fontWeight: 'normal', fontSize: '0.6rem', marginLeft: '10px' }}>{resposta.data}</a>
                                 <a
                                   hidden={data.status}
-                                  style={{ cursor: 'pointer', fontWeight: 'normal' }}
+                                  style={{ cursor: 'pointer', fontWeight: 'normal', position: 'absolute', left:'98%', color:'#92979d'}}
+                                  title="Excluir Resposta"
                                   onClick={async () => {
                                     await data.respostas.splice(index); //splice remove tudo, usar filter futuramente
                                     await setLanes(lanes);
@@ -708,7 +733,7 @@ export default function TaskPanel(infos, cardID) {
                                     setNewLane('a')
                                     setNewLane('')
                                     setAdicionando(true)
-                                  }}> - Excluir</a>
+                                  }}> <FaTimes></FaTimes></a>
                               </div>
 
                               <div className='border' style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word' }}>
@@ -751,6 +776,7 @@ export default function TaskPanel(infos, cardID) {
                                 id: data.respostas.length + 1,
                                 user: user,
                                 role: role,
+                                data: formatDate(new Date()),
                                 description: newresposta,
                               }
                             )
@@ -826,6 +852,7 @@ export default function TaskPanel(infos, cardID) {
                           id: lanes.length + 1,
                           user: user,
                           role: role,
+                          data: formatDate(new Date()),
                           description: newLane,
                           status:false,
                           respostas: []
