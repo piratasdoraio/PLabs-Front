@@ -750,17 +750,43 @@ export default function Quadros() {
                 localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
               );
               setNewGrupos(dados);
-            } else if (user == 'pedro') {
-              dados = JSON.parse(
-                localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
-              );
-              setNewGrupos(dados);
-            } else if (user == 'julio') {
-              dados = JSON.parse(
-                localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
-              );
-              setNewGrupos(dados);
-            }
+            } 
+
+            dados = JSON.parse(
+              localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
+            );
+            setNewGrupos(dados);
+
+            dados.grupos.map((grupo : any)=>{
+              grupo.quadros.map((quadro: any) =>{
+                quadro.lanes.map((lane:any)=>{
+                  console.log('lastSavweane', lane)
+                  lane.cards.map((card:any)=>{
+                    console.log('card',card)
+                    const found = card.ler.find((pessoa:any) => pessoa === localStorage.getItem('user') || '');
+                    if(found == undefined){
+                      //console.log('adnubvuadai aju', found)
+                      let remover = lane.cards.filter((caard : any ) => caard.id != card.id)
+                      //console.log('adnubvuadai asdasd', remover)
+                      lane.cards = remover
+                    }
+                  })
+                })
+              })
+            })
+            
+            // else if (user == 'pedro') {
+            //   dados = JSON.parse(
+            //     localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
+            //   );
+            //   setNewGrupos(dados);
+            // } else if (user == 'julio') {
+            //   dados = JSON.parse(
+            //     localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
+            //   );
+            //   setNewGrupos(dados);
+            // }
+
           }}
           dialogClassName="modal-100w"
           aria-labelledby="example-custom-modal-styling-title"
