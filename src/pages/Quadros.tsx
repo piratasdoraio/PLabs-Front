@@ -40,6 +40,7 @@ let grupos = {
                       description: 'admin triste',
                       users: [], //usuarios associados se pa
                       permissions: ['admin'],
+                      status:true,
                       respostas:[{
                           id: '1',
                           user: 'admin também',
