@@ -6,7 +6,7 @@ import './style.css';
 import Overlay from 'react-bootstrap/Overlay'
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import { FaCheckCircle, FaTimes } from "react-icons/fa";
+import { FaCheckCircle, FaTimes,FaTasks,FaAlignLeft,FaRegFileAlt,FaPen } from "react-icons/fa";
 
 // let data = {
 //     id:'Card 1 (por enquanto n ta na API)',
@@ -414,7 +414,7 @@ export default function TaskPanel(infos, cardID) {
                     await setTagBugFetch(true)
                     await setTagBugFetch(false)
                   }}>
-                  ✏
+                  <FaPen style={{color:'747474', position:'relative', left: '7px'}}></FaPen>
                 </button>
 
                 <button style={{ border: 0, fontSize: '1.1rem' }} className='btn'
@@ -590,10 +590,14 @@ export default function TaskPanel(infos, cardID) {
             />
           </div>
         </div>
-
+        <FaRegFileAlt style={{position: 'absolute', left:'16px', top:'30px', fontSize: '1.3rem', color:'#747474'}}></FaRegFileAlt>
+        <FaAlignLeft style={{position: 'absolute', left:'16px', top:'215px', fontSize: '1.3rem', color:'#747474'}}></FaAlignLeft>
+        <FaTasks style={{position: 'absolute', left:'16px', top:'363px', fontSize: '1.3rem', color:'#747474'}}></FaTasks>
         <div style={{ marginTop: '25px', marginBottom: '16px', fontSize: '1.25rem' }}>
+        {/* <FaTasks style={{position: 'absolute', left:'15px'}}></FaTasks> */}
           Atividades
         </div>
+        
         {lanes.map((data, index) => {
           return (
 
@@ -721,8 +725,8 @@ export default function TaskPanel(infos, cardID) {
                         return (
                           <>
                             {/* default era 30 e 67px */}
-                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-20px':'',marginTop:'10px' }} id={'respostas' + index}>
-                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#72bfa7':'#adb5bd', height: '64px', position: 'absolute', left: '-11px' }}></div>
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-20px':'',marginBottom:'10px' }} id={'respostas' + index}>
+                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#72bfa7':'#adb5bd', height: '63.5px', position: 'absolute', left: '-11px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
                                 <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{resposta.role}</a>
@@ -802,7 +806,7 @@ export default function TaskPanel(infos, cardID) {
                     </div>
                     <a
                       hidden={data.status}
-                      style={{ fontSize: '0.8rem', cursor: 'pointer', marginLeft: '13px', paddingTop: '10px', color: '#adb5b', color: '#6c757d' }}
+                      style={{ fontSize: '0.8rem', cursor: 'pointer', marginLeft: '13px', paddingTop: '13px', color: '#adb5b', color: '#6c757d' }}
                       onClick={async () => { document.getElementById("lane" + index).hidden = false; handleFocus(); }}>
                       Responder ({data.respostas.length})</a>
                   </div>
