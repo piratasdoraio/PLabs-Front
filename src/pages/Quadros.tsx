@@ -30,6 +30,7 @@ let grupos = {
                   description: 'Vendedor de fruta',
                   label: 'Alta prioridade',
                   draggable: false,
+                  data:'10/02/2022',
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [
@@ -40,10 +41,13 @@ let grupos = {
                       description: 'admin triste',
                       users: [], //usuarios associados se pa
                       permissions: ['admin'],
+
                       status:false,
+                      data:'13/02/2022',
                       respostas:[{
                           id: '1',
                           user: 'admin também',
+                          data:'10/02/2022',
                           role: 'Admin',
                           description: 'resposta ao admin triste',
                           permissions: ['admin']
@@ -51,6 +55,7 @@ let grupos = {
                         {
                           id: '1',
                           user: 'admin também',
+                          data:'11/05/2022',
                           role: 'Admin',
                           description: 'resposta ao admin triste2',
                           permissions: ['admin']
@@ -108,6 +113,7 @@ let grupos = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
+                  data:'10/02/2022',
                   preTags:[
                     {
                       bgcolor: '#EB5A46',
@@ -146,6 +152,7 @@ let grupos = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
+                  data:'10/02/2022',
                   preTags:[
                     {
                       bgcolor: '#EB5A46',
@@ -184,6 +191,7 @@ let grupos = {
                   // metadata: { sha: 'be312a1' },
                   author: 'Admin',
                   role: 'Admin',
+                  data:'10/02/2022',
                   lanes: [],
                   tags: [],
                   preTags:[
@@ -220,6 +228,7 @@ let grupos = {
               id: 'Coluna2',
               title: 'Fase2',
               label: '0/0',
+              data:'10/02/2022',
               cards: [],
             },
           ],
@@ -242,6 +251,7 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
+                  data:'10/02/2022',
                   tags: [],
                   preTags:[
                     {
@@ -292,6 +302,7 @@ let grupos = {
               cards: [
                 {
                   id: 'Card1',
+                  data:'10/02/2022',
                   title: 'Pedro',
                   description: 'Programador',
                   label: 'Extrema prioridade',
@@ -800,6 +811,8 @@ export default function Quadros() {
   //   role: string;
   //   lanes: never[];
   // }
+
+  
   let card = {
     id: '',
     title: '',
@@ -807,6 +820,7 @@ export default function Quadros() {
     label: '',
     author: '',
     role: '',
+
     lanes: [],
   };
   const [lastCardUpdate, setLastCardUpdate] = React.useState(card);
@@ -890,6 +904,17 @@ export default function Quadros() {
     setActualGrupo(grupoIndex);
     setActualQuadro(quadroIndex);
   };
+  
+  function padTo2Digits(num : any) {
+    return num.toString().padStart(2, '0');
+  }
+  function formatDate(date : any) {
+    return [
+      padTo2Digits(date.getDate()),
+      padTo2Digits(date.getMonth() + 1),
+      date.getFullYear(),
+    ].join('/');
+  }
 
   const lastCardAdd = async (e: any) => {
     localStorage.setItem('lastCardId', e.id);
@@ -907,6 +932,7 @@ export default function Quadros() {
       role: `${role}`,
       lanes: [],
       tags: [],
+      data: e.data || formatDate(new Date()),
       preTags:[
         {
           bgcolor: '#EB5A46',
