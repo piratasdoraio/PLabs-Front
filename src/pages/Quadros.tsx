@@ -33,6 +33,10 @@ let grupos = {
                   data:'10/02/2022',
                   author: 'Admin',
                   role: 'Admin',
+
+                  ler: ['admin','pedro'],
+                  escrever:['admin'],
+
                   lanes: [
                     {
                       id: '1',
@@ -40,7 +44,9 @@ let grupos = {
                       role: 'Admin',
                       description: 'admin triste',
                       users: [], //usuarios associados se pa
-                      permissions: ['admin'],
+
+                      ler: ['admin'],
+                      escrever:['admin'],
 
                       status:false,
                       data:'13/02/2022',
@@ -113,6 +119,8 @@ let grupos = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
+                  ler: ['admin','pedro'],
+                  escrever:['admin'],
                   data:'10/02/2022',
                   preTags:[
                     {
@@ -152,6 +160,8 @@ let grupos = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
+                  ler: ['admin','pedro'],
+                  escrever:['admin'],
                   data:'10/02/2022',
                   preTags:[
                     {
@@ -193,6 +203,8 @@ let grupos = {
                   role: 'Admin',
                   data:'10/02/2022',
                   lanes: [],
+                  ler: ['admin','pedro'],
+                  escrever:['admin'],
                   tags: [],
                   preTags:[
                     {
@@ -252,6 +264,8 @@ let grupos = {
                   role: 'Admin',
                   lanes: [],
                   data:'10/02/2022',
+                  ler: ['admin','pedro'],
+                  escrever:['admin'],
                   tags: [],
                   preTags:[
                     {
@@ -303,6 +317,8 @@ let grupos = {
                 {
                   id: 'Card1',
                   data:'10/02/2022',
+                  ler: ['admin','pedro'],
+                  escrever:['admin'],
                   title: 'Pedro',
                   description: 'Programador',
                   label: 'Extrema prioridade',
@@ -796,6 +812,24 @@ export default function Quadros() {
   } else {
     window.location.href = '/login';
   }
+  console.log('dados',dados)
+
+  dados.grupos.map((grupo : any)=>{
+    grupo.quadros.map((quadro: any) =>{
+      quadro.lanes.map((lane:any)=>{
+        lane.cards.map((card:any)=>{
+          //console.log('card',card)
+          const found = card.ler.find((pessoa:any) => pessoa === localStorage.getItem('user') || '');
+          if(found == undefined){
+            //console.log('adnubvuadai aju', found)
+            let remover = lane.cards.filter((caard : any ) => caard.id != card.id)
+            //console.log('adnubvuadai asdasd', remover)
+            lane.cards = remover
+          }
+        })
+      })
+    })
+  })
 
   const [newGrupos, setNewGrupos] = React.useState(dados);
   const [actualGrupo, setActualGrupo] = React.useState(0);
@@ -959,7 +993,10 @@ export default function Quadros() {
           color: 'white',
           title: '',
         },
-      ]
+      ],
+
+      ler:['admin'],
+      escrever:['admin'],
     };
     await localStorage.setItem('LastCard', JSON.stringify(newCard));
     setLastCardUpdate(newCard);
@@ -995,6 +1032,7 @@ export default function Quadros() {
       );
     }
     //console.log('e lanes',e)
+
     updateGrupos.grupos[actualGrupo].quadros[actualQuadro].lanes = e.lanes;
 
     await setNewGrupos(updateGrupos);
