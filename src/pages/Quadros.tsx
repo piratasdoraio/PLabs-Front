@@ -34,7 +34,7 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
 
-                  ler: ['admin','pedro'],
+                  ler: ['admin'], //permissão para visualizar os cards
                   escrever:['admin'],
 
                   lanes: [
@@ -793,25 +793,34 @@ export default function Quadros() {
   // dados = JSON.parse(
   //   localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
   // );
-
+  
+  dados = JSON.parse(
+    localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
+  );
   if (user == 'admin') {
     if (authorization == false) {
       setAuthorization(true);
     }
-    dados = JSON.parse(
-      localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
-    );
-  } else if (user == 'pedro') {
-    dados = JSON.parse(
-      localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
-    );
-  } else if (user == 'julio') {
-    dados = JSON.parse(
-      localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
-    );
-  } else {
-    window.location.href = '/login';
   }
+
+  // if (user == 'admin') {
+  //   if (authorization == false) {
+  //     setAuthorization(true);
+  //   }
+  //   dados = JSON.parse(
+  //     localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
+  //   );
+  // } else if (user == 'pedro') {
+  //   dados = JSON.parse(
+  //     localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
+  //   );
+  // } else if (user == 'julio') {
+  //   dados = JSON.parse(
+  //     localStorage.getItem('newGruposU2') || JSON.stringify(gruposU2)
+  //   );
+  // } else {
+  //   window.location.href = '/login';
+  // }
   console.log('dados',dados)
 
   dados.grupos.map((grupo : any)=>{
