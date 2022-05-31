@@ -85,7 +85,7 @@ export default function TaskPanel(infos, cardID) {
   const [quadroNome, setQuadroNome] = useState('');
   //const [grupoNome, setGrupoNome] = useState('');
   let [id, setId] = useState('id off')
-  let [label, setLabel] = useState('label')
+  let [label, setLabel] = useState('')
   let [author, setAuthor] = useState('')
   let [permission, setPermission] = useState([])
   let [authorization, setaAuthorization] = useState(false)
@@ -133,6 +133,7 @@ export default function TaskPanel(infos, cardID) {
   let faseIndex
   let cardIndex
   let faseID
+  
   const isAdmin = localStorage.getItem('user') === 'admin';
 
   dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes.map((coluna, indexCol) => {
@@ -192,8 +193,46 @@ export default function TaskPanel(infos, cardID) {
         })
       }
     }
-    setTags(data.tags)
-    setPreTags(data.preTags)
+    
+    if(data.tags == undefined){
+      setTags([])
+    }else{
+      setTags(data.tags)
+    }
+    if(data.preTags == undefined){
+      setPreTags(
+        [
+        {
+          bgcolor: '#EB5A46',
+          color: 'white',
+          title: '',
+        },
+        {
+          bgcolor: '#0079BF', 
+          color: 'white',
+          title: '',
+        },
+        {
+          bgcolor: '#20c997',  
+          color: 'white',
+          title: '',
+        },
+        {
+          bgcolor: '#ffc107',
+          color: 'white',
+          title: '',
+        },
+        {
+          bgcolor: '#7b58bb',  
+          color: 'white',
+          title: '',
+        },
+      ]
+      )
+    }else{
+      setPreTags(data.preTags)
+    }
+    
     setLanes(lanes)
   }
 
@@ -243,8 +282,10 @@ export default function TaskPanel(infos, cardID) {
     //     title: 'Pedro'
     //   },]
     // }
+    
     const newCard = {
       author: author,
+      label: label,
       description: description,
       draggable: false,
       id: CardId,
@@ -652,8 +693,8 @@ export default function TaskPanel(infos, cardID) {
                         return (
                           <>
                             {/* default era 30 e 67px */}
-                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-20px':'' }} id={'respostas' + index}>
-                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#39c99eb8':'#adb5bd', height: '59px', position: 'absolute', left: '-11px' }}></div>
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-21px':'' }} id={'respostas' + index}>
+                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#72bfa7':'#adb5bd', height: '59px', position: 'absolute', left: '-11px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
                                 <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{data.role}</a>
