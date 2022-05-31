@@ -6,6 +6,7 @@ import './style.css';
 import Overlay from 'react-bootstrap/Overlay'
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import { FaCheckCircle } from "react-icons/fa";
 
 // let data = {
 //     id:'Card 1 (por enquanto n ta na API)',
@@ -582,14 +583,19 @@ export default function TaskPanel(infos, cardID) {
                 </>
                 :
                 <>
-                  <div className='border' id={'task' + index} style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word' }}>
-                    {data.description}
+                  <div className='' id={'task' + index} style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word', border:'1px solid ', borderColor: data.status ? '#39c99eb8': '#dee2e6' }}>
+                    {data.description} 
+                    
                   </div>
-
+                  <div style={{position:'relative', top:'-27px'}}>
+                  <FaCheckCircle hidden ={!data.status} style={{color:'#39c99eb8', position: 'absolute', left: 'calc( 101% - 1px)', fontSize:'1.3rem'}}/>
+                  </div>
+                  
                   <div hidden={!authorization} style={{ marginLeft: '13px', color: '#6c757d' }}>
-
+                      
 
                     <a
+                      hidden={data.status}
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
                       onClick={async () => {
                         await setElementHeight(document.getElementById('task' + index).offsetHeight)
@@ -599,8 +605,12 @@ export default function TaskPanel(infos, cardID) {
                       }}
                     >
                       Editar </a>
-                    -
+                      <a  hidden={data.status}>
+                      -
+                      </a>
+                    
                     <a
+                     hidden={data.status}
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
                       onClick={async () => {
                         lanes.splice(index); //splice remove tudo, usar filter futuramente
@@ -617,11 +627,18 @@ export default function TaskPanel(infos, cardID) {
                     
                     <Form.Check
                             inline
-                            style={{fontSize: '0.8rem', marginLeft: '10px', cursor:'pointer'}}
+                            style={{fontSize: '0.8rem', marginLeft: '10px', cursor:'pointer', position:'relative',left:data.status? 'calc(75% - 1px)': 'calc(63% - 0.4px)' }}
                             label="Marcar como concluído."
                             name="group1"
                             type='checkbox'
-                            id={'concluded' + index}
+                            id={'check'+index}
+                            checked={data.status}
+                            onClick={async ()=>{
+                              data.status = !data.status
+                              //await salvar()  
+                              await setaAuthorization(false)
+                              await setaAuthorization(true)
+                            }}  
                           />
                           :
                           <></>
@@ -635,12 +652,13 @@ export default function TaskPanel(infos, cardID) {
                         return (
                           <>
                             {/* default era 30 e 67px */}
-                            <div style={{ marginLeft: '25px', fontSize: '0.8rem' }} id={'respostas' + index} >
-                              <div class='vl' style={{ borderLeft: '4px solid #adb5bd', height: '59px', position: 'absolute', left: '65px' }}></div>
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-20px':'' }} id={'respostas' + index}>
+                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#39c99eb8':'#adb5bd', height: '59px', position: 'absolute', left: '-11px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
                                 <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{data.role}</a>
                                 <a
+                                  hidden={data.status}
                                   style={{ cursor: 'pointer', fontWeight: 'normal' }}
                                   onClick={async () => {
                                     await data.respostas.splice(index); //splice remove tudo, usar filter futuramente
@@ -711,6 +729,7 @@ export default function TaskPanel(infos, cardID) {
                       </div>
                     </div>
                     <a
+                      hidden={data.status}
                       style={{ fontSize: '0.8rem', cursor: 'pointer', marginLeft: '13px', paddingTop: '10px', color: '#adb5b', color: '#6c757d' }}
                       onClick={async () => { document.getElementById("lane" + index).hidden = false; handleFocus(); }}>
                       Responder ({data.respostas.length})</a>
@@ -767,7 +786,7 @@ export default function TaskPanel(infos, cardID) {
                           user: user,
                           role: role,
                           description: newLane,
-                          status:true,
+                          status:false,
                           respostas: []
                           //usuarios associados se pa
                           //tags
