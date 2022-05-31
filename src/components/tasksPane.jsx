@@ -767,6 +767,7 @@ export default function TaskPanel(infos, cardID) {
                           user: user,
                           role: role,
                           description: newLane,
+                          status:true,
                           respostas: []
                           //usuarios associados se pa
                           //tags
