@@ -927,7 +927,7 @@ export default function TaskPanel(infos, cardID) {
                       escrever.push(user)
                       setLer(ler)
                       setEscrever(escrever)
-                    
+                      await salvar()
                       await setaAuthorization(false)
                       await setaAuthorization(true)
                       
@@ -955,10 +955,10 @@ export default function TaskPanel(infos, cardID) {
                   <Col>
                   <div
                   onClick={
-                    ()=>{
+                   async  ()=>{
                       let remover = ler.filter( pessoa => pessoa != user)
-                      setLer(remover)
-                      salvar()
+                      await setLer(remover)
+                      await salvar()
                     }
                   }
                   >
@@ -985,10 +985,11 @@ export default function TaskPanel(infos, cardID) {
                   <Col>
                   <div
                   onClick={
-                    ()=>{
+                    async ()=>{
                       let remover = ler.filter( pessoa => pessoa != user)
-                      setEscrever(remover)
-                      salvar()
+                      await setEscrever(remover)
+                      
+                      await salvar()
                     }
                   }>
                   {user}
