@@ -1099,8 +1099,18 @@ export default function Quadros() {
     }
   }
 
+  let [onLoad, setLoad] = useState(false)
+  let a = async ()=>{
+    await setLoad(true)
+  }
+
+  if(onLoad == false){
+    a()
+  }
+  
   return (
     <>
+    {onLoad? <></> : <></>}
       <Base>
         <div
           style={{
