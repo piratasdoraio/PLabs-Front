@@ -34,7 +34,7 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
 
-                  ler: ['admin'], //permissão para visualizar os cards
+                  ler: ['admin','pedro'], //permissão para visualizar os cards
                   escrever:['admin'],
 
                   lanes: [
@@ -762,13 +762,17 @@ export default function Quadros() {
                 quadro.lanes.map((lane:any)=>{
                   console.log('lastSavweane', lane)
                   lane.cards.map((card:any)=>{
-                    console.log('card',card)
+
+                    if(card.ler != undefined){
+                      console.log('card',card)
                     const found = card.ler.find((pessoa:any) => pessoa === localStorage.getItem('user') || '');
                     if(found == undefined){
                       //console.log('adnubvuadai aju', found)
                       let remover = lane.cards.filter((caard : any ) => caard.id != card.id)
                       //console.log('adnubvuadai asdasd', remover)
                       lane.cards = remover
+                    }
+                    
                     }
                   })
                 })
@@ -854,12 +858,16 @@ export default function Quadros() {
       quadro.lanes.map((lane:any)=>{
         lane.cards.map((card:any)=>{
           //console.log('card',card)
-          const found = card.ler.find((pessoa:any) => pessoa === localStorage.getItem('user') || '');
+          
+          if(lane.cards.ler != undefined){
+            const found = card.ler.find((pessoa:any) => pessoa === localStorage.getItem('user') || '');
           if(found == undefined){
             //console.log('adnubvuadai aju', found)
             let remover = lane.cards.filter((caard : any ) => caard.id != card.id)
             //console.log('adnubvuadai asdasd', remover)
             lane.cards = remover
+          }
+          
           }
         })
       })

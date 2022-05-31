@@ -78,7 +78,7 @@ export default function TaskPanel(infos, cardID) {
     localStorage.getItem('newGrupos') || ''//localstorage ou client
   );
 
-
+  const users = ['pedro', 'admin']
   const user = localStorage.user
   const role = localStorage.getItem('role') //alterar o metodo disso para pegar do local storage futuramente
   //console.log('card id',cardID)
@@ -130,6 +130,7 @@ export default function TaskPanel(infos, cardID) {
   let [preTags, setPreTags] = useState([])
   let [tagBugFetch, setTagBugFetch] = useState(false)
   const [showTags, setShowTags] = useState(false);
+  let [showPessoas,setSowPessoas]= useState(false);
   const target = useRef(null);
   let data
   let CardId = localStorage.getItem('CardId')
@@ -175,15 +176,27 @@ export default function TaskPanel(infos, cardID) {
   if (title == '⠀') {
     //console.log('card',data)
     if (role == 'admin' || user == data.author) {
-      // console.log('permitido liberaco cu ')
+      // console.log('permitido liberaco cu '
       setaAuthorization(true)
     }
+    if(data.escrever != undefined){
+      const found =  data.escrever.find((pessoa) => pessoa === localStorage.getItem('user'));
+      setLer(data.ler)
+      setEscrever(data.escrever)  
+      if (found != undefined){
+        setaAuthorization(true)
+      }
+    } else{
+      setLer(['admin'])
+      setEscrever(['admin'])  
+
+    }
+
+
     setAuthor(data.author)
     setLabel(data.label)
     setId(data.id);
 
-    setLer(data.ler)
-    setEscrever(data.escrever)
 
     if(data.data == undefined) {
       setCardData(formatDate(new Date()))
@@ -598,9 +611,12 @@ export default function TaskPanel(infos, cardID) {
             />
           </div>
         </div>
-        <FaRegFileAlt style={{position: 'absolute', left:'16px', top:'30px', fontSize: '1.3rem', color:'#747474'}}></FaRegFileAlt>
+
+        {/* <FaRegFileAlt style={{position: 'absolute', left:'16px', top:'30px', fontSize: '1.3rem', color:'#747474'}}></FaRegFileAlt>
         <FaAlignLeft style={{position: 'absolute', left:'16px', top:'215px', fontSize: '1.3rem', color:'#747474'}}></FaAlignLeft>
-        <FaTasks style={{position: 'absolute', left:'16px', top:'363px', fontSize: '1.3rem', color:'#747474'}}></FaTasks>
+        <FaTasks style={{position: 'absolute', left:'16px', top:'363px', fontSize: '1.3rem', color:'#747474'}}></FaTasks> */}
+        
+
         <div style={{ marginTop: '25px', marginBottom: '16px', fontSize: '1.25rem' }}>
         {/* <FaTasks style={{position: 'absolute', left:'15px'}}></FaTasks> */}
           Atividades
@@ -894,6 +910,101 @@ export default function TaskPanel(infos, cardID) {
           }
         </div>
       </div>
+      <div onClick={()=>setSowPessoas(!showPessoas)} hidden={!authorization} style={{marginTop:'50px'}}>Permissões</div>
+        <div hidden={!showPessoas}>
+          <Row>
+            Pessoas
+          <Col>
+          {
+            users.map((user,index)=>{
+              return(
+                <>
+                <Row>
+                  <Col>
+                  <div onClick={
+                    async()=>{
+                      ler.push(user)
+                      escrever.push(user)
+                      setLer(ler)
+                      setEscrever(escrever)
+                    
+                      await setaAuthorization(false)
+                      await setaAuthorization(true)
+                      
+                    }
+                  }>
+                  {user}
+                  </div>
+                  </Col>
+
+                </Row>
+                
+                </>
+              )
+            })
+          }
+          </Col>
+          
+          Ler
+          <Col>
+          {
+            ler.map((user,index)=>{
+              return(
+                <>
+                <Row>
+                  <Col>
+                  <div
+                  onClick={
+                    ()=>{
+                      let remover = ler.filter( pessoa => pessoa != user)
+                      setLer(remover)
+                      salvar()
+                    }
+                  }
+                  >
+                  {user}
+                  </div>
+                  
+                  </Col>
+
+                </Row>
+                
+                </>
+              )
+            })
+          }
+          </Col>
+
+          Escrever
+          <Col>
+          {
+            escrever.map((user,index)=>{
+              return(
+                <>
+                <Row>
+                  <Col>
+                  <div
+                  onClick={
+                    ()=>{
+                      let remover = ler.filter( pessoa => pessoa != user)
+                      setEscrever(remover)
+                      salvar()
+                    }
+                  }>
+                  {user}
+                  </div>
+                  </Col>
+
+                </Row>
+                
+                </>
+              )
+            })
+          }
+          </Col>
+          </Row>
+        
+        </div>
     </>
   );
 }
