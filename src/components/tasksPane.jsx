@@ -122,6 +122,9 @@ export default function TaskPanel(infos, cardID) {
   let [actualLane, setActualLane] = useState('')
 
 
+  //permissoes leitura
+  let [ler, setLer] = useState([])
+  let [escrever, setEscrever] = useState([])
   //TAGS
   let [tags, setTags] = useState([])
   let [preTags, setPreTags] = useState([])
@@ -178,6 +181,9 @@ export default function TaskPanel(infos, cardID) {
     setAuthor(data.author)
     setLabel(data.label)
     setId(data.id);
+
+    setLer(data.ler)
+    setEscrever(data.escrever)
 
     if(data.data == undefined) {
       setCardData(formatDate(new Date()))
@@ -303,6 +309,8 @@ export default function TaskPanel(infos, cardID) {
       lanes: lanes,
       role: 'Admin',
       tags: tags,
+      ler:ler,
+      escrever:escrever,
       preTags: preTags,
     }
     dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex] = newCard
