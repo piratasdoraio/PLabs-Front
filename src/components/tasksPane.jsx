@@ -502,7 +502,7 @@ export default function TaskPanel(infos, cardID) {
           <a style={{ fontSize: '0.85rem', cursor: 'pointer' }}>{faseName} • </a> 
           <a style={{ fontSize: '0.7rem', cursor: 'pointer' }}>{cardData} </a> 
           <br></br>
-          <a style={{ fontSize: '0.9rem', cursor: 'pointer' }}>{label}</a> 
+          <a style={{ fontSize: '1rem', cursor: 'pointer' }}>{label}</a> 
         </div>
 
         {/* TAGS */}
@@ -514,9 +514,16 @@ export default function TaskPanel(infos, cardID) {
           </div>
           <div style={{ maxHeight: '30px' }}>
             <Row style={{ marginLeft: '0px' }}>
-            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-                <button style={{ backgroundColor: '#adb5bd73', color: "#495057", border: 0, borderRadius: '5px', width: 'fit-content', marginLeft: '3px', position:'relative'}} className='ilumina' onClick>+</button>
+
+            {
+              authorization? 
+              <OverlayTrigger trigger="click" placement="bottom" overlay={popover} >
+                <button style={{ backgroundColor: '#adb5bd73', color: "#495057", border: 0, borderRadius: '5px', width: 'fit-content', marginLeft: '3px', position:'relative'}}  className='ilumina'>+</button>
               </OverlayTrigger>
+              :
+              <div></div>
+            }
+            
 
               {tags.map((tag, index) => {
                 //console.log('tag', tag)
