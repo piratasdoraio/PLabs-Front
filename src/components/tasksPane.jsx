@@ -661,10 +661,8 @@ export default function TaskPanel(infos, cardID) {
                   <div style={{position:'relative', top:'-27px'}}>
                   <FaCheckCircle hidden ={!data.status} style={{color:'#39c99eb8', position: 'absolute', left: 'calc( 101% - 1px)', fontSize:'1.3rem'}}/>
                   </div>
-                  
                   <div hidden={!authorization} style={{ marginLeft: '13px', color: '#6c757d' }}>
-                      
-
+                    
                     <a
                       hidden={data.status}
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
@@ -723,7 +721,7 @@ export default function TaskPanel(infos, cardID) {
                         return (
                           <>
                             {/* default era 30 e 67px */}
-                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-20px':'',marginBottom:'10px' }} id={'respostas' + index}>
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-20px':'',marginTop:'10px' }} id={'respostas' + index}>
                               <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#72bfa7':'#adb5bd', height: '64px', position: 'absolute', left: '-11px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
