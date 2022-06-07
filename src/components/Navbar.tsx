@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaStickerMule } from "react-icons/fa";
+import { FaStickerMule } from 'react-icons/fa';
 const logoCss = {};
 
 export default function Navbar() {
@@ -68,9 +68,9 @@ export default function Navbar() {
               </button>
             </Link>
           </form>
-          <button onClick={async ()=> {await localStorage.clear(); await localStorage.setItem('user', 'admin'); await localStorage.setItem('role', 'admin'); window.location.reload()}}>
+          {/* <button onClick={async ()=> {await localStorage.clear(); await localStorage.setItem('user', 'admin'); await localStorage.setItem('role', 'admin'); window.location.reload()}}>
                         <FaStickerMule></FaStickerMule>
-                    </button>
+                    </button> */}
         </div>
       </div>
     </nav>

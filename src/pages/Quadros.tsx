@@ -30,12 +30,12 @@ let grupos = {
                   description: 'Vendedor de fruta',
                   label: 'Alta prioridade',
                   draggable: false,
-                  data:'10/02/2022',
+                  data: '10/02/2022',
                   author: 'Admin',
                   role: 'Admin',
 
-                  ler: ['admin','pedro'], //permissão para visualizar os cards
-                  escrever:['admin'],
+                  ler: ['admin', 'pedro'], //permissão para visualizar os cards
+                  escrever: ['admin'],
 
                   lanes: [
                     {
@@ -46,27 +46,28 @@ let grupos = {
                       users: [], //usuarios associados se pa
 
                       ler: ['admin'],
-                      escrever:['admin'],
+                      escrever: ['admin'],
 
-                      status:false,
-                      data:'13/02/2022',
-                      respostas:[{
+                      status: false,
+                      data: '13/02/2022',
+                      respostas: [
+                        {
                           id: '1',
                           user: 'admin também',
-                          data:'10/02/2022',
+                          data: '10/02/2022',
                           role: 'Admin',
                           description: 'resposta ao admin triste',
-                          permissions: ['admin']
+                          permissions: ['admin'],
                         },
                         {
                           id: '1',
                           user: 'admin também',
-                          data:'11/05/2022',
+                          data: '11/05/2022',
                           role: 'Admin',
                           description: 'resposta ao admin triste2',
-                          permissions: ['admin']
-                        }
-                      ]
+                          permissions: ['admin'],
+                        },
+                      ],
                     },
                   ],
                   tags: [
@@ -81,19 +82,19 @@ let grupos = {
                       title: 'Pedro',
                     },
                   ],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: 'Atrasado',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: 'Pedro',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -103,11 +104,11 @@ let grupos = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
                 {
                   id: 'Card2',
@@ -119,22 +120,22 @@ let grupos = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
-                  ler: ['admin','pedro'],
-                  escrever:['admin'],
-                  data:'10/02/2022',
-                  preTags:[
+                  ler: ['admin', 'pedro'],
+                  escrever: ['admin'],
+                  data: '10/02/2022',
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -144,11 +145,11 @@ let grupos = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
                 {
                   id: 'Card3',
@@ -160,22 +161,22 @@ let grupos = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
-                  ler: ['admin','pedro'],
-                  escrever:['admin'],
-                  data:'10/02/2022',
-                  preTags:[
+                  ler: ['admin', 'pedro'],
+                  escrever: ['admin'],
+                  data: '10/02/2022',
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -185,12 +186,11 @@ let grupos = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
-                  
+                  ],
                 },
 
                 {
@@ -201,24 +201,24 @@ let grupos = {
                   // metadata: { sha: 'be312a1' },
                   author: 'Admin',
                   role: 'Admin',
-                  data:'10/02/2022',
+                  data: '10/02/2022',
                   lanes: [],
-                  ler: ['admin','pedro'],
-                  escrever:['admin'],
+                  ler: ['admin', 'pedro'],
+                  escrever: ['admin'],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -228,11 +228,11 @@ let grupos = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -240,7 +240,7 @@ let grupos = {
               id: 'Coluna2',
               title: 'Fase2',
               label: '0/0',
-              data:'10/02/2022',
+              data: '10/02/2022',
               cards: [],
             },
           ],
@@ -263,23 +263,23 @@ let grupos = {
                   author: 'Admin',
                   role: 'Admin',
                   lanes: [],
-                  data:'10/02/2022',
-                  ler: ['admin','pedro'],
-                  escrever:['admin'],
+                  data: '10/02/2022',
+                  ler: ['admin', 'pedro'],
+                  escrever: ['admin'],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -289,11 +289,11 @@ let grupos = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -316,9 +316,9 @@ let grupos = {
               cards: [
                 {
                   id: 'Card1',
-                  data:'10/02/2022',
-                  ler: ['admin','pedro'],
-                  escrever:['admin'],
+                  data: '10/02/2022',
+                  ler: ['admin', 'pedro'],
+                  escrever: ['admin'],
                   title: 'Pedro',
                   description: 'Programador',
                   label: 'Extrema prioridade',
@@ -327,19 +327,19 @@ let grupos = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -349,11 +349,11 @@ let grupos = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -389,19 +389,19 @@ let gruposU1 = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -411,11 +411,11 @@ let gruposU1 = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -446,19 +446,19 @@ let gruposU1 = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -468,11 +468,11 @@ let gruposU1 = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -503,19 +503,19 @@ let gruposU1 = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -525,11 +525,11 @@ let gruposU1 = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -563,19 +563,19 @@ let gruposU2 = {
                   metadata: { sha: 'be312a1' },
                   lanes: [],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -585,11 +585,11 @@ let gruposU2 = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -620,19 +620,19 @@ let gruposU2 = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -642,11 +642,11 @@ let gruposU2 = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -677,19 +677,19 @@ let gruposU2 = {
                   role: 'Admin',
                   lanes: [],
                   tags: [],
-                  preTags:[
+                  preTags: [
                     {
                       bgcolor: '#EB5A46',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#0079BF', 
+                      bgcolor: '#0079BF',
                       color: 'white',
                       title: '',
                     },
                     {
-                      bgcolor: '#20c997',  
+                      bgcolor: '#20c997',
                       color: 'white',
                       title: '',
                     },
@@ -699,11 +699,11 @@ let gruposU2 = {
                       title: '',
                     },
                     {
-                      bgcolor: '#7b58bb',  
+                      bgcolor: '#7b58bb',
                       color: 'white',
                       title: '',
                     },
-                  ]
+                  ],
                 },
               ],
             },
@@ -750,35 +750,38 @@ export default function Quadros() {
                 localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
               );
               setNewGrupos(dados);
-            } 
+            }
 
             dados = JSON.parse(
               localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
             );
             setNewGrupos(dados);
 
-            dados.grupos.map((grupo : any)=>{
-              grupo.quadros.map((quadro: any) =>{
-                quadro.lanes.map((lane:any)=>{
-                  console.log('lastSavweane', lane)
-                  lane.cards.map((card:any)=>{
+            dados.grupos.map((grupo: any) => {
+              grupo.quadros.map((quadro: any) => {
+                quadro.lanes.map((lane: any) => {
+                  console.log('lastSavweane', lane);
+                  lane.cards.map((card: any) => {
+                    if (card.ler != undefined) {
+                      console.log('card', card);
+                      const found = card.ler.find(
+                        (pessoa: any) =>
+                          pessoa === localStorage.getItem('user') || ''
+                      );
+                      if (found == undefined) {
+                        //console.log('adnubvuadai aju', found)
+                        let remover = lane.cards.filter(
+                          (caard: any) => caard.id != card.id
+                        );
+                        //console.log('adnubvuadai asdasd', remover)
+                        lane.cards = remover;
+                      }
+                    }
+                  });
+                });
+              });
+            });
 
-                    if(card.ler != undefined){
-                      console.log('card',card)
-                    const found = card.ler.find((pessoa:any) => pessoa === localStorage.getItem('user') || '');
-                    if(found == undefined){
-                      //console.log('adnubvuadai aju', found)
-                      let remover = lane.cards.filter((caard : any ) => caard.id != card.id)
-                      //console.log('adnubvuadai asdasd', remover)
-                      lane.cards = remover
-                    }
-                    
-                    }
-                  })
-                })
-              })
-            })
-            
             // else if (user == 'pedro') {
             //   dados = JSON.parse(
             //     localStorage.getItem('newGruposU1') || JSON.stringify(gruposU1)
@@ -790,7 +793,6 @@ export default function Quadros() {
             //   );
             //   setNewGrupos(dados);
             // }
-
           }}
           dialogClassName="modal-100w"
           aria-labelledby="example-custom-modal-styling-title"
@@ -823,7 +825,7 @@ export default function Quadros() {
   // dados = JSON.parse(
   //   localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
   // );
-  
+
   dados = JSON.parse(
     localStorage.getItem('newGrupos') || JSON.stringify(grupos) //localstorage ou client
   );
@@ -851,28 +853,31 @@ export default function Quadros() {
   // } else {
   //   window.location.href = '/login';
   // }
-  console.log('dados',dados)
+  console.log('dados', dados);
 
-  dados.grupos.map((grupo : any)=>{
-    grupo.quadros.map((quadro: any) =>{
-      quadro.lanes.map((lane:any)=>{
-        lane.cards.map((card:any)=>{
-          //console.log('card',card)
-          
-          if(lane.cards.ler != undefined){
-            const found = card.ler.find((pessoa:any) => pessoa === localStorage.getItem('user') || '');
-          if(found == undefined){
-            //console.log('adnubvuadai aju', found)
-            let remover = lane.cards.filter((caard : any ) => caard.id != card.id)
-            //console.log('adnubvuadai asdasd', remover)
-            lane.cards = remover
+  dados.grupos.map((grupo: any) => {
+    grupo.quadros.map((quadro: any) => {
+      quadro.lanes.map((lane: any) => {
+        console.log('lastSavweane', lane);
+        lane.cards.map((card: any) => {
+          if (card.ler != undefined) {
+            console.log('card', card);
+            const found = card.ler.find(
+              (pessoa: any) => pessoa === localStorage.getItem('user') || ''
+            );
+            if (found == undefined) {
+              //console.log('adnubvuadai aju', found)
+              let remover = lane.cards.filter(
+                (caard: any) => caard.id != card.id
+              );
+              //console.log('adnubvuadai asdasd', remover)
+              lane.cards = remover;
+            }
           }
-          
-          }
-        })
-      })
-    })
-  })
+        });
+      });
+    });
+  });
 
   const [newGrupos, setNewGrupos] = React.useState(dados);
   const [actualGrupo, setActualGrupo] = React.useState(0);
@@ -889,7 +894,6 @@ export default function Quadros() {
   //   lanes: never[];
   // }
 
-  
   let card = {
     id: '',
     title: '',
@@ -981,11 +985,11 @@ export default function Quadros() {
     setActualGrupo(grupoIndex);
     setActualQuadro(quadroIndex);
   };
-  
-  function padTo2Digits(num : any) {
+
+  function padTo2Digits(num: any) {
     return num.toString().padStart(2, '0');
   }
-  function formatDate(date : any) {
+  function formatDate(date: any) {
     return [
       padTo2Digits(date.getDate()),
       padTo2Digits(date.getMonth() + 1),
@@ -1010,19 +1014,19 @@ export default function Quadros() {
       lanes: [],
       tags: [],
       data: e.data || formatDate(new Date()),
-      preTags:[
+      preTags: [
         {
           bgcolor: '#EB5A46',
           color: 'white',
           title: '',
         },
         {
-          bgcolor: '#0079BF', 
+          bgcolor: '#0079BF',
           color: 'white',
           title: '',
         },
         {
-          bgcolor: '#20c997',  
+          bgcolor: '#20c997',
           color: 'white',
           title: '',
         },
@@ -1032,14 +1036,14 @@ export default function Quadros() {
           title: '',
         },
         {
-          bgcolor: '#7b58bb',  
+          bgcolor: '#7b58bb',
           color: 'white',
           title: '',
         },
       ],
 
-      ler:['admin'],
-      escrever:['admin'],
+      ler: ['admin'],
+      escrever: ['admin'],
     };
     await localStorage.setItem('LastCard', JSON.stringify(newCard));
     setLastCardUpdate(newCard);
@@ -1099,18 +1103,18 @@ export default function Quadros() {
     }
   }
 
-  let [onLoad, setLoad] = useState(false)
-  let a = async ()=>{
-    await setLoad(true)
+  let [onLoad, setLoad] = useState(false);
+  let a = async () => {
+    await setLoad(true);
+  };
+
+  if (onLoad == false) {
+    a();
   }
 
-  if(onLoad == false){
-    a()
-  }
-  
   return (
     <>
-    {onLoad? <></> : <></>}
+      {onLoad ? <></> : <></>}
       <Base>
         <div
           style={{
@@ -1224,8 +1228,7 @@ export default function Quadros() {
               data={newGrupos.grupos[actualGrupo].quadros[actualQuadro]}
               draggable={authorization}
               editable={authorization}
-              canAddLanes={authorization
-              }
+              canAddLanes={authorization}
               //addCardTitle='asdsad'
 
               //aqui chamar a função de API

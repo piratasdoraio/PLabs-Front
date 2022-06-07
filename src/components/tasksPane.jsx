@@ -1,12 +1,12 @@
 import Button from '@restart/ui/esm/Button';
 import React, { Component, useState, useEffect, useRef } from 'react';
-import { Card, Col, Row,Form } from 'react-bootstrap';
+import { Card, Col, Row, Form } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import './style.css';
 import Overlay from 'react-bootstrap/Overlay'
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import { FaCheckCircle, FaTimes,FaTasks,FaAlignLeft,FaRegFileAlt,FaPen } from "react-icons/fa";
+import { FaCheckCircle, FaTimes, FaTasks, FaAlignLeft, FaRegFileAlt, FaPen } from "react-icons/fa";
 
 // let data = {
 //     id:'Card 1 (por enquanto n ta na API)',
@@ -90,7 +90,7 @@ export default function TaskPanel(infos, cardID) {
   let [permission, setPermission] = useState([])
   let [authorization, setaAuthorization] = useState(false)
   let [lanes, setLanes] = useState([])
-  let [cardData,setCardData] = useState('')
+  let [cardData, setCardData] = useState('')
 
   //adicionando Titulo
   let [editandoTitulo, setEditandoTitulo] = useState(false)
@@ -115,7 +115,7 @@ export default function TaskPanel(infos, cardID) {
   let [editandoTask, setEditandoTask] = useState('-1')
   let [elementHeight, setElementHeight] = useState('')
 
-  //RESPOSTAS 
+  //RESPOSTAS
   let [exibirResposta, setExibirResposta] = useState(false)
   let [adicionandoResposta, setadicionandoResposta] = useState(false)
   let [newresposta, setResposta] = useState('')
@@ -130,7 +130,7 @@ export default function TaskPanel(infos, cardID) {
   let [preTags, setPreTags] = useState([])
   let [tagBugFetch, setTagBugFetch] = useState(false)
   const [showTags, setShowTags] = useState(false);
-  let [showPessoas,setSowPessoas]= useState(false);
+  let [showPessoas, setSowPessoas] = useState(false);
   const target = useRef(null);
   let data
   let CardId = localStorage.getItem('CardId')
@@ -138,7 +138,7 @@ export default function TaskPanel(infos, cardID) {
   let faseIndex
   let cardIndex
   let faseID
-  
+
   const isAdmin = localStorage.getItem('user') === 'admin';
 
   dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes.map((coluna, indexCol) => {
@@ -179,16 +179,16 @@ export default function TaskPanel(infos, cardID) {
       // console.log('permitido liberaco cu '
       setaAuthorization(true)
     }
-    if(data.escrever != undefined){
-      const found =  data.escrever.find((pessoa) => pessoa === localStorage.getItem('user'));
+    if (data.escrever != undefined) {
+      const found = data.escrever.find((pessoa) => pessoa === localStorage.getItem('user'));
       setLer(data.ler)
-      setEscrever(data.escrever)  
-      if (found != undefined){
+      setEscrever(data.escrever)
+      if (found != undefined) {
         setaAuthorization(true)
       }
-    } else{
+    } else {
       setLer(['admin'])
-      setEscrever(['admin'])  
+      setEscrever(['admin'])
 
     }
 
@@ -198,12 +198,12 @@ export default function TaskPanel(infos, cardID) {
     setId(data.id);
 
 
-    if(data.data == undefined) {
+    if (data.data == undefined) {
       setCardData(formatDate(new Date()))
-    }else{
+    } else {
       setCardData(data.data)
     }
-    
+
 
     if (data.title == '') {
       setTitle('Titulo⠀')
@@ -220,46 +220,46 @@ export default function TaskPanel(infos, cardID) {
         })
       }
     }
-    
-    if(data.tags == undefined){
+
+    if (data.tags == undefined) {
       setTags([])
-    }else{
+    } else {
       setTags(data.tags)
     }
-    if(data.preTags == undefined){
+    if (data.preTags == undefined) {
       setPreTags(
         [
-        {
-          bgcolor: '#EB5A46',
-          color: 'white',
-          title: '',
-        },
-        {
-          bgcolor: '#0079BF', 
-          color: 'white',
-          title: '',
-        },
-        {
-          bgcolor: '#20c997',  
-          color: 'white',
-          title: '',
-        },
-        {
-          bgcolor: '#ffc107',
-          color: 'white',
-          title: '',
-        },
-        {
-          bgcolor: '#7b58bb',  
-          color: 'white',
-          title: '',
-        },
-      ]
+          {
+            bgcolor: '#EB5A46',
+            color: 'white',
+            title: '',
+          },
+          {
+            bgcolor: '#0079BF',
+            color: 'white',
+            title: '',
+          },
+          {
+            bgcolor: '#20c997',
+            color: 'white',
+            title: '',
+          },
+          {
+            bgcolor: '#ffc107',
+            color: 'white',
+            title: '',
+          },
+          {
+            bgcolor: '#7b58bb',
+            color: 'white',
+            title: '',
+          },
+        ]
       )
-    }else{
+    } else {
       setPreTags(data.preTags)
     }
-    
+
     setLanes(lanes)
   }
 
@@ -309,7 +309,7 @@ export default function TaskPanel(infos, cardID) {
     //     title: 'Pedro'
     //   },]
     // }
-    
+
     const newCard = {
       author: author,
       label: label,
@@ -322,8 +322,8 @@ export default function TaskPanel(infos, cardID) {
       lanes: lanes,
       role: 'Admin',
       tags: tags,
-      ler:ler,
-      escrever:escrever,
+      ler: ler,
+      escrever: escrever,
       preTags: preTags,
     }
     dados.grupos[localStorage.getItem('actualGrupo')].quadros[localStorage.getItem('actualQuadro')].lanes[faseIndex].cards[cardIndex] = newCard
@@ -347,9 +347,10 @@ export default function TaskPanel(infos, cardID) {
     <Popover id="popover-basic" sanitize={false}>
       <Popover.Header as="h3" className='center' sanitize={false} >
         Tags
-        <a style={{ marginLeft: '80%', fontSize: '1.2rem', color: 'gray', cursor: 'pointer' }} onClick={() => {let element = document.getElementById('popover-basic')             
-                                                                                                                element.classList.remove('show')
-                                                                                                                }}>x</a>
+        <a style={{ marginLeft: '80%', fontSize: '1.2rem', color: 'gray', cursor: 'pointer' }} onClick={() => {
+          let element = document.getElementById('popover-basic')
+          element.classList.remove('show')
+        }}>x</a>
       </Popover.Header>
       <Popover.Body sanitize={false}>
         {preTags.map((preTag, index) => {
@@ -371,8 +372,8 @@ export default function TaskPanel(infos, cardID) {
               return (
                 <></>
               )
+            }
           }
-        }
 
 
           return (
@@ -414,7 +415,7 @@ export default function TaskPanel(infos, cardID) {
                     maxLength={20}
                     style={{
                       backgroundColor: preTag.bgcolor, border: 0, margin: '3px', borderRadius: '5px', paddingLeft: '10px', color: '#fff', fontSize: '1.1rem', width: '200px',
-                      cursor: document.getElementById('color' + index) == null? 'auto' : (document.getElementById('color' + index).disabled ? 'pointer' : '')
+                      cursor: document.getElementById('color' + index) == null ? 'auto' : (document.getElementById('color' + index).disabled ? 'pointer' : '')
                     }}
                   >
                   </input>
@@ -423,7 +424,7 @@ export default function TaskPanel(infos, cardID) {
               <Col xs={4} style={{ position: 'relative', left: '15px' }}>
 
                 <button style={{ border: 0, fontSize: '1.1rem' }} className='btn'
-                  
+
                   id={'botaoEditar' + index}
                   onClick={async () => {
                     document.getElementById("color" + index).value = preTag.title;
@@ -435,7 +436,7 @@ export default function TaskPanel(infos, cardID) {
                     await setTagBugFetch(true)
                     await setTagBugFetch(false)
                   }}>
-                  <FaPen style={{color:'747474', position:'relative', left: '7px'}}></FaPen>
+                  <FaPen style={{ color: '747474', position: 'relative', left: '7px' }}></FaPen>
                 </button>
 
                 <button style={{ border: 0, fontSize: '1.1rem' }} className='btn'
@@ -443,7 +444,7 @@ export default function TaskPanel(infos, cardID) {
                   id={'botaoSalvar' + index}
                   onClick={async () => {
                     // ISSO AKI É PRA SALVAR QUANDO EDITAR E ESTIVER MARCADO
-                    // const checke = tags.find(tag => tag.bgcolor === preTag.bgcolor) 
+                    // const checke = tags.find(tag => tag.bgcolor === preTag.bgcolor)
 
                     // if(check != undefined){
 
@@ -460,7 +461,7 @@ export default function TaskPanel(infos, cardID) {
                   }}>
                   save
                 </button>
-                  <Check></Check>
+                <Check></Check>
               </Col>
             </Row>
 
@@ -469,6 +470,8 @@ export default function TaskPanel(infos, cardID) {
       </Popover.Body>
     </Popover>
   );
+
+  salvar();
 
   return (
     <>
@@ -520,10 +523,10 @@ export default function TaskPanel(infos, cardID) {
 
 
         <div hidden={!isAdmin} style={{ color: '#6c757d' }}>
-          <a style={{ fontSize: '0.85rem', cursor: 'pointer' }}>{faseName} • </a> 
-          <a style={{ fontSize: '0.7rem', cursor: 'pointer' }}>{cardData} </a> 
+          <a style={{ fontSize: '0.85rem', cursor: 'pointer' }}>{faseName} • </a>
+          <a style={{ fontSize: '0.7rem', cursor: 'pointer' }}>{cardData} </a>
           <br></br>
-          <a style={{ fontSize: '1rem', cursor: 'pointer' }}>{label}</a> 
+          <a style={{ fontSize: '1rem', cursor: 'pointer' }}>{label}</a>
         </div>
 
         {/* TAGS */}
@@ -536,15 +539,15 @@ export default function TaskPanel(infos, cardID) {
           <div style={{ maxHeight: '30px' }}>
             <Row style={{ marginLeft: '0px' }}>
 
-            {
-              authorization? 
-              <OverlayTrigger trigger="click" placement="bottom" overlay={popover} >
-                <button style={{ backgroundColor: '#adb5bd73', color: "#495057", border: 0, borderRadius: '5px', width: 'fit-content', marginLeft: '3px', position:'relative'}}  className='ilumina'>+</button>
-              </OverlayTrigger>
-              :
-              <div></div>
-            }
-            
+              {
+                authorization ?
+                  <OverlayTrigger trigger="click" placement="bottom" overlay={popover} >
+                    <button style={{ backgroundColor: '#adb5bd73', color: "#495057", border: 0, borderRadius: '5px', width: 'fit-content', marginLeft: '3px', position: 'relative' }} className='ilumina'>+</button>
+                  </OverlayTrigger>
+                  :
+                  <div></div>
+              }
+
 
               {tags.map((tag, index) => {
                 //console.log('tag', tag)
@@ -561,9 +564,9 @@ export default function TaskPanel(infos, cardID) {
                 )
               })}
               {/* <Row></Row> */}
-              
+
             </Row>
-            
+
           </div>
         </div>
 
@@ -615,13 +618,13 @@ export default function TaskPanel(infos, cardID) {
         {/* <FaRegFileAlt style={{position: 'absolute', left:'16px', top:'30px', fontSize: '1.3rem', color:'#747474'}}></FaRegFileAlt>
         <FaAlignLeft style={{position: 'absolute', left:'16px', top:'215px', fontSize: '1.3rem', color:'#747474'}}></FaAlignLeft>
         <FaTasks style={{position: 'absolute', left:'16px', top:'363px', fontSize: '1.3rem', color:'#747474'}}></FaTasks> */}
-        
+
 
         <div style={{ marginTop: '25px', marginBottom: '16px', fontSize: '1.25rem' }}>
-        {/* <FaTasks style={{position: 'absolute', left:'15px'}}></FaTasks> */}
+          {/* <FaTasks style={{position: 'absolute', left:'15px'}}></FaTasks> */}
           Atividades
         </div>
-        
+
         {lanes.map((data, index) => {
           return (
 
@@ -683,14 +686,14 @@ export default function TaskPanel(infos, cardID) {
                 </>
                 :
                 <>
-                  <div className='' id={'task' + index} style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word', border:'1px solid ', borderColor: data.status ? '#39c99eb8': '#dee2e6' }}>
-                    {data.description} 
+                  <div className='' id={'task' + index} style={{ padding: '5px', paddingLeft: '12px', borderRadius: '5px', overflowWrap: 'break-word', border: '1px solid ', borderColor: data.status ? '#39c99eb8' : '#dee2e6' }}>
+                    {data.description}
                   </div>
-                  <div style={{position:'relative', top:'-27px'}}>
-                  <FaCheckCircle hidden ={!data.status} style={{color:'#39c99eb8', position: 'absolute', left: 'calc( 101% - 1px)', fontSize:'1.3rem'}}/>
+                  <div style={{ position: 'relative', top: '-27px' }}>
+                    <FaCheckCircle hidden={!data.status} style={{ color: '#39c99eb8', position: 'absolute', left: 'calc( 101% - 1px)', fontSize: '1.3rem' }} />
                   </div>
                   <div hidden={!authorization} style={{ marginLeft: '13px', color: '#6c757d' }}>
-                    
+
                     <a
                       hidden={data.status}
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
@@ -702,12 +705,12 @@ export default function TaskPanel(infos, cardID) {
                       }}
                     >
                       Editar </a>
-                      <a  hidden={data.status}>
+                    <a hidden={data.status}>
                       -
-                      </a>
-                    
+                    </a>
+
                     <a
-                     hidden={data.status}
+                      hidden={data.status}
                       style={{ fontSize: '0.8rem', cursor: 'pointer' }}
                       onClick={async () => {
                         lanes.splice(index); //splice remove tudo, usar filter futuramente
@@ -720,26 +723,26 @@ export default function TaskPanel(infos, cardID) {
 
 
                     {
-                      authorization?
-                    
-                    <Form.Check
-                            inline
-                            style={{fontSize: '0.8rem', marginLeft: '10px', cursor:'pointer', position:'relative',left:data.status? 'calc(75% - 1px)': 'calc(63% - 0.4px)' }}
-                            label="Marcar como concluído."
-                            name="group1"
-                            type='checkbox'
-                            id={'check'+index}
-                            checked={data.status}
-                            onClick={async ()=>{
-                              data.status = !data.status
-                              //await salvar()  
-                              await setaAuthorization(false)
-                              await setaAuthorization(true)
-                            }}  
-                          />
-                          :
-                          <></>
-                        }
+                      authorization ?
+
+                        <Form.Check
+                          inline
+                          style={{ fontSize: '0.8rem', marginLeft: '10px', cursor: 'pointer', position: 'relative', left: data.status ? 'calc(75% - 1px)' : 'calc(63% - 0.4px)' }}
+                          label="Marcar como concluído."
+                          name="group1"
+                          type='checkbox'
+                          id={'check' + index}
+                          checked={data.status}
+                          onClick={async () => {
+                            data.status = !data.status
+                            //await salvar()
+                            await setaAuthorization(false)
+                            await setaAuthorization(true)
+                          }}
+                        />
+                        :
+                        <></>
+                    }
                   </div>
 
                   {/* RESPOSTAS */}
@@ -749,15 +752,15 @@ export default function TaskPanel(infos, cardID) {
                         return (
                           <>
                             {/* default era 30 e 67px */}
-                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position:'relative',top: data.status? '-20px':'',marginBottom:'10px' }} id={'respostas' + index}>
-                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status?'#72bfa7':'#adb5bd', height: '63.5px', position: 'absolute', left: '-11px' }}></div>
+                            <div style={{ marginLeft: '25px', fontSize: '0.8rem', position: 'relative', top: data.status ? '-20px' : '', marginBottom: '10px' }} id={'respostas' + index}>
+                              <div class='vl' style={{ borderLeft: '4px solid', borderColor: data.status ? '#72bfa7' : '#adb5bd', height: '63.5px', position: 'absolute', left: '-11px' }}></div>
                               <div style={{ color: '#495057', marginTop: '5px', marginBottom: '3px', fontWeight: 'bold' }}>
                                 {resposta.user}
                                 <a style={{ fontWeight: 'normal', fontSize: '0.8rem', marginLeft: '10px' }}>{resposta.role}</a>
-                                <a style={{ fontWeight: 'normal', fontSize: '0.6rem', marginLeft: '10px', color:'#798087' }}>{resposta.data}</a>
+                                <a style={{ fontWeight: 'normal', fontSize: '0.6rem', marginLeft: '10px', color: '#798087' }}>{resposta.data}</a>
                                 <a
                                   hidden={data.status}
-                                  style={{ cursor: 'pointer', fontWeight: 'normal', position: 'absolute', left:'98%', color:'#92979d'}}
+                                  style={{ cursor: 'pointer', fontWeight: 'normal', position: 'absolute', left: '98%', color: '#92979d' }}
                                   title="Excluir Resposta"
                                   onClick={async () => {
                                     await data.respostas.splice(index); //splice remove tudo, usar filter futuramente
@@ -887,7 +890,7 @@ export default function TaskPanel(infos, cardID) {
                           role: role,
                           data: formatDate(new Date()),
                           description: newLane,
-                          status:false,
+                          status: false,
                           respostas: []
                           //usuarios associados se pa
                           //tags
@@ -910,102 +913,106 @@ export default function TaskPanel(infos, cardID) {
           }
         </div>
       </div>
-      <div onClick={()=>setSowPessoas(!showPessoas)} hidden={!authorization} style={{marginTop:'50px'}}>Permissões</div>
-        <div hidden={!showPessoas}>
-          <Row>
-            Pessoas
+      <div onClick={() => setSowPessoas(!showPessoas)} hidden={!authorization} style={{ marginTop: '50px' }}>Permissões</div>
+      <div hidden={!showPessoas}>
+        <Row>
+          Pessoas
           <Col>
-          {
-            users.map((user,index)=>{
-              return(
-                <>
-                <Row>
-                  <Col>
-                  <div onClick={
-                    async()=>{
-                      ler.push(user)
-                      escrever.push(user)
-                      setLer(ler)
-                      setEscrever(escrever)
-                      await salvar()
-                      await setaAuthorization(false)
-                      await setaAuthorization(true)
-                      
-                    }
-                  }>
-                  {user}
-                  </div>
-                  </Col>
+            {
+              users.map((user, index) => {
+                return (
+                  <>
+                    <Row>
+                      <Col>
+                        <div onClick={
+                          async () => {
+                            // ler.push(user)
+                            // escrever.push(user)
+                            // console.log(ler)
+                            // console.log(escrever)
+                            // console.log(user)
+                            if (!ler.find((pessoa => pessoa == user))) {
+                              setLer([...ler, user])
+                            }
+                            if (!escrever.find((pessoa => pessoa == user))) {
+                              setEscrever([...escrever, user])
+                            }
+                            setaAuthorization(false)
+                            setaAuthorization(true)
+                          }
+                        }>
+                          {user}
+                        </div>
+                      </Col>
 
-                </Row>
-                
-                </>
-              )
-            })
-          }
+                    </Row>
+
+                  </>
+                )
+              })
+            }
           </Col>
-          
+
           Ler
           <Col>
-          {
-            ler.map((user,index)=>{
-              return(
-                <>
-                <Row>
-                  <Col>
-                  <div
-                  onClick={
-                   async  ()=>{
-                      let remover = ler.filter( pessoa => pessoa != user)
-                      await setLer(remover)
-                      await salvar()
-                    }
-                  }
-                  >
-                  {user}
-                  </div>
-                  
-                  </Col>
+            {
+              ler.map((user, index) => {
+                return (
+                  <>
+                    <Row>
+                      <Col>
+                        <div
+                          onClick={
+                            async () => {
+                              if (user === "admin") return;
+                              setLer([...ler.filter(pessoa => pessoa != user)])
+                              setEscrever([...escrever.filter(pessoa => pessoa != user)])
+                            }
+                          }
+                        >
+                          {user}
+                        </div>
 
-                </Row>
-                
-                </>
-              )
-            })
-          }
+                      </Col>
+
+                    </Row>
+
+                  </>
+                )
+              })
+            }
           </Col>
 
           Escrever
           <Col>
-          {
-            escrever.map((user,index)=>{
-              return(
-                <>
-                <Row>
-                  <Col>
-                  <div
-                  onClick={
-                    async ()=>{
-                      let remover = ler.filter( pessoa => pessoa != user)
-                      await setEscrever(remover)
-                      
-                      await salvar()
-                    }
-                  }>
-                  {user}
-                  </div>
-                  </Col>
+            {
+              escrever.map((user, index) => {
+                return (
+                  <>
+                    <Row>
+                      <Col>
+                        <div
+                          onClick={
+                            async () => {
+                              if (user === "admin") return;
+                              setEscrever([...escrever.filter(pessoa => pessoa != user)])
+                              // setLer([...ler.filter(pessoa => pessoa != user)])
+                            }
+                          }>
+                          {user}
+                        </div>
+                      </Col>
 
-                </Row>
-                
-                </>
-              )
-            })
-          }
+                    </Row>
+
+                  </>
+                )
+              })
+            }
           </Col>
-          </Row>
-        
-        </div>
+        </Row>
+
+      </div>
     </>
   );
 }
