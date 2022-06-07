@@ -913,9 +913,10 @@ export default function TaskPanel(infos, cardID) {
           }
         </div>
       </div>
-      <div onClick={() => setSowPessoas(!showPessoas)} hidden={!authorization} style={{ marginTop: '50px' }}>Permissões</div>
+
+      <div onClick={() => setSowPessoas(!showPessoas)} hidden={!authorization} style={{ marginTop: '50px', cursor: 'pointer', marginBottom: '10px' }}>Permissões +</div>
       <div hidden={!showPessoas}>
-        <Row>
+        <Row style={{ marginLeft: '33px' }}>
           Pessoas
           <Col>
             {
@@ -924,23 +925,25 @@ export default function TaskPanel(infos, cardID) {
                   <>
                     <Row>
                       <Col>
-                        <div onClick={
-                          async () => {
-                            // ler.push(user)
-                            // escrever.push(user)
-                            // console.log(ler)
-                            // console.log(escrever)
-                            // console.log(user)
-                            if (!ler.find((pessoa => pessoa == user))) {
-                              setLer([...ler, user])
+                        <div
+                          style={{ cursor: 'pointer' }}
+                          onClick={
+                            async () => {
+                              // ler.push(user)
+                              // escrever.push(user)
+                              // console.log(ler)
+                              // console.log(escrever)
+                              // console.log(user)
+                              if (!ler.find((pessoa => pessoa == user))) {
+                                setLer([...ler, user])
+                              }
+                              if (!escrever.find((pessoa => pessoa == user))) {
+                                setEscrever([...escrever, user])
+                              }
+                              setaAuthorization(false)
+                              setaAuthorization(true)
                             }
-                            if (!escrever.find((pessoa => pessoa == user))) {
-                              setEscrever([...escrever, user])
-                            }
-                            setaAuthorization(false)
-                            setaAuthorization(true)
-                          }
-                        }>
+                          }>
                           {user}
                         </div>
                       </Col>
@@ -962,6 +965,7 @@ export default function TaskPanel(infos, cardID) {
                     <Row>
                       <Col>
                         <div
+                          style={{ cursor: 'pointer' }}
                           onClick={
                             async () => {
                               if (user === "admin") return;
